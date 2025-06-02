@@ -1,0 +1,4 @@
+*.ini
+*.pyc
+electricity-bot-backend/alembic/README
+*.mako
