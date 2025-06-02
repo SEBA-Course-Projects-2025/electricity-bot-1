@@ -7,7 +7,7 @@ from application.models import DeviceModel
 from application.database import session
 import uuid
 
-@app.route("/api/measurement", methods=["POST"])
+@app.route("/api/measurements", methods=["POST"])
 def receive_measurement():
     try:
         data = request.get_json()

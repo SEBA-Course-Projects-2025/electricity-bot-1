@@ -29,7 +29,7 @@ def list_devices():
     except Exception as exception:
         return jsonify({"error": "Device fetch failed", "details": str(exception)}), 500
 
-@app.route("/api/device/<device_id>", methods=["GET"])
+@app.route("/api/devices/<device_id>", methods=["GET"])
 def get_device(device_id):
     try:
         with DeviceService() as service:
@@ -47,7 +47,7 @@ def get_device(device_id):
     except Exception as exception:
         return jsonify({"error": "Failed to fetch device", "details": str(exception)}), 500
 
-@app.route("/api/device/<device_id>", methods=["DELETE"])
+@app.route("/api/devices/<device_id>", methods=["DELETE"])
 def delete_device_api(device_id):
     try:
         with DeviceService() as service:

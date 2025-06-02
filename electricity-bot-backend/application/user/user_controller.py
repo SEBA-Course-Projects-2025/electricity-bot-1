@@ -5,7 +5,7 @@ from application.user.user_service import UserService
 from application.user.model.dto.user import CreateUserRequest, UpdateUserRequest
 from pydantic import ValidationError
 
-@app.route("/api/user", methods=["POST"])
+@app.route("/api/users", methods=["POST"])
 def create_user():
     try:
         data = request.get_json()
@@ -57,7 +57,7 @@ def list_users():
         return jsonify({"error": "Failed to fetch users", "details": str(exception)}), 500
 
 
-@app.route("/api/user/<user_id>", methods=["PATCH"])
+@app.route("/api/users/<user_id>", methods=["PATCH"])
 def update_user(user_id):
     try:
         user_id = str(uuid.UUID(user_id))
@@ -80,7 +80,7 @@ def update_user(user_id):
         return jsonify({"error": "Update failed", "details": str(exception)}), 400
 
 
-@app.route("/api/user/<user_id>", methods=["DELETE"])
+@app.route("/api/users/<user_id>", methods=["DELETE"])
 def delete_user_route(user_id):
     try:
         user_id = str(uuid.UUID(user_id))
@@ -99,7 +99,7 @@ def delete_user_route(user_id):
         return jsonify({"error": "Delete failed", "details": str(exception)}), 400
 
 
-@app.route("/api/user/<user_id>", methods=["GET"])
+@app.route("/api/users/<user_id>", methods=["GET"])
 def get_user(user_id):
     try:
         user_id = str(uuid.UUID(user_id))
