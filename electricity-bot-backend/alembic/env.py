@@ -7,10 +7,14 @@ from sqlalchemy import pool
 
 from alembic import context
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from application.database import base
-from application.models import MeasurementModel, DeviceModel, UserModel # IF I HAVE MORE MODELS, I WILL ADD THEM HERE
+from application.models import (
+    MeasurementModel,
+    DeviceModel,
+    UserModel,
+)  # IF I HAVE MORE MODELS, I WILL ADD THEM HERE
 
 target_metadata = base.metadata
 

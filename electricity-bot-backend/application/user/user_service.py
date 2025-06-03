@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import uuid
 from application.user.model.dto.user import CreateUserRequest, UpdateUserRequest
 
+
 class UserService:
     def __enter__(self):
         self.db = session()
@@ -20,24 +21,21 @@ class UserService:
                 user_id=user_id,
                 email=dto.email,
                 first_name=dto.first_name,
-                last_name=dto.last_name
+                last_name=dto.last_name,
             )
 
             device = DeviceModel(
                 device_id=str(dto.device_id),
                 owner_id=user_id,
                 owner_email=dto.email,
-                last_seen=datetime.now(timezone.utc)
+                last_seen=datetime.now(timezone.utc),
             )
 
             self.db.add(user)
             self.db.add(device)
             self.db.commit()
 
-            return {
-                "user_id": user.user_id,
-                "device_id": device.device_id
-            }
+            return {"user_id": user.user_id, "device_id": device.device_id}
 
         except Exception:
             self.db.rollback()
@@ -55,7 +53,9 @@ class UserService:
         self.db.commit()
         return user
 
-    def get_all_users(self, page: int, per_page: int, first_name: str = None, last_name: str = None):
+    def get_all_users(
+        self, page: int, per_page: int, first_name: str = None, last_name: str = None
+    ):
         query = self.db.query(UserModel)
 
         if first_name:

@@ -1,4 +1,5 @@
 # to see the specification at https://editor.swagger.io, copy the code below and paste it into the editor
+# to see the specification at https://editor.swagger.io, copy the code below and paste it into the editor
 openapi: 3.0.0
 info:
   title: Electricity Bot API
@@ -76,7 +77,7 @@ components:
           format: date-time
 
 paths:
-  /api/user:
+  /api/users:
     post:
       summary: Create a new user with device
       requestBody:
@@ -119,7 +120,7 @@ paths:
         '500':
           description: Unexpected server error
 
-  /api/users:
+  /api/users.:
     get:
       summary: Get list of users with optional filters and pagination
       parameters:
@@ -166,7 +167,7 @@ paths:
         '500':
           description: Failed to fetch users
 
-  /api/user/{user_id}:
+  /api/users/{user_id}:
     get:
       summary: Get user by ID
       parameters:
@@ -288,7 +289,7 @@ paths:
         '500':
           description: Device fetch failed
 
-  /api/device/{device_id}:
+  /api/devices/{device_id}:
     get:
       summary: Get a device by ID
       parameters:
@@ -329,7 +330,7 @@ paths:
         '500':
           description: Failed to delete device
 
-  /api/measurement:
+  /api/measurements:
     post:
       summary: Submit a new measurement from a device
       requestBody:

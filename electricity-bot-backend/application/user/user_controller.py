@@ -5,6 +5,7 @@ from application.user.user_service import UserService
 from application.user.model.dto.user import CreateUserRequest, UpdateUserRequest
 from pydantic import ValidationError
 
+
 @app.route("/api/users", methods=["POST"])
 def create_user():
     try:
@@ -17,18 +18,24 @@ def create_user():
         return jsonify(result), 201
 
     except ValidationError as validation_error:
-        return jsonify({"error": "Invalid input", "details": validation_error.errors()}), 422
+        return (
+            jsonify({"error": "Invalid input", "details": validation_error.errors()}),
+            422,
+        )
     except KeyError as key_error:
         return jsonify({"error": f"Missing required field: {str(key_error)}"}), 400
     except Exception as exception:
-        return jsonify({"error": "Unexpected server error", "details": str(exception)}), 500
+        return (
+            jsonify({"error": "Unexpected server error", "details": str(exception)}),
+            500,
+        )
 
 
 @app.route("/api/users", methods=["GET"])
 def list_users():
     try:
-        page = int(request.args.get("page", 1))  
-        per_page = int(request.args.get("per_page", 20))  
+        page = int(request.args.get("page", 1))
+        per_page = int(request.args.get("per_page", 20))
         first_name = request.args.get("first_name")
         last_name = request.args.get("last_name")
 
@@ -38,23 +45,32 @@ def list_users():
         with UserService() as user_service:
             users = user_service.get_all_users(page, per_page, first_name, last_name)
 
-        return jsonify({
-            "page": page,
-            "per_page": per_page,
-            "users": [
+        return (
+            jsonify(
                 {
-                    "user_id": user.user_id,
-                    "email": user.email,
-                    "first_name": user.first_name,
-                    "last_name": user.last_name
-                } for user in users
-            ]
-        }), 200
+                    "page": page,
+                    "per_page": per_page,
+                    "users": [
+                        {
+                            "user_id": user.user_id,
+                            "email": user.email,
+                            "first_name": user.first_name,
+                            "last_name": user.last_name,
+                        }
+                        for user in users
+                    ],
+                }
+            ),
+            200,
+        )
 
     except ValueError:
         return jsonify({"error": "Invalid pagination parameters"}), 400
     except Exception as exception:
-        return jsonify({"error": "Failed to fetch users", "details": str(exception)}), 500
+        return (
+            jsonify({"error": "Failed to fetch users", "details": str(exception)}),
+            500,
+        )
 
 
 @app.route("/api/users/<user_id>", methods=["PATCH"])
@@ -75,7 +91,10 @@ def update_user(user_id):
     except ValueError:
         return jsonify({"error": "Invalid UUID format"}), 400
     except ValidationError as validation_error:
-        return jsonify({"error": "Invalid input", "details": validation_error.errors()}), 422
+        return (
+            jsonify({"error": "Invalid input", "details": validation_error.errors()}),
+            422,
+        )
     except Exception as exception:
         return jsonify({"error": "Update failed", "details": str(exception)}), 400
 
@@ -108,16 +127,24 @@ def get_user(user_id):
             user = user_service.get_user_by_id(user_id)
 
         if user:
-            return jsonify({
-                "user_id": user.user_id,
-                "email": user.email,
-                "first_name": user.first_name,
-                "last_name": user.last_name
-            }), 200
+            return (
+                jsonify(
+                    {
+                        "user_id": user.user_id,
+                        "email": user.email,
+                        "first_name": user.first_name,
+                        "last_name": user.last_name,
+                    }
+                ),
+                200,
+            )
         else:
             return jsonify({"error": "User not found"}), 404
 
     except ValueError:
         return jsonify({"error": "Invalid UUID format"}), 400
     except Exception as exception:
-        return jsonify({"error": "Failed to fetch user", "details": str(exception)}), 500
+        return (
+            jsonify({"error": "Failed to fetch user", "details": str(exception)}),
+            500,
+        )

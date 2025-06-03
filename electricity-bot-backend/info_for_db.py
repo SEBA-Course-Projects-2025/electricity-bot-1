@@ -14,12 +14,12 @@ try:
             user_id=str(uuid.uuid4()),
             email=f"user{i}@example.com",
             first_name=f"FirstName{i}",
-            last_name=f"LastName{i}"
+            last_name=f"LastName{i}",
         )
         db.add(user)
         users.append(user)
 
-    db.commit()   
+    db.commit()
 
     # table devices
     devices = []
@@ -28,7 +28,7 @@ try:
             device_id=str(uuid.uuid4()),
             owner_id=users[i % len(users)].user_id,
             owner_email=users[i % len(users)].email,
-            last_seen=datetime.now(timezone.utc) - timedelta(minutes=i * 3)
+            last_seen=datetime.now(timezone.utc) - timedelta(minutes=i * 3),
         )
         db.add(device)
         devices.append(device)
@@ -41,7 +41,7 @@ try:
             measurement_id=str(uuid.uuid4()),
             device_id=devices[i % len(devices)].device_id,
             timestamp=datetime.now(timezone.utc) - timedelta(hours=i),
-            outgate_status=random.choice([True, False])
+            outgate_status=random.choice([True, False]),
         )
         db.add(measurement)
 
