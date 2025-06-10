@@ -48,8 +48,8 @@ try:
     db.commit()
     print("8 users, 8 devices, 8 measurements were added to the database")
 
-except:
+except Exception as exception:
     db.rollback()
-    print("Error during seeding")
+    print("Error during seeding:", exception)
 finally:
     db.close()
