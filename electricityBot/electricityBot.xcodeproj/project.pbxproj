@@ -1,0 +1,655 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BA8391742DF8772F00C3EA55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391732DF8772F00C3EA55 /* Assets.xcassets */; };
+		BA8391772DF8772F00C3EA55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */; };
+		BA8391812DF8772F00C3EA55 /* electricityBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391802DF8772F00C3EA55 /* electricityBotTests.swift */; };
+		BA83918B2DF8772F00C3EA55 /* electricityBotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA83918A2DF8772F00C3EA55 /* electricityBotUITests.swift */; };
+		BA83918D2DF8772F00C3EA55 /* electricityBotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA83918C2DF8772F00C3EA55 /* electricityBotUITestsLaunchTests.swift */; };
+		BA83919E2DF878C300C3EA55 /* Berlin-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA8391992DF878C300C3EA55 /* Berlin-Italic.ttf */; };
+		BA83919F2DF878C300C3EA55 /* Berlin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919A2DF878C300C3EA55 /* Berlin.ttf */; };
+		BA8391A02DF878C300C3EA55 /* BerlinBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919B2DF878C300C3EA55 /* BerlinBold.ttf */; };
+		BA8391A12DF878C300C3EA55 /* BerlinX-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919C2DF878C300C3EA55 /* BerlinX-Bold.ttf */; };
+		BA8391A52DF878CC00C3EA55 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391A22DF878CC00C3EA55 /* LoginViewModel.swift */; };
+		BA8391A62DF878CC00C3EA55 /* RegisterUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391A32DF878CC00C3EA55 /* RegisterUserRequest.swift */; };
+		BA8391A92DF878D100C3EA55 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391A72DF878D100C3EA55 /* APIService.swift */; };
+		BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391AA2DF878D800C3EA55 /* ContentView.swift */; };
+		BA8391AF2DF878D800C3EA55 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391AB2DF878D800C3EA55 /* LoginView.swift */; };
+		BA8391B02DF878D800C3EA55 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */; };
+		BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391B32DF8799500C3EA55 /* electricityBotApp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BA83917D2DF8772F00C3EA55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA8391642DF8772E00C3EA55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BA83916B2DF8772E00C3EA55;
+			remoteInfo = electricityBot;
+		};
+		BA8391872DF8772F00C3EA55 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BA8391642DF8772E00C3EA55 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BA83916B2DF8772E00C3EA55;
+			remoteInfo = electricityBot;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BA83916C2DF8772E00C3EA55 /* electricityBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = electricityBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA8391732DF8772F00C3EA55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		BA83917C2DF8772F00C3EA55 /* electricityBotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = electricityBotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA8391802DF8772F00C3EA55 /* electricityBotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = electricityBotTests.swift; sourceTree = "<group>"; };
+		BA8391862DF8772F00C3EA55 /* electricityBotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = electricityBotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA83918A2DF8772F00C3EA55 /* electricityBotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = electricityBotUITests.swift; sourceTree = "<group>"; };
+		BA83918C2DF8772F00C3EA55 /* electricityBotUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = electricityBotUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		BA8391992DF878C300C3EA55 /* Berlin-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Berlin-Italic.ttf"; sourceTree = "<group>"; };
+		BA83919A2DF878C300C3EA55 /* Berlin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Berlin.ttf; sourceTree = "<group>"; };
+		BA83919B2DF878C300C3EA55 /* BerlinBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BerlinBold.ttf; sourceTree = "<group>"; };
+		BA83919C2DF878C300C3EA55 /* BerlinX-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BerlinX-Bold.ttf"; sourceTree = "<group>"; };
+		BA8391A22DF878CC00C3EA55 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		BA8391A32DF878CC00C3EA55 /* RegisterUserRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterUserRequest.swift; sourceTree = "<group>"; };
+		BA8391A72DF878D100C3EA55 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		BA8391AA2DF878D800C3EA55 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		BA8391AB2DF878D800C3EA55 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
+		BA8391B32DF8799500C3EA55 /* electricityBotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = electricityBotApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BA8391692DF8772E00C3EA55 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA8391792DF8772F00C3EA55 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA8391832DF8772F00C3EA55 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BA8391632DF8772E00C3EA55 = {
+			isa = PBXGroup;
+			children = (
+				BA83916E2DF8772E00C3EA55 /* electricityBot */,
+				BA83917F2DF8772F00C3EA55 /* electricityBotTests */,
+				BA8391892DF8772F00C3EA55 /* electricityBotUITests */,
+				BA83916D2DF8772E00C3EA55 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BA83916D2DF8772E00C3EA55 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BA83916C2DF8772E00C3EA55 /* electricityBot.app */,
+				BA83917C2DF8772F00C3EA55 /* electricityBotTests.xctest */,
+				BA8391862DF8772F00C3EA55 /* electricityBotUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BA83916E2DF8772E00C3EA55 /* electricityBot */ = {
+			isa = PBXGroup;
+			children = (
+				BA8391AD2DF878D800C3EA55 /* View */,
+				BA8391A82DF878D100C3EA55 /* Network */,
+				BA8391A42DF878CC00C3EA55 /* Models */,
+				BA83919D2DF878C300C3EA55 /* Fonts */,
+				BA8391732DF8772F00C3EA55 /* Assets.xcassets */,
+				BA8391752DF8772F00C3EA55 /* Preview Content */,
+				BA8391B32DF8799500C3EA55 /* electricityBotApp.swift */,
+			);
+			path = electricityBot;
+			sourceTree = "<group>";
+		};
+		BA8391752DF8772F00C3EA55 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		BA83917F2DF8772F00C3EA55 /* electricityBotTests */ = {
+			isa = PBXGroup;
+			children = (
+				BA8391802DF8772F00C3EA55 /* electricityBotTests.swift */,
+			);
+			path = electricityBotTests;
+			sourceTree = "<group>";
+		};
+		BA8391892DF8772F00C3EA55 /* electricityBotUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BA83918A2DF8772F00C3EA55 /* electricityBotUITests.swift */,
+				BA83918C2DF8772F00C3EA55 /* electricityBotUITestsLaunchTests.swift */,
+			);
+			path = electricityBotUITests;
+			sourceTree = "<group>";
+		};
+		BA83919D2DF878C300C3EA55 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				BA8391992DF878C300C3EA55 /* Berlin-Italic.ttf */,
+				BA83919A2DF878C300C3EA55 /* Berlin.ttf */,
+				BA83919B2DF878C300C3EA55 /* BerlinBold.ttf */,
+				BA83919C2DF878C300C3EA55 /* BerlinX-Bold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		BA8391A42DF878CC00C3EA55 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BA8391A22DF878CC00C3EA55 /* LoginViewModel.swift */,
+				BA8391A32DF878CC00C3EA55 /* RegisterUserRequest.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BA8391A82DF878D100C3EA55 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				BA8391A72DF878D100C3EA55 /* APIService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		BA8391AD2DF878D800C3EA55 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				BA8391AA2DF878D800C3EA55 /* ContentView.swift */,
+				BA8391AB2DF878D800C3EA55 /* LoginView.swift */,
+				BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BA83916B2DF8772E00C3EA55 /* electricityBot */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA8391902DF8772F00C3EA55 /* Build configuration list for PBXNativeTarget "electricityBot" */;
+			buildPhases = (
+				BA8391682DF8772E00C3EA55 /* Sources */,
+				BA8391692DF8772E00C3EA55 /* Frameworks */,
+				BA83916A2DF8772E00C3EA55 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = electricityBot;
+			productName = electricityBot;
+			productReference = BA83916C2DF8772E00C3EA55 /* electricityBot.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BA83917B2DF8772F00C3EA55 /* electricityBotTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA8391932DF8772F00C3EA55 /* Build configuration list for PBXNativeTarget "electricityBotTests" */;
+			buildPhases = (
+				BA8391782DF8772F00C3EA55 /* Sources */,
+				BA8391792DF8772F00C3EA55 /* Frameworks */,
+				BA83917A2DF8772F00C3EA55 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BA83917E2DF8772F00C3EA55 /* PBXTargetDependency */,
+			);
+			name = electricityBotTests;
+			productName = electricityBotTests;
+			productReference = BA83917C2DF8772F00C3EA55 /* electricityBotTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BA8391852DF8772F00C3EA55 /* electricityBotUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BA8391962DF8772F00C3EA55 /* Build configuration list for PBXNativeTarget "electricityBotUITests" */;
+			buildPhases = (
+				BA8391822DF8772F00C3EA55 /* Sources */,
+				BA8391832DF8772F00C3EA55 /* Frameworks */,
+				BA8391842DF8772F00C3EA55 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BA8391882DF8772F00C3EA55 /* PBXTargetDependency */,
+			);
+			name = electricityBotUITests;
+			productName = electricityBotUITests;
+			productReference = BA8391862DF8772F00C3EA55 /* electricityBotUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BA8391642DF8772E00C3EA55 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1540;
+				LastUpgradeCheck = 1540;
+				TargetAttributes = {
+					BA83916B2DF8772E00C3EA55 = {
+						CreatedOnToolsVersion = 15.4;
+					};
+					BA83917B2DF8772F00C3EA55 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = BA83916B2DF8772E00C3EA55;
+					};
+					BA8391852DF8772F00C3EA55 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = BA83916B2DF8772E00C3EA55;
+					};
+				};
+			};
+			buildConfigurationList = BA8391672DF8772E00C3EA55 /* Build configuration list for PBXProject "electricityBot" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BA8391632DF8772E00C3EA55;
+			productRefGroup = BA83916D2DF8772E00C3EA55 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BA83916B2DF8772E00C3EA55 /* electricityBot */,
+				BA83917B2DF8772F00C3EA55 /* electricityBotTests */,
+				BA8391852DF8772F00C3EA55 /* electricityBotUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BA83916A2DF8772E00C3EA55 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA8391A12DF878C300C3EA55 /* BerlinX-Bold.ttf in Resources */,
+				BA8391772DF8772F00C3EA55 /* Preview Assets.xcassets in Resources */,
+				BA83919E2DF878C300C3EA55 /* Berlin-Italic.ttf in Resources */,
+				BA83919F2DF878C300C3EA55 /* Berlin.ttf in Resources */,
+				BA8391742DF8772F00C3EA55 /* Assets.xcassets in Resources */,
+				BA8391A02DF878C300C3EA55 /* BerlinBold.ttf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA83917A2DF8772F00C3EA55 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA8391842DF8772F00C3EA55 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BA8391682DF8772E00C3EA55 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA8391A52DF878CC00C3EA55 /* LoginViewModel.swift in Sources */,
+				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
+				BA8391A92DF878D100C3EA55 /* APIService.swift in Sources */,
+				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
+				BA8391AF2DF878D800C3EA55 /* LoginView.swift in Sources */,
+				BA8391A62DF878CC00C3EA55 /* RegisterUserRequest.swift in Sources */,
+				BA8391B02DF878D800C3EA55 /* SplashScreenView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA8391782DF8772F00C3EA55 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA8391812DF8772F00C3EA55 /* electricityBotTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA8391822DF8772F00C3EA55 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BA83918D2DF8772F00C3EA55 /* electricityBotUITestsLaunchTests.swift in Sources */,
+				BA83918B2DF8772F00C3EA55 /* electricityBotUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BA83917E2DF8772F00C3EA55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BA83916B2DF8772E00C3EA55 /* electricityBot */;
+			targetProxy = BA83917D2DF8772F00C3EA55 /* PBXContainerItemProxy */;
+		};
+		BA8391882DF8772F00C3EA55 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BA83916B2DF8772E00C3EA55 /* electricityBot */;
+			targetProxy = BA8391872DF8772F00C3EA55 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BA83918E2DF8772F00C3EA55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BA83918F2DF8772F00C3EA55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BA8391912DF8772F00C3EA55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"electricityBot/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dl.electricityBot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BA8391922DF8772F00C3EA55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"electricityBot/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dl.electricityBot;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BA8391942DF8772F00C3EA55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dl.electricityBotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/electricityBot.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/electricityBot";
+			};
+			name = Debug;
+		};
+		BA8391952DF8772F00C3EA55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dl.electricityBotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/electricityBot.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/electricityBot";
+			};
+			name = Release;
+		};
+		BA8391972DF8772F00C3EA55 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dl.electricityBotUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = electricityBot;
+			};
+			name = Debug;
+		};
+		BA8391982DF8772F00C3EA55 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = dl.electricityBotUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = electricityBot;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BA8391672DF8772E00C3EA55 /* Build configuration list for PBXProject "electricityBot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA83918E2DF8772F00C3EA55 /* Debug */,
+				BA83918F2DF8772F00C3EA55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA8391902DF8772F00C3EA55 /* Build configuration list for PBXNativeTarget "electricityBot" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA8391912DF8772F00C3EA55 /* Debug */,
+				BA8391922DF8772F00C3EA55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA8391932DF8772F00C3EA55 /* Build configuration list for PBXNativeTarget "electricityBotTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA8391942DF8772F00C3EA55 /* Debug */,
+				BA8391952DF8772F00C3EA55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BA8391962DF8772F00C3EA55 /* Build configuration list for PBXNativeTarget "electricityBotUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BA8391972DF8772F00C3EA55 /* Debug */,
+				BA8391982DF8772F00C3EA55 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BA8391642DF8772E00C3EA55 /* Project object */;
+}

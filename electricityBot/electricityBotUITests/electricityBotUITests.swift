@@ -2,7 +2,7 @@
 //  electricityBotUITests.swift
 //  electricityBotUITests
 //
-//  Created by Dana Litvak on 22.05.2025.
+//  Created by Dana Litvak on 10.06.2025.
 //
 
 import XCTest
