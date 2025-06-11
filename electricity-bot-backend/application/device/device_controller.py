@@ -1,29 +1,28 @@
-from application import app
+import uuid
+from datetime import datetime, timezone
 from flask import request, jsonify
+from application import app
+from application.device.model.dto.device import Device as DeviceDTO
 from application.device.device_service import DeviceService
+from pydantic import ValidationError
 
 
 @app.route("/api/devices", methods=["GET"])
 def list_devices():
     try:
-        owner_id = request.args.get("owner_id")
-        owner_email = request.args.get("owner_email")
         page = int(request.args.get("page", 1))
         per_page = int(request.args.get("per_page", 3))
-
         if page < 1 or per_page < 1:
             return jsonify({"error": "Invalid pagination parameters"}), 400
 
         with DeviceService() as service:
-            devices = service.get_devices(owner_id, owner_email, page, per_page)
+            devices = service.get_devices(page, per_page)
 
         return (
             jsonify(
                 [
                     {
                         "device_id": d.device_id,
-                        "owner_id": d.owner_id,
-                        "owner_email": d.owner_email,
                         "last_seen": d.last_seen.isoformat() if d.last_seen else None,
                     }
                     for d in devices
@@ -41,22 +40,20 @@ def get_device(device_id):
     try:
         with DeviceService() as service:
             device = service.get_device_by_id(device_id)
-            if device is None:
-                return jsonify({"error": "Device not found"}), 404
+        if not device:
+            return jsonify({"error": "Device not found"}), 404
 
-            return (
-                jsonify(
-                    {
-                        "device_id": device.device_id,
-                        "owner_id": device.owner_id,
-                        "owner_email": device.owner_email,
-                        "last_seen": (
-                            device.last_seen.isoformat() if device.last_seen else None
-                        ),
-                    }
-                ),
-                200,
-            )
+        return (
+            jsonify(
+                {
+                    "device_id": device.device_id,
+                    "last_seen": (
+                        device.last_seen.isoformat() if device.last_seen else None
+                    ),
+                }
+            ),
+            200,
+        )
 
     except Exception as exception:
         return (
@@ -70,14 +67,44 @@ def delete_device_api(device_id):
     try:
         with DeviceService() as service:
             success = service.delete_device(device_id)
-
         if success:
             return jsonify({"message": "Device deleted"}), 200
-        else:
-            return jsonify({"error": "Device not found"}), 404
+        return jsonify({"error": "Device not found"}), 404
 
     except Exception as exception:
         return (
             jsonify({"error": "Failed to delete device", "details": str(exception)}),
+            500,
+        )
+
+
+@app.route("/api/devices", methods=["POST"])
+def create_device():
+    try:
+        data = request.get_json() or {}
+        dto = DeviceDTO(
+            device_id=(
+                uuid.UUID(data["device_id"]) if data.get("device_id") else uuid.uuid4()
+            ),
+            last_seen=(
+                datetime.fromisoformat(data["last_seen"])
+                if data.get("last_seen")
+                else datetime.now(timezone.utc)
+            ),
+        )
+        with DeviceService() as service:
+            device = service.create_device(dto)
+        return jsonify({"device_id": str(device.device_id)}), 201
+
+    except ValidationError as validation_error:
+        return (
+            jsonify({"error": "Invalid input", "details": validation_error.errors()}),
+            422,
+        )
+    except (KeyError, ValueError) as exception:
+        return jsonify({"error": str(exception)}), 400
+    except Exception as exception:
+        return (
+            jsonify({"error": "Failed to create device", "details": str(exception)}),
             500,
         )

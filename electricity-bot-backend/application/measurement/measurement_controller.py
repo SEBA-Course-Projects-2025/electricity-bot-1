@@ -1,27 +1,55 @@
-from datetime import datetime, timedelta, timezone
-from application import app
-from flask import request, jsonify
-from application.measurement.model.dto.measurement import Measurement
-from application.measurement.measurement_service import MeasurementService
-from application.models import DeviceModel, UnassignedDeviceModel
-from application.database import session
 import uuid
+from flask import request, jsonify
+from application import app
+from application.database import session
+from application.models import DeviceModel, UnassignedDeviceModel
+from application.measurement.model.dto.measurement import Measurement as MeasurementDTO
+from application.measurement.measurement_service import MeasurementService
+from pydantic import ValidationError
+from datetime import datetime, timezone
 
 
 @app.route("/api/measurements", methods=["POST"])
 def receive_measurement():
     try:
-        data = request.get_json()
-        device_id = uuid.UUID(data["device_id"])
+        data = request.get_json() or {}
+
+        if (
+            "device_id" not in data
+            or "outgate_status" not in data
+            or "timestamp" not in data
+        ):
+            return (
+                jsonify(
+                    {
+                        "error": "Missing required field: device_id, outgate_status and timestamp are required"
+                    }
+                ),
+                400,
+            )
+
+        try:
+            timestamp = datetime.fromisoformat(data["timestamp"])
+            if timestamp.tzinfo is None:
+                timestamp = timestamp.replace(tzinfo=timezone.utc)
+        except Exception:
+            return (
+                jsonify({"error": "Invalid timestamp format, must be ISO-8601 UTC"}),
+                400,
+            )
+
+        dto = MeasurementDTO(
+            device_id=uuid.UUID(data["device_id"]),
+            outgate_status=data["outgate_status"],
+            timestamp=timestamp,
+        )
 
         with session() as db:
-            device_exists = (
-                db.query(DeviceModel).filter_by(device_id=str(device_id)).first()
-            )
-            if not device_exists:
+            dev = db.query(DeviceModel).filter_by(device_id=str(dto.device_id)).first()
+            if not dev:
                 orphaned = (
                     db.query(UnassignedDeviceModel)
-                    .filter_by(device_id=str(device_id))
+                    .filter_by(device_id=str(dto.device_id))
                     .first()
                 )
                 if orphaned:
@@ -33,24 +61,25 @@ def receive_measurement():
                     )
                 return jsonify({"error": "Device not registered"}), 404
 
-        measurement = Measurement(
-            measurement_id=uuid.uuid4(),
-            device_id=device_id,
-            outgate_status=data["outgate_status"],
+        with MeasurementService() as service:
+            service.save_measurement(dto)
+
+        return (
+            jsonify(
+                {"message": "Measurement saved", "timestamp": dto.timestamp.isoformat()}
+            ),
+            201,
         )
 
-        with MeasurementService() as service:
-            service.save_measurement(measurement)
-
-        return jsonify({"message": "Measurement saved"}), 201
-
-    except KeyError as key_error:
-        return jsonify({"error": f"Missing field: {str(key_error)}"}), 400
-    except ValueError as value_error:
+    except ValidationError as validation_error:
         return (
-            jsonify({"error": f"Invalid UUID or data format: {str(value_error)}"}),
+            jsonify({"error": "Invalid input", "details": validation_error.errors()}),
             422,
         )
+
+    except (ValueError,) as validation_error:
+        return jsonify({"error": str(validation_error)}), 400
+
     except Exception as exception:
         return (
             jsonify({"error": "Unexpected server error", "details": str(exception)}),

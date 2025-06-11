@@ -24,17 +24,70 @@ components:
         last_name:
           type: string
 
+    CreateUserRequest:
+      type: object
+      required: [email, device_id, first_name, last_name]
+      properties:
+        email:
+          type: string
+          format: email
+        device_id:
+          type: string
+          format: uuid
+        first_name:
+          type: string
+        last_name:
+          type: string
+      example:
+        email: "anna@example.com"
+        device_id: "128e4560-e80b-1203-a456-426614174000"
+        first_name: "Anna"
+        last_name: "Ivanova"
+
+    UpdateUserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        first_name:
+          type: string
+        last_name:
+          type: string
+      example:
+        first_name: "AnnaUpdated"
+
+    Device:
+      type: object
+      required: [device_id, last_seen]
+      properties:
+        device_id:
+          type: string
+          format: uuid
+        last_seen:
+          type: string
+          format: date-time
+      example:
+        device_id: "128e4560-e80b-1203-a456-426614174000"
+        last_seen: "2025-06-11T20:00:00Z"
+
     Measurement:
       type: object
-      required:
-        - device_id
-        - outgate_status
+      required: [device_id, outgate_status, timestamp]
       properties:
         device_id:
           type: string
           format: uuid
         outgate_status:
           type: boolean
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO-8601 UTC timestamp
+      example:
+        device_id: "128e4560-e80b-1203-a456-426614174000"
+        outgate_status: true
+        timestamp: "2025-06-11T20:17:00Z"
 
     MeasurementStatistics:
       type: object
@@ -59,63 +112,39 @@ components:
               outgate_status:
                 type: boolean
 
-    Device:
-      type: object
-      properties:
-        device_id:
-          type: string
-          format: uuid
-        last_seen:
-          type: string
-          format: date-time
-
 paths:
   /api/users:
     post:
-      summary: Create a new user with device
+      summary: Create a new user and associate a device
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              required:
-                - email
-                - device_id
-                - first_name
-                - last_name
-              properties:
-                email:
-                  type: string
-                  format: email
-                device_id:
-                  type: string
-                  format: uuid
-                first_name:
-                  type: string
-                last_name:
-                  type: string
-            examples:
-              userExample:
-                summary: Create sample user
-                value:
-                  email: "olesia3@gmail.com"
-                  device_id: "128e4560-e80b-1203-a456-426614174000"
-                  first_name: "Olesia"
-                  last_name: "Mykhailyshyn"
+              $ref: '#/components/schemas/CreateUserRequest'
       responses:
         '201':
-          description: User created
-        '400':
-          description: Missing required field
-        '422':
-          description: Validation failed
-        '500':
-          description: Unexpected server error
+          description: User and device created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: string
+                    format: uuid
+                  device_id:
+                    type: string
+                    format: uuid
+              example:
+                user_id: "d78c3244-2376-4321-8bee-26c460f5432b"
+                device_id: "128e4560-e80b-1203-a456-426614174000"
+        '400': { description: Missing required field }
+        '422': { description: Validation failed }
+        '500': { description: Unexpected server error }
 
-  /api/users.:
     get:
-      summary: Get list of users with optional filters and pagination
+      summary: List users with optional filtering
       parameters:
         - in: query
           name: page
@@ -128,20 +157,20 @@ paths:
           schema:
             type: integer
             minimum: 1
-          example: 3
+          example: 20
         - in: query
           name: first_name
           schema:
             type: string
-          example: Olesia
+          example: Anna
         - in: query
           name: last_name
           schema:
             type: string
-          example: Mykhailyshyn
+          example: Ivanova
       responses:
         '200':
-          description: Paginated list of users
+          description: Paginated user list
           content:
             application/json:
               schema:
@@ -155,10 +184,16 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/User'
-        '400':
-          description: Invalid pagination parameters
-        '500':
-          description: Failed to fetch users
+              example:
+                page: 1
+                per_page: 20
+                users:
+                  - user_id: "d78c3244-2376-4321-8bee-26c460f5432b"
+                    email: "anna@example.com"
+                    first_name: "Anna"
+                    last_name: "Ivanova"
+        '400': { description: Invalid pagination parameters }
+        '500': { description: Failed to fetch users }
 
   /api/users/{user_id}:
     get:
@@ -170,7 +205,6 @@ paths:
           schema:
             type: string
             format: uuid
-          example: d78c3244-2376-4321-8bee-26c460f5432b
       responses:
         '200':
           description: User details
@@ -178,12 +212,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
-        '400':
-          description: Invalid UUID format
-        '404':
-          description: User not found
-        '500':
-          description: Failed to fetch user
+        '400': { description: Invalid UUID format }
+        '404': { description: User not found }
+        '500': { description: Failed to fetch user }
 
     patch:
       summary: Update user by ID
@@ -194,35 +225,17 @@ paths:
           schema:
             type: string
             format: uuid
-          example: d78c3244-2376-4321-8bee-26c460f5432b
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                  format: email
-                first_name:
-                  type: string
-                last_name:
-                  type: string
-            examples:
-              updateExample:
-                summary: Update user first name
-                value:
-                  first_name: "OlesiaUpdated"
+              $ref: '#/components/schemas/UpdateUserRequest'
       responses:
-        '200':
-          description: User updated
-        '400':
-          description: Invalid UUID format or update failed
-        '404':
-          description: User not found
-        '422':
-          description: Validation error
+        '200': { description: User updated }
+        '400': { description: Invalid UUID or update failed }
+        '404': { description: User not found }
+        '422': { description: Validation error }
 
     delete:
       summary: Delete user by ID
@@ -233,54 +246,66 @@ paths:
           schema:
             type: string
             format: uuid
-          example: d78c3244-2376-4321-8bee-26c460f5432b
       responses:
-        '200':
-          description: User deleted
-        '400':
-          description: Invalid UUID format or delete failed
-        '404':
-          description: User not found
+        '200': { description: User deleted }
+        '400': { description: Invalid UUID format or delete failed }
+        '404': { description: User not found }
 
   /api/devices:
+    post:
+      summary: Create a new device (optionally provide ID & last_seen)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+      responses:
+        '201':
+          description: Device created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  device_id:
+                    type: string
+                    format: uuid
+              example:
+                device_id: "128e4560-e80b-1203-a456-426614174000"
+        '400': { description: Missing or invalid field }
+        '422': { description: Validation failed }
+        '500': { description: Failed to create device }
+
     get:
-      summary: Get devices with optional filters and pagination
+      summary: List devices (paginated)
       parameters:
-        - in: query
-          name: owner_id
-          schema:
-            type: string
-            format: uuid
-          example: 3bdc2a34-1d29-431e-9f48-e0aa2aa2341f
-        - in: query
-          name: owner_email
-          schema:
-            type: string
-            format: email
-          example: olesia3@gmail.com
         - in: query
           name: page
           schema:
             type: integer
-            example: 1
+            minimum: 1
+          example: 1
         - in: query
           name: per_page
           schema:
             type: integer
-            example: 3
+            minimum: 1
+          example: 3
       responses:
         '200':
-          description: List of devices
+          description: Device list
           content:
             application/json:
               schema:
                 type: array
                 items:
                   $ref: '#/components/schemas/Device'
-        '400':
-          description: Invalid pagination parameters
-        '500':
-          description: Device fetch failed
+              example:
+                - device_id: "128e4560-e80b-1203-a456-426614174000"
+                  last_seen: "2025-06-11T20:00:00Z"
+        '400': { description: Invalid pagination parameters }
+        '500': { description: Failed to fetch devices }
 
   /api/devices/{device_id}:
     get:
@@ -292,7 +317,6 @@ paths:
           schema:
             type: string
             format: uuid
-          example: 128e4560-e80b-1203-a456-426614174000
       responses:
         '200':
           description: Device details
@@ -300,10 +324,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Device'
-        '404':
-          description: Device not found
-        '500':
-          description: Failed to fetch device
+        '404': { description: Device not found }
+        '500': { description: Failed to fetch device }
 
     delete:
       summary: Delete a device by ID
@@ -314,48 +336,47 @@ paths:
           schema:
             type: string
             format: uuid
-          example: 128e4560-e80b-1203-a456-426614174000
       responses:
-        '200':
-          description: Device deleted
-        '404':
-          description: Device not found
-        '500':
-          description: Failed to delete device
+        '200': { description: Device deleted }
+        '404': { description: Device not found }
+        '500': { description: Failed to delete device }
 
   /api/measurements:
     post:
-      summary: Submit a new measurement from a device
+      summary: Submit a new measurement
       requestBody:
         required: true
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/Measurement'
-            examples:
-              validMeasurement:
-                summary: A valid measurement
-                value:
-                  device_id: "128e4560-e80b-1203-a456-426614174000"
-                  outgate_status: true
       responses:
         '201':
           description: Measurement saved
-        '400':
-          description: Missing field
-        '404':
-          description: Device not registered
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  timestamp:
+                    type: string
+                    format: date-time
+                example:
+                  message: "Measurement saved"
+                  timestamp: "2025-06-11T20:17:00Z"
+        '400': { description: Missing or invalid field }
+        '404': { description: Device not registered }
         '410':
-          description: Device removed from system and must reboot
+          description: Device removed; must reboot
           content:
             application/json:
               example:
                 error: "Device removed from system"
                 action: "reboot"
-        '422':
-          description: Invalid UUID or data format
-        '500':
-          description: Unexpected server error
+        '422': { description: Validation failed }
+        '500': { description: Unexpected server error }
 
   /api/statistics/day/{device_id}:
     get:
@@ -367,7 +388,6 @@ paths:
           schema:
             type: string
             format: uuid
-          example: 128e4560-e80b-1203-a456-426614174000
       responses:
         '200':
           description: Events returned
@@ -375,12 +395,9 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MeasurementStatistics'
-        '404':
-          description: Device not registered
-        '422':
-          description: Invalid device ID format
-        '500':
-          description: Could not retrieve statistics
+        '404': { description: Device not registered }
+        '422': { description: Invalid device ID }
+        '500': { description: Could not retrieve statistics }
 
   /api/statistics/week/{device_id}:
     get:
@@ -392,7 +409,6 @@ paths:
           schema:
             type: string
             format: uuid
-          example: 128e4560-e80b-1203-a456-426614174000
       responses:
         '200':
           description: Events returned
@@ -400,9 +416,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MeasurementStatistics'
-        '404':
-          description: Device not registered
-        '422':
-          description: Invalid device ID format
-        '500':
-          description: Could not retrieve statistics
+        '404': { description: Device not registered }
+        '422': { description: Invalid device ID }
+        '500': { description: Could not retrieve statistics }

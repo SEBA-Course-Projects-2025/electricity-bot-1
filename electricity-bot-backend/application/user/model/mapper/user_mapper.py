@@ -1,7 +1,8 @@
-from application.user.model.dto.user import User
+from application.user.model.dto.user import User as UserDTO
 
 
 class UserMapper:
+
     def map_request(self, request_data):  # json to object
         # should be immutable
 
@@ -13,7 +14,11 @@ class UserMapper:
 
         return user  # fields are validated by Pydantic
 
-    def map_entity_to_dto(self, entity):  # ORM object from db to DTO
-        user = User(user_id=entity.user_id, email=entity.email)
+    def map_entity_to_dto(self, entity) -> UserDTO:  # ORM object from db to DTO
 
-        return user
+        return UserDTO(
+            user_id=entity.user_id,
+            email=entity.email,
+            first_name=entity.first_name,
+            last_name=entity.last_name,
+        )
