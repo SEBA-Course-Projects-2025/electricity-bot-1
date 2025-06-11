@@ -1,5 +1,5 @@
 //
-//  LoginView.swift
+//  RegisterView.swift
 //  electricityBot
 //
 //  Created by Dana Litvak on 11.06.2025.
@@ -7,24 +7,27 @@
 
 import SwiftUI
 
-struct LoginView: View {
+struct RegisterView: View {
+    @State private var fullName = ""
     @State private var email = ""
     @State private var password = ""
     
     var body: some View {
-        NavigationStack {
+        VStack {
             VStack(alignment: .leading) {
-                // login message
-                Text("Login to your account")
+                // sign up message
+                Text("Create an account")
                     .font(Font.custom("Poppins-SemiBold", size: 28))
                     .multilineTextAlignment(.leading)
                     .padding(.top, 100)
                     .padding(.horizontal)
-                    
+                
                 
                 // form fields: email & password
                 
                 VStack(spacing: 24) {
+                    InputFieldView(text: $fullName, title: "Full Name", placeholder: "f.e. John Smith")
+                    
                     InputFieldView(text: $email, title: "Email", placeholder: "example@kse.org.ua")
                         .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
                         .autocorrectionDisabled()
@@ -35,12 +38,12 @@ struct LoginView: View {
                 .padding(.horizontal)
                 .padding(.top, 32.0)
                 
-                // log in button
+                // sign up button
                 
                 Button {
-                    print("Log user in...")
+                    print("Sign user up...")
                 } label: {
-                    Text("Login now")
+                    Text("Create account")
                         .font(.custom("Poppins-SemiBold", size: 16))
                         .foregroundColor(Color.textColor.opacity(0.72))
                         .frame(width: UIScreen.main.bounds.width - 32, height: 52)
@@ -49,30 +52,13 @@ struct LoginView: View {
                 .cornerRadius(8.0)
                 .padding(.top, 32.0)
                 .padding(.horizontal, 16.0)
-                
-                // sign up navigation
-                
-                NavigationLink (){
-                    RegisterView()
-                } label:{
-                    HStack {
-                        Text("Don't Have An Account?")
-                            .foregroundStyle(Color.foregroundLow)
-                        Text("Sign Up")
-                    }
-                    .font(.custom("Poppins-Regular", size: 16))
-                    .frame(maxWidth: .infinity)
-                    .multilineTextAlignment(.center)
-                }
-                .padding(.top, 24.0)
-                
-                Spacer()
             }
-            .background(Color.backgroundColor)
+            
+            Spacer()
         }
+        .background(Color.backgroundColor)
     }
 }
-
 #Preview {
-    LoginView()
+    RegisterView()
 }
