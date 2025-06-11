@@ -13,10 +13,11 @@ from application.models import (
     DeviceModel,
     UserModel,
     UnassignedDeviceModel,
-    user_device_association
+    user_device_association,
 )
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 config = context.config
