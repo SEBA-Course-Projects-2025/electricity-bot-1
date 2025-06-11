@@ -41,8 +41,13 @@ struct ContentView: View {
                 .cornerRadius(8.0)
                 .padding(.top, 32.0)
                 .padding(.horizontal, 16.0)
+                .shadow(color: .black.opacity(0), radius: 51, x: 145, y: 112)
+                .shadow(color: .black.opacity(0), radius: 47, x: 93, y: 72)
+                .shadow(color: .black.opacity(0.01), radius: 40, x: 52, y: 40)
+                .shadow(color: .black.opacity(0.02), radius: 29, x: 23, y: 18)
+                .shadow(color: .black.opacity(0.02), radius: 16, x: 6, y: 4)
                                     
-                
+    
                 Spacer()
             }
         }

@@ -18,11 +18,16 @@ struct InputFieldView: View {
             Text(title)
                 .font(.custom("Poppins-Regular", size: 16))
             if isSecureField {
-                SecureField(placeholder, text: $text)
-                    .padding(.all, 17.0)
-                    .font(.custom("Poppins-Regular", size: 14))
-                    .background(RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray, lineWidth: 1))
+                HStack {
+                    SecureField(placeholder, text: $text)
+                        .padding(.all, 17.0)
+                        .font(.custom("Poppins-Regular", size: 14))
+                    Image(systemName: "eye")
+                        .padding(17)
+                        .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
+                }
+                .background(RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.gray, lineWidth: 1))
             } else {
                 TextField(placeholder, text: $text)
                     .padding(.all, 17.0)

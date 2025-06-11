@@ -16,7 +16,6 @@
 		BA83919F2DF878C300C3EA55 /* Berlin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919A2DF878C300C3EA55 /* Berlin.ttf */; };
 		BA8391A02DF878C300C3EA55 /* BerlinBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919B2DF878C300C3EA55 /* BerlinBold.ttf */; };
 		BA8391A12DF878C300C3EA55 /* BerlinX-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919C2DF878C300C3EA55 /* BerlinX-Bold.ttf */; };
-		BA8391A52DF878CC00C3EA55 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391A22DF878CC00C3EA55 /* LoginViewModel.swift */; };
 		BA8391A62DF878CC00C3EA55 /* RegisterUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391A32DF878CC00C3EA55 /* RegisterUserRequest.swift */; };
 		BA8391A92DF878D100C3EA55 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391A72DF878D100C3EA55 /* APIService.swift */; };
 		BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391AA2DF878D800C3EA55 /* ContentView.swift */; };
@@ -43,6 +42,8 @@
 		BA8391E22DF94EA200C3EA55 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA8391CE2DF94EA200C3EA55 /* Poppins-ThinItalic.ttf */; };
 		BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391E62DF95FAB00C3EA55 /* InputFieldView.swift */; };
 		BA8391E92DF9737C00C3EA55 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391E82DF9737C00C3EA55 /* RegisterView.swift */; };
+		BA8391EB2DF99EED00C3EA55 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391EA2DF99EED00C3EA55 /* ProfileView.swift */; };
+		BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391EC2DF9AE7100C3EA55 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,7 +76,6 @@
 		BA83919A2DF878C300C3EA55 /* Berlin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Berlin.ttf; sourceTree = "<group>"; };
 		BA83919B2DF878C300C3EA55 /* BerlinBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BerlinBold.ttf; sourceTree = "<group>"; };
 		BA83919C2DF878C300C3EA55 /* BerlinX-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BerlinX-Bold.ttf"; sourceTree = "<group>"; };
-		BA8391A22DF878CC00C3EA55 /* LoginViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BA8391A32DF878CC00C3EA55 /* RegisterUserRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterUserRequest.swift; sourceTree = "<group>"; };
 		BA8391A72DF878D100C3EA55 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		BA8391AA2DF878D800C3EA55 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,6 +103,8 @@
 		BA8391CE2DF94EA200C3EA55 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
 		BA8391E62DF95FAB00C3EA55 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
 		BA8391E82DF9737C00C3EA55 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		BA8391EA2DF99EED00C3EA55 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		BA8391EC2DF9AE7100C3EA55 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,7 +157,6 @@
 			children = (
 				BA8391B62DF8A50500C3EA55 /* Core */,
 				BA8391B52DF8A4E600C3EA55 /* Components */,
-				BA8391AD2DF878D800C3EA55 /* View */,
 				BA8391A82DF878D100C3EA55 /* Network */,
 				BA8391A42DF878CC00C3EA55 /* Models */,
 				BA8391732DF8772F00C3EA55 /* Assets.xcassets */,
@@ -206,8 +207,8 @@
 		BA8391A42DF878CC00C3EA55 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BA8391A22DF878CC00C3EA55 /* LoginViewModel.swift */,
 				BA8391A32DF878CC00C3EA55 /* RegisterUserRequest.swift */,
+				BA8391EC2DF9AE7100C3EA55 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -218,17 +219,6 @@
 				BA8391A72DF878D100C3EA55 /* APIService.swift */,
 			);
 			path = Network;
-			sourceTree = "<group>";
-		};
-		BA8391AD2DF878D800C3EA55 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				BA8391AA2DF878D800C3EA55 /* ContentView.swift */,
-				BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */,
-				BA8391BA2DF94C3900C3EA55 /* LoginView.swift */,
-				BA8391E82DF9737C00C3EA55 /* RegisterView.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		BA8391B52DF8A4E600C3EA55 /* Components */ = {
@@ -252,6 +242,8 @@
 		BA8391B72DF8A65300C3EA55 /* Root */ = {
 			isa = PBXGroup;
 			children = (
+				BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */,
+				BA8391AA2DF878D800C3EA55 /* ContentView.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -259,6 +251,8 @@
 		BA8391B82DF8A69B00C3EA55 /* Authentification */ = {
 			isa = PBXGroup;
 			children = (
+				BA8391BA2DF94C3900C3EA55 /* LoginView.swift */,
+				BA8391E82DF9737C00C3EA55 /* RegisterView.swift */,
 			);
 			path = Authentification;
 			sourceTree = "<group>";
@@ -266,6 +260,7 @@
 		BA8391B92DF8A6A900C3EA55 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				BA8391EA2DF99EED00C3EA55 /* ProfileView.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -449,13 +444,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BA8391E92DF9737C00C3EA55 /* RegisterView.swift in Sources */,
-				BA8391A52DF878CC00C3EA55 /* LoginViewModel.swift in Sources */,
+				BA8391EB2DF99EED00C3EA55 /* ProfileView.swift in Sources */,
 				BA8391BB2DF94C3900C3EA55 /* LoginView.swift in Sources */,
 				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
 				BA8391A92DF878D100C3EA55 /* APIService.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
 				BA8391A62DF878CC00C3EA55 /* RegisterUserRequest.swift in Sources */,
 				BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */,
+				BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */,
 				BA8391B02DF878D800C3EA55 /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
