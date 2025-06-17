@@ -6,7 +6,7 @@ from application.models import DeviceModel, UnassignedDeviceModel
 from application.measurement.model.dto.measurement import Measurement as MeasurementDTO
 from application.measurement.measurement_service import MeasurementService
 from pydantic import ValidationError
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 
 @app.route("/api/measurements", methods=["POST"])
@@ -132,5 +132,36 @@ def _get_statistics(device_id: str, days: int):
             jsonify(
                 {"error": "Could not retrieve statistics", "details": str(exception)}
             ),
+            500,
+        )
+
+
+@app.route("/api/status/<device_id>", methods=["GET"])
+def get_current_status(device_id: str):
+    try:
+        uuid_obj = uuid.UUID(device_id)
+
+        with MeasurementService() as service:
+            latest = service.get_current_power_status(str(uuid_obj))
+
+        if latest is None:
+            return jsonify({"error": "No data for this device"}), 404
+
+        return (
+            jsonify(
+                {
+                    "device_id": device_id,
+                    "outgate_status": latest.outgate_status,
+                    "timestamp": latest.timestamp.isoformat(),
+                }
+            ),
+            200,
+        )
+
+    except ValueError:
+        return jsonify({"error": "Invalid UUID format"}), 422
+    except Exception as exception:
+        return (
+            jsonify({"error": "Failed to fetch status", "details": str(exception)}),
             500,
         )

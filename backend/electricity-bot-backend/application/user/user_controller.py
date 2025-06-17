@@ -2,11 +2,14 @@ import uuid
 from application import app
 from flask import request, jsonify
 from application.user.user_service import UserService
-from application.user.model.dto.user import CreateUserRequest, UpdateUserRequest
+from application.user.model.dto.user import CreateUserRequest
 from pydantic import ValidationError
 
 
-@app.route("/api/users", methods=["POST"])
+@app.route(
+    "/api/users", methods=["POST"]
+)  # is not needed, because user is created by Google login
+# can be used for tests
 def create_user():
     try:
         data = request.get_json()
@@ -36,15 +39,15 @@ def list_users():
     try:
         page = int(request.args.get("page", 1))
         per_page = int(request.args.get("per_page", 20))
-        first_name = request.args.get("first_name")
-        last_name = request.args.get("last_name")
+        # first_name = request.args.get("first_name")
+        # last_name = request.args.get("last_name")
 
         if page < 1 or per_page < 1:
             raise ValueError("page and per_page must be >= 1")
 
         with UserService() as user_service:
-            users = user_service.get_all_users(page, per_page, first_name, last_name)
-
+            # users = user_service.get_all_users(page, per_page, first_name, last_name)
+            users = user_service.get_all_users(page, per_page)
         return (
             jsonify(
                 {
@@ -54,8 +57,8 @@ def list_users():
                         {
                             "user_id": user.user_id,
                             "email": user.email,
-                            "first_name": user.first_name,
-                            "last_name": user.last_name,
+                            # "first_name": user.first_name,
+                            # "last_name": user.last_name,
                         }
                         for user in users
                     ],
@@ -73,30 +76,31 @@ def list_users():
         )
 
 
-@app.route("/api/users/<user_id>", methods=["PATCH"])
-def update_user(user_id):
-    try:
-        user_id = str(uuid.UUID(user_id))
-        data = request.get_json()
-        dto = UpdateUserRequest(**data)
+# not needed cause currently user does not have the first and last name
+# @app.route("/api/users/<user_id>", methods=["PATCH"])
+# def update_user(user_id):
+#     try:
+#         user_id = str(uuid.UUID(user_id))
+#         data = request.get_json()
+#         dto = UpdateUserRequest(**data)
 
-        with UserService() as user_service:
-            user = user_service.update_user(user_id, dto)
+#         with UserService() as user_service:
+#             user = user_service.update_user(user_id, dto)
 
-        if not user:
-            return jsonify({"error": "User not found"}), 404
+#         if not user:
+#             return jsonify({"error": "User not found"}), 404
 
-        return jsonify({"message": "User updated"}), 200
+#         return jsonify({"message": "User updated"}), 200
 
-    except ValueError:
-        return jsonify({"error": "Invalid UUID format"}), 400
-    except ValidationError as validation_error:
-        return (
-            jsonify({"error": "Invalid input", "details": validation_error.errors()}),
-            422,
-        )
-    except Exception as exception:
-        return jsonify({"error": "Update failed", "details": str(exception)}), 400
+#     except ValueError:
+#         return jsonify({"error": "Invalid UUID format"}), 400
+#     except ValidationError as validation_error:
+#         return (
+#             jsonify({"error": "Invalid input", "details": validation_error.errors()}),
+#             422,
+#         )
+#     except Exception as exception:
+#         return jsonify({"error": "Update failed", "details": str(exception)}), 400
 
 
 @app.route("/api/users/<user_id>", methods=["DELETE"])
@@ -132,8 +136,8 @@ def get_user(user_id):
                     {
                         "user_id": user.user_id,
                         "email": user.email,
-                        "first_name": user.first_name,
-                        "last_name": user.last_name,
+                        # "first_name": user.first_name,
+                        # "last_name": user.last_name,
                     }
                 ),
                 200,

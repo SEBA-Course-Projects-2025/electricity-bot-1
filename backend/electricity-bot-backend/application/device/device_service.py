@@ -3,6 +3,7 @@ from application.models import (
     DeviceModel,
     MeasurementModel,
     UnassignedDeviceModel,
+    UserModel,
     user_device_association,
 )
 from application.device.model.mapper.device_mapper import dto_to_entity
@@ -16,10 +17,13 @@ class DeviceService:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.db.close()
 
-    def create_device(self, dto):
+    def create_device(self, dto, user_id: str):
         device = dto_to_entity(dto)
         self.db.add(device)
-        self.db.add(UnassignedDeviceModel(device_id=device.device_id))
+        user = self.db.query(UserModel).filter_by(user_id=user_id).first()
+        if not user:
+            raise Exception("User not found")
+        user.devices.append(device)
         self.db.commit()
         return device
 
@@ -44,6 +48,17 @@ class DeviceService:
             .filter(user_device_association.c.user_id == user_id)
             .offset((page - 1) * per_page)
             .limit(per_page)
+            .all()
+        )
+
+    def get_devices_by_user(self, user_id: str, page: int, per_page: int):
+        return (
+            self.db.query(DeviceModel)
+            .join(DeviceModel.users)  # many-to-many
+            .filter(UserModel.user_id == user_id)
+            .order_by(DeviceModel.device_id)
+            .limit(per_page)
+            .offset((page - 1) * per_page)
             .all()
         )
 

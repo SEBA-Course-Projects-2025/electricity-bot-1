@@ -1,3 +1,7 @@
+from dotenv import load_dotenv
+
+load_dotenv()
+
 from application import app
 from application.background_tasks import start_scheduler
 

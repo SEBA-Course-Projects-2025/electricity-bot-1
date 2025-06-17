@@ -24,8 +24,8 @@ class UserService:
             user = UserModel(
                 user_id=user_id,
                 email=dto.email,
-                first_name=dto.first_name,
-                last_name=dto.last_name,
+                # first_name=dto.first_name,
+                # last_name=dto.last_name,
             )
             self.db.add(user)
 
@@ -46,28 +46,34 @@ class UserService:
             self.db.rollback()
             raise
 
-    def get_all_users(
-        self, page: int, per_page: int, first_name: str = None, last_name: str = None
-    ):
-        query = self.db.query(UserModel)
-        if first_name:
-            query = query.filter(UserModel.first_name.ilike(f"%{first_name}%"))
-        if last_name:
-            query = query.filter(UserModel.last_name.ilike(f"%{last_name}%"))
-        return query.offset((page - 1) * per_page).limit(per_page).all()
+    # def get_all_users(
+    #     self, page: int, per_page: int, first_name: str = None, last_name: str = None
+    # ):
+    #     query = self.db.query(UserModel)
+    #     if first_name:
+    #         query = query.filter(UserModel.first_name.ilike(f"%{first_name}%"))
+    #     if last_name:
+    #         query = query.filter(UserModel.last_name.ilike(f"%{last_name}%"))
+    #     return query.offset((page - 1) * per_page).limit(per_page).all()
+
+    def get_all_users(self, page, per_page):
+        return (
+            self.db.query(UserModel).offset((page - 1) * per_page).limit(per_page).all()
+        )
 
     def get_user_by_id(self, user_id: str):
         return self.db.query(UserModel).filter_by(user_id=user_id).first()
 
-    def update_user(self, user_id: str, dto: UpdateUserRequest):
-        user = self.db.query(UserModel).filter_by(user_id=user_id).first()
-        if not user:
-            return None
-        user.email = dto.email
-        user.first_name = dto.first_name
-        user.last_name = dto.last_name
-        self.db.commit()
-        return user
+    # not needed cause currently user does not have the first and last name
+    # def update_user(self, user_id: str, dto: UpdateUserRequest):
+    #     user = self.db.query(UserModel).filter_by(user_id=user_id).first()
+    #     if not user:
+    #         return None
+    #     user.email = dto.email
+    #     user.first_name = dto.first_name
+    #     user.last_name = dto.last_name
+    #     self.db.commit()
+    #     return user
 
     def delete_user(self, user_id: str) -> bool:
         user = self.db.query(UserModel).filter_by(user_id=user_id).first()

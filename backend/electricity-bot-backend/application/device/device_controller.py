@@ -82,6 +82,10 @@ def delete_device_api(device_id):
 def create_device():
     try:
         data = request.get_json() or {}
+        user_id = data.get("user_id")
+        if not user_id:
+            return jsonify({"error": "Missing user_id"}), 400
+
         dto = DeviceDTO(
             device_id=(
                 uuid.UUID(data["device_id"]) if data.get("device_id") else uuid.uuid4()
@@ -93,7 +97,7 @@ def create_device():
             ),
         )
         with DeviceService() as service:
-            device = service.create_device(dto)
+            device = service.create_device(dto, user_id)
         return jsonify({"device_id": str(device.device_id)}), 201
 
     except ValidationError as validation_error:
@@ -108,3 +112,33 @@ def create_device():
             jsonify({"error": "Failed to create device", "details": str(exception)}),
             500,
         )
+
+
+@app.route("/api/users/<user_id>/devices", methods=["GET"])
+def list_user_devices(user_id):
+    try:
+        user_id = str(uuid.UUID(user_id))
+        page = int(request.args.get("page", 1))
+        per_page = int(request.args.get("per_page", 20))
+        if page < 1 or per_page < 1:
+            return jsonify({"error": "Invalid pagination"}), 400
+
+        with DeviceService() as service:
+            devices = service.get_devices_by_user(user_id, page, per_page)
+
+        return (
+            jsonify(
+                [
+                    {
+                        "device_id": d.device_id,
+                        "last_seen": d.last_seen.isoformat() if d.last_seen else None,
+                    }
+                    for d in devices
+                ]
+            ),
+            200,
+        )
+    except ValueError:
+        return jsonify({"error": "Invalid UUID format"}), 400
+    except Exception as exception:
+        return jsonify({"error": str(exception)}), 500

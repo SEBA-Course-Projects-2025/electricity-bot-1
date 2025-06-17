@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: electricity-bot-bd
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  flask:
+    build:
+      context: ./electricity-bot-backend
+    container_name: electricity-bot-flask
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.1
+    container_name: electricity-bot-keycloak
+    command: start-dev --import-realm
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_DB=mysql
+      - KC_DB_URL=jdbc:mysql://mysql:3306/keycloak
+      - KC_DB_USERNAME=${MYSQL_USER}
+      - KC_DB_PASSWORD=${MYSQL_PASSWORD}
+    depends_on:
+      - mysql
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./keylock/realm-export.json:/opt/keycloak/data/import/realm-export.json
+
+volumes:
+  mysql_data:

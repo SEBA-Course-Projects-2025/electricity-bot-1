@@ -90,3 +90,22 @@ class MeasurementService:
             }
             for measurement in events
         ]
+
+    def get_current_power_status(self, device_id: str) -> Measurement | None:
+
+        last = (
+            self.db.query(MeasurementModel)
+            .filter_by(device_id=device_id)
+            .order_by(MeasurementModel.timestamp.desc())
+            .first()
+        )
+
+        if last is None:
+            return None
+
+        return Measurement(
+            measurement_id=uuid.UUID(last.measurement_id),
+            device_id=uuid.UUID(last.device_id),
+            timestamp=last.timestamp,
+            outgate_status=last.outgate_status,
+        )

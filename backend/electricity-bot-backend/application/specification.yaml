@@ -2,8 +2,11 @@
 openapi: 3.0.0
 info:
   title: Electricity Bot API
-  version: 1.0.0
-  description: Description of how the server communicates with a Raspberry Pi and a client (app and website)
+  version: 1.2.0
+  description: >
+    REST API for Raspberry Pi power-monitoring devices and client applications.
+    Supports Google-based authentication via Keycloak, user/device management,
+    power-status measurements, real-time status checks and statistics.
 
 servers:
   - url: http://localhost:5000
@@ -12,6 +15,7 @@ components:
   schemas:
     User:
       type: object
+      required: [user_id, email]
       properties:
         user_id:
           type: string
@@ -19,14 +23,10 @@ components:
         email:
           type: string
           format: email
-        first_name:
-          type: string
-        last_name:
-          type: string
 
     CreateUserRequest:
       type: object
-      required: [email, device_id, first_name, last_name]
+      required: [email, device_id]
       properties:
         email:
           type: string
@@ -34,32 +34,44 @@ components:
         device_id:
           type: string
           format: uuid
-        first_name:
-          type: string
-        last_name:
+      example:
+        email: anna@example.com
+        device_id: 128e4560-e80b-1203-a456-426614174000
+
+    LoginRequest:
+      type: object
+      required: [id_token]
+      properties:
+        id_token:
           type: string
       example:
-        email: "anna@example.com"
-        device_id: "128e4560-e80b-1203-a456-426614174000"
-        first_name: "Anna"
-        last_name: "Ivanova"
+        id_token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...
 
-    UpdateUserRequest:
+    LoginResponse:
       type: object
       properties:
-        email:
+        access_token:
           type: string
-          format: email
-        first_name:
+        refresh_token:
           type: string
-        last_name:
+        expires_in:
+          type: integer
+      example:
+        access_token: eyJraWQiOiIxIn0...
+        refresh_token: aeyJraWQiOiIyIn0...
+        expires_in: 300
+
+    LogoutResponse:
+      type: object
+      properties:
+        logout_url:
           type: string
       example:
-        first_name: "AnnaUpdated"
+        logout_url: http://localhost:8080/realms/electricity-bot/protocol/openid-connect/logout?redirect_uri=http%3A%2F%2Flocalhost%3A3000
 
     Device:
       type: object
-      required: [device_id, last_seen]
+      required: [device_id]
       properties:
         device_id:
           type: string
@@ -68,8 +80,26 @@ components:
           type: string
           format: date-time
       example:
-        device_id: "128e4560-e80b-1203-a456-426614174000"
-        last_seen: "2025-06-11T20:00:00Z"
+        device_id: 128e4560-e80b-1203-a456-426614174000
+        last_seen: 2025-06-11T20:00:00Z
+
+    CreateDeviceRequest:
+      type: object
+      required: [user_id]
+      properties:
+        user_id:
+          type: string
+          format: uuid
+        device_id:
+          type: string
+          format: uuid
+        last_seen:
+          type: string
+          format: date-time
+      example:
+        user_id: d78c3244-2376-4321-8bee-26c460f5432b
+        device_id: 128e4560-e80b-1203-a456-426614174000
+        last_seen: 2025-06-11T20:00:00Z
 
     Measurement:
       type: object
@@ -83,11 +113,26 @@ components:
         timestamp:
           type: string
           format: date-time
-          description: ISO-8601 UTC timestamp
       example:
-        device_id: "128e4560-e80b-1203-a456-426614174000"
+        device_id: 128e4560-e80b-1203-a456-426614174000
         outgate_status: true
-        timestamp: "2025-06-11T20:17:00Z"
+        timestamp: 2025-06-11T20:17:00Z
+
+    CurrentStatus:
+      type: object
+      properties:
+        device_id:
+          type: string
+          format: uuid
+        outgate_status:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+      example:
+        device_id: 128e4560-e80b-1203-a456-426614174000
+        outgate_status: false
+        timestamp: 2025-06-11T20:20:00Z
 
     MeasurementStatistics:
       type: object
@@ -113,9 +158,41 @@ components:
                 type: boolean
 
 paths:
+  /api/auth/login:
+    post:
+      summary: Authenticate with a Google ID token via Keycloak
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successful authentication
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '400': { description: Missing id_token }
+        '422': { description: Validation error }
+        '500': { description: Authentication failed }
+
+  /api/auth/logout:
+    get:
+      summary: Retrieve a Keycloak logout URL
+      responses:
+        '200':
+          description: Logout URL returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LogoutResponse'
+        '500': { description: Logout failed }
+
   /api/users:
     post:
-      summary: Create a new user and associate a device
+      summary: Create a user and link a device (testing only)
       requestBody:
         required: true
         content:
@@ -124,7 +201,7 @@ paths:
               $ref: '#/components/schemas/CreateUserRequest'
       responses:
         '201':
-          description: User and device created
+          description: User created
           content:
             application/json:
               schema:
@@ -133,18 +210,14 @@ paths:
                   user_id:
                     type: string
                     format: uuid
-                  device_id:
-                    type: string
-                    format: uuid
               example:
-                user_id: "d78c3244-2376-4321-8bee-26c460f5432b"
-                device_id: "128e4560-e80b-1203-a456-426614174000"
+                user_id: d78c3244-2376-4321-8bee-26c460f5432b
         '400': { description: Missing required field }
         '422': { description: Validation failed }
-        '500': { description: Unexpected server error }
+        '500': { description: Server error }
 
     get:
-      summary: List users with optional filtering
+      summary: List users with pagination
       parameters:
         - in: query
           name: page
@@ -158,16 +231,6 @@ paths:
             type: integer
             minimum: 1
           example: 20
-        - in: query
-          name: first_name
-          schema:
-            type: string
-          example: Anna
-        - in: query
-          name: last_name
-          schema:
-            type: string
-          example: Ivanova
       responses:
         '200':
           description: Paginated user list
@@ -176,10 +239,8 @@ paths:
               schema:
                 type: object
                 properties:
-                  page:
-                    type: integer
-                  per_page:
-                    type: integer
+                  page: { type: integer }
+                  per_page: { type: integer }
                   users:
                     type: array
                     items:
@@ -188,16 +249,14 @@ paths:
                 page: 1
                 per_page: 20
                 users:
-                  - user_id: "d78c3244-2376-4321-8bee-26c460f5432b"
-                    email: "anna@example.com"
-                    first_name: "Anna"
-                    last_name: "Ivanova"
+                  - user_id: d78c3244-2376-4321-8bee-26c460f5432b
+                    email: anna@example.com
         '400': { description: Invalid pagination parameters }
-        '500': { description: Failed to fetch users }
+        '500': { description: Retrieval failed }
 
   /api/users/{user_id}:
     get:
-      summary: Get user by ID
+      summary: Retrieve a user by ID
       parameters:
         - in: path
           name: user_id
@@ -214,31 +273,10 @@ paths:
                 $ref: '#/components/schemas/User'
         '400': { description: Invalid UUID format }
         '404': { description: User not found }
-        '500': { description: Failed to fetch user }
-
-    patch:
-      summary: Update user by ID
-      parameters:
-        - in: path
-          name: user_id
-          required: true
-          schema:
-            type: string
-            format: uuid
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateUserRequest'
-      responses:
-        '200': { description: User updated }
-        '400': { description: Invalid UUID or update failed }
-        '404': { description: User not found }
-        '422': { description: Validation error }
+        '500': { description: Retrieval failed }
 
     delete:
-      summary: Delete user by ID
+      summary: Delete a user by ID
       parameters:
         - in: path
           name: user_id
@@ -248,18 +286,19 @@ paths:
             format: uuid
       responses:
         '200': { description: User deleted }
-        '400': { description: Invalid UUID format or delete failed }
+        '400': { description: Invalid UUID format }
         '404': { description: User not found }
+        '500': { description: Deletion failed }
 
   /api/devices:
     post:
-      summary: Create a new device (optionally provide ID & last_seen)
+      summary: Create a device and assign it to a user
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Device'
+              $ref: '#/components/schemas/CreateDeviceRequest'
       responses:
         '201':
           description: Device created
@@ -272,13 +311,13 @@ paths:
                     type: string
                     format: uuid
               example:
-                device_id: "128e4560-e80b-1203-a456-426614174000"
-        '400': { description: Missing or invalid field }
+                device_id: 128e4560-e80b-1203-a456-426614174000
+        '400': { description: Missing user_id or invalid field }
         '422': { description: Validation failed }
-        '500': { description: Failed to create device }
+        '500': { description: Creation failed }
 
     get:
-      summary: List devices (paginated)
+      summary: List devices with pagination
       parameters:
         - in: query
           name: page
@@ -301,15 +340,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Device'
-              example:
-                - device_id: "128e4560-e80b-1203-a456-426614174000"
-                  last_seen: "2025-06-11T20:00:00Z"
         '400': { description: Invalid pagination parameters }
-        '500': { description: Failed to fetch devices }
+        '500': { description: Retrieval failed }
 
   /api/devices/{device_id}:
     get:
-      summary: Get a device by ID
+      summary: Retrieve a device by ID
       parameters:
         - in: path
           name: device_id
@@ -325,7 +361,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Device'
         '404': { description: Device not found }
-        '500': { description: Failed to fetch device }
+        '500': { description: Retrieval failed }
 
     delete:
       summary: Delete a device by ID
@@ -339,11 +375,38 @@ paths:
       responses:
         '200': { description: Device deleted }
         '404': { description: Device not found }
-        '500': { description: Failed to delete device }
+        '500': { description: Deletion failed }
+  
+/api/users/{user_id}/devices:
+get:
+  summary: List all devices linked to a user
+  parameters:
+    - in: path
+      name: user_id
+      required: true
+      schema: { type: string, format: uuid }
+    - in: query
+      name: page
+      schema: { type: integer, minimum: 1 }
+      example: 1
+    - in: query
+      name: per_page
+      schema: { type: integer, minimum: 1 }
+      example: 20
+  responses:
+    '200':
+      description: Devices of the user
+      content:
+        application/json:
+          schema:
+            type: array
+            items: { $ref: '#/components/schemas/Device' }
+    '404': { description: User not found }
+    '400': { description: Invalid parameters }
 
   /api/measurements:
     post:
-      summary: Submit a new measurement
+      summary: Submit a power-status measurement
       requestBody:
         required: true
         content:
@@ -352,35 +415,55 @@ paths:
               $ref: '#/components/schemas/Measurement'
       responses:
         '201':
-          description: Measurement saved
+          description: Measurement stored
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
+                  message: { type: string }
                   timestamp:
                     type: string
                     format: date-time
-                example:
-                  message: "Measurement saved"
-                  timestamp: "2025-06-11T20:17:00Z"
+              example:
+                message: Measurement saved
+                timestamp: 2025-06-11T20:17:00Z
         '400': { description: Missing or invalid field }
         '404': { description: Device not registered }
         '410':
-          description: Device removed; must reboot
+          description: Device removed; client must reboot
           content:
             application/json:
               example:
-                error: "Device removed from system"
-                action: "reboot"
+                error: Device removed from system
+                action: reboot
         '422': { description: Validation failed }
-        '500': { description: Unexpected server error }
+        '500': { description: Server error }
+
+  /api/status/{device_id}:
+    get:
+      summary: Retrieve the latest power status of a device
+      parameters:
+        - in: path
+          name: device_id
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Current status returned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrentStatus'
+        '404': { description: No status data or device not registered }
+        '422': { description: Invalid device ID }
+        '500': { description: Retrieval failed }
 
   /api/statistics/day/{device_id}:
     get:
-      summary: Get power events for the last 24 hours
+      summary: Power events for the last 24 hours
       parameters:
         - in: path
           name: device_id
@@ -390,18 +473,18 @@ paths:
             format: uuid
       responses:
         '200':
-          description: Events returned
+          description: Statistics returned
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MeasurementStatistics'
         '404': { description: Device not registered }
         '422': { description: Invalid device ID }
-        '500': { description: Could not retrieve statistics }
+        '500': { description: Retrieval failed }
 
   /api/statistics/week/{device_id}:
     get:
-      summary: Get power events for the last 7 days
+      summary: Power events for the last 7 days
       parameters:
         - in: path
           name: device_id
@@ -411,11 +494,11 @@ paths:
             format: uuid
       responses:
         '200':
-          description: Events returned
+          description: Statistics returned
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MeasurementStatistics'
         '404': { description: Device not registered }
         '422': { description: Invalid device ID }
-        '500': { description: Could not retrieve statistics }
+        '500': { description: Retrieval failed }

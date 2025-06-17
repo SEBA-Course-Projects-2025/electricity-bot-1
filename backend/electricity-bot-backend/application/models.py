@@ -52,8 +52,8 @@ class UserModel(base):
         String(255), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False
     )
     email = Column(String(255), nullable=False, unique=True)
-    first_name = Column(String(255), nullable=False)
-    last_name = Column(String(255), nullable=False)
+    # first_name = Column(String(255), nullable=False)
+    # last_name = Column(String(255), nullable=False)
 
     devices = relationship(
         "DeviceModel", secondary=user_device_association, back_populates="users"
