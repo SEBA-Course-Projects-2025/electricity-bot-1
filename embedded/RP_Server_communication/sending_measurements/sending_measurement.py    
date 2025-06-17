@@ -1,0 +1,50 @@
+import requests
+from datetime import datetime, timezone
+from pathlib import Path
+import os
+
+CONFIG_PATH = "/home/user/electricity_bot/device_config.txt"
+URL = "https://server/api/measurements"
+
+def send_measurement(config_path_str=CONFIG_PATH, url=URL):
+    config_path = Path(config_path_str)
+    if not config_path.exists():
+        print("Device ID not found.")
+        return False
+
+    device_id = config_path.read_text().strip()
+    data = {
+        "device_id": device_id,
+        "outgate_status": True,
+        "timestamp": datetime.now(timezone.utc).isoformat()
+    }
+
+    try:
+        response = requests.post(url, json=data)
+        status = response.status_code
+
+        if status == 201:
+            print("Measurement saved")
+            return True
+        elif status == 410:
+            print("Device removed. Performing factory reset")
+            # config_path.unlink(missing_ok=True)
+            # os.system("sudo reboot")
+            return False
+        elif status == 404:
+            print("Device not registered")
+            return False
+        elif status in (400, 422):
+            print("Invalid UUID or data format")
+            return False
+        else:
+            print("Unknown status:", status)
+            return False
+
+    except Exception as e:
+        print("Connection error:", e)
+        return False
+
+
+if __name__ == "__main__":
+    send_measurement()
