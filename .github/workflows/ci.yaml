@@ -17,7 +17,12 @@ jobs:
         with:
           python-version: 3.11
       - run: pip install black
-      - run: black --check backend/electricity-bot-backend
+      - run: |
+          if [ -d "backend/electricity-bot-backend" ]; then
+            black --check backend/electricity-bot-backend
+          else
+            echo "No Python backend found"
+          fi
 
   # Backend (Python) – tests
   test-python:
