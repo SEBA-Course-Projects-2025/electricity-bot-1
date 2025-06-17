@@ -7,3 +7,4 @@ pymysql>=1.0.0
 cryptography>=3.4.7
 python-dotenv>=1.0.0
 google-auth>=2.0.0
+requests==2.32.2

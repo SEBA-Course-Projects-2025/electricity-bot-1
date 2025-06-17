@@ -12,6 +12,19 @@
             "name": "db",
             "database": "electricity_bot_bd",
             "username": "user"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "127.0.0.1",
+            "port": 3307,
+            "driver": "MySQL",
+            "name": "electricity-bot-db",
+            "database": "electricity_bot_bd",
+            "username": "root"
         }
     ]
 }

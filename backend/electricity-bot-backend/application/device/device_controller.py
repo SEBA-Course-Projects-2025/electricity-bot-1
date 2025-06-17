@@ -86,19 +86,12 @@ def create_device():
         if not user_id:
             return jsonify({"error": "Missing user_id"}), 400
 
-        dto = DeviceDTO(
-            device_id=(
-                uuid.UUID(data["device_id"]) if data.get("device_id") else uuid.uuid4()
-            ),
-            last_seen=(
-                datetime.fromisoformat(data["last_seen"])
-                if data.get("last_seen")
-                else datetime.now(timezone.utc)
-            ),
-        )
+        dto = DeviceDTO(**data)
+
         with DeviceService() as service:
-            device = service.create_device(dto, user_id)
-        return jsonify({"device_id": str(device.device_id)}), 201
+            device_data = service.create_device(dto, user_id)
+
+        return jsonify(device_data), 201
 
     except ValidationError as validation_error:
         return (

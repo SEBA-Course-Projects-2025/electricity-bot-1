@@ -7,6 +7,7 @@ from application.models import (
     user_device_association,
 )
 from application.device.model.mapper.device_mapper import dto_to_entity
+from application.device.model.dto.device import Device as DeviceDTO
 
 
 class DeviceService:
@@ -17,15 +18,38 @@ class DeviceService:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.db.close()
 
-    def create_device(self, dto, user_id: str):
-        device = dto_to_entity(dto)
-        self.db.add(device)
-        user = self.db.query(UserModel).filter_by(user_id=user_id).first()
-        if not user:
-            raise Exception("User not found")
-        user.devices.append(device)
-        self.db.commit()
-        return device
+    def create_device(self, dto: DeviceDTO, user_id: str) -> DeviceModel:
+        try:
+            print(
+                f"[CREATE DEVICE] Start: user_id={user_id}, device_id={dto.device_id}"
+            )
+
+            existing_device = (
+                self.db.query(DeviceModel).filter_by(device_id=dto.device_id).first()
+            )
+            if existing_device:
+                raise ValueError("Device with this ID already exists")
+
+            device = DeviceModel(device_id=dto.device_id, last_seen=dto.last_seen)
+            self.db.add(device)
+
+            self.db.flush()
+
+            self.db.execute(
+                user_device_association.insert().values(
+                    user_id=user_id, device_id=dto.device_id
+                )
+            )
+
+            self.db.commit()
+
+            return {"device_id": str(dto.device_id)}
+
+        except Exception as exception:
+            import traceback
+
+            traceback.print_exc()
+            raise exception
 
     def get_devices(self, page: int = 1, per_page: int = 3):
         return (

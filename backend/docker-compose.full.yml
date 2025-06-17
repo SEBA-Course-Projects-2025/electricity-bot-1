@@ -33,8 +33,9 @@ services:
       - KEYCLOAK_ADMIN_PASSWORD=admin
       - KC_DB=mysql
       - KC_DB_URL=jdbc:mysql://mysql:3306/keycloak
-      - KC_DB_USERNAME=${MYSQL_USER}
-      - KC_DB_PASSWORD=${MYSQL_PASSWORD}
+      - KC_DB_USERNAME=root         
+      - KC_DB_PASSWORD=${MYSQL_ROOT_PASSWORD}
+
     depends_on:
       - mysql
     ports:

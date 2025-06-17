@@ -7,7 +7,7 @@ from application.models import (
     UnassignedDeviceModel,
     user_device_association,
 )
-from application.user.model.dto.user import CreateUserRequest, UpdateUserRequest
+from application.user.model.dto.user import CreateUserRequest
 
 
 class UserService:
