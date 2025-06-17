@@ -34,11 +34,15 @@ jobs:
         with:
           python-version: 3.11
       - run: |
-          pip install -r backend/electricity-bot-backend/requirements.txt
+          if [ -f "backend/electricity-bot-backend/requirements.txt" ]; then
+            pip install -r backend/electricity-bot-backend/requirements.txt
+          else
+            echo "No requirements.txt found, skipping install"
+          fi
       - name: Run tests if they exist
         run: |
-          cd backend/electricity-bot-backend
-          if [ -d "tests" ]; then
+          if [ -d "backend/electricity-bot-backend/tests" ]; then
+            cd backend/electricity-bot-backend
             pytest tests
           else
             echo "No tests yet"
