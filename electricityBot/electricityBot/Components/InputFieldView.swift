@@ -12,6 +12,7 @@ struct InputFieldView: View {
     let title: String
     let placeholder: String
     var isSecureField = false
+    @FocusState var isFocused: Bool
     
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -22,18 +23,20 @@ struct InputFieldView: View {
                     SecureField(placeholder, text: $text)
                         .padding(.all, 17.0)
                         .font(.custom("Poppins-Regular", size: 14))
+                        .focused($isFocused)
                     Image(systemName: "eye")
                         .padding(17)
                         .opacity(/*@START_MENU_TOKEN@*/0.8/*@END_MENU_TOKEN@*/)
                 }
                 .background(RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.gray, lineWidth: 1))
+                .stroke(isFocused ? Color.yellowGlow : Color.gray, lineWidth: 1))
             } else {
                 TextField(placeholder, text: $text)
                     .padding(.all, 17.0)
                     .font(.custom("Poppins-Regular", size: 14))
+                    .focused($isFocused)
                     .background(RoundedRectangle(cornerRadius: 8)
-                        .stroke(Color.gray, lineWidth: 1))
+                        .stroke(isFocused ? Color.yellowGlow : Color.gray, lineWidth: 1))
             }
         }
     }

@@ -44,6 +44,13 @@
 		BA8391E92DF9737C00C3EA55 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391E82DF9737C00C3EA55 /* RegisterView.swift */; };
 		BA8391EB2DF99EED00C3EA55 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391EA2DF99EED00C3EA55 /* ProfileView.swift */; };
 		BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391EC2DF9AE7100C3EA55 /* User.swift */; };
+		BAD4A1D82E02AE53001E7B21 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = BAD4A1D72E02AE53001E7B21 /* GoogleSignIn */; };
+		BAD4A1DA2E02AE53001E7B21 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BAD4A1D92E02AE53001E7B21 /* GoogleSignInSwift */; };
+		BAD4A1DC2E02F157001E7B21 /* GoogleSignInButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1DB2E02F157001E7B21 /* GoogleSignInButtonView.swift */; };
+		BAD4A1E02E02FC82001E7B21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1DF2E02FC82001E7B21 /* AppDelegate.swift */; };
+		BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E12E030051001E7B21 /* Helpers.swift */; };
+		BAD4A1E52E030BBD001E7B21 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E42E030BBD001E7B21 /* UserSession.swift */; };
+		BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E62E03269D001E7B21 /* LogOutView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +112,11 @@
 		BA8391E82DF9737C00C3EA55 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		BA8391EA2DF99EED00C3EA55 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		BA8391EC2DF9AE7100C3EA55 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BAD4A1DB2E02F157001E7B21 /* GoogleSignInButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButtonView.swift; sourceTree = "<group>"; };
+		BAD4A1DF2E02FC82001E7B21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BAD4A1E12E030051001E7B21 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		BAD4A1E42E030BBD001E7B21 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
+		BAD4A1E62E03269D001E7B21 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +124,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAD4A1D82E02AE53001E7B21 /* GoogleSignIn in Frameworks */,
+				BAD4A1DA2E02AE53001E7B21 /* GoogleSignInSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,6 +222,7 @@
 			isa = PBXGroup;
 			children = (
 				BA8391A32DF878CC00C3EA55 /* RegisterUserRequest.swift */,
+				BAD4A1E42E030BBD001E7B21 /* UserSession.swift */,
 				BA8391EC2DF9AE7100C3EA55 /* User.swift */,
 			);
 			path = Models;
@@ -217,6 +232,7 @@
 			isa = PBXGroup;
 			children = (
 				BA8391A72DF878D100C3EA55 /* APIService.swift */,
+				BAD4A1DF2E02FC82001E7B21 /* AppDelegate.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -225,6 +241,9 @@
 			isa = PBXGroup;
 			children = (
 				BA8391E62DF95FAB00C3EA55 /* InputFieldView.swift */,
+				BAD4A1DB2E02F157001E7B21 /* GoogleSignInButtonView.swift */,
+				BAD4A1E12E030051001E7B21 /* Helpers.swift */,
+				BAD4A1E62E03269D001E7B21 /* LogOutView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -307,6 +326,10 @@
 			dependencies = (
 			);
 			name = electricityBot;
+			packageProductDependencies = (
+				BAD4A1D72E02AE53001E7B21 /* GoogleSignIn */,
+				BAD4A1D92E02AE53001E7B21 /* GoogleSignInSwift */,
+			);
 			productName = electricityBot;
 			productReference = BA83916C2DF8772E00C3EA55 /* electricityBot.app */;
 			productType = "com.apple.product-type.application";
@@ -379,6 +402,9 @@
 				Base,
 			);
 			mainGroup = BA8391632DF8772E00C3EA55;
+			packageReferences = (
+				BAD4A1D62E02AE53001E7B21 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+			);
 			productRefGroup = BA83916D2DF8772E00C3EA55 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -443,14 +469,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAD4A1E02E02FC82001E7B21 /* AppDelegate.swift in Sources */,
 				BA8391E92DF9737C00C3EA55 /* RegisterView.swift in Sources */,
+				BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */,
 				BA8391EB2DF99EED00C3EA55 /* ProfileView.swift in Sources */,
+				BAD4A1E52E030BBD001E7B21 /* UserSession.swift in Sources */,
 				BA8391BB2DF94C3900C3EA55 /* LoginView.swift in Sources */,
 				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
 				BA8391A92DF878D100C3EA55 /* APIService.swift in Sources */,
+				BAD4A1DC2E02F157001E7B21 /* GoogleSignInButtonView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
 				BA8391A62DF878CC00C3EA55 /* RegisterUserRequest.swift in Sources */,
 				BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */,
+				BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */,
 				BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */,
 				BA8391B02DF878D800C3EA55 /* SplashScreenView.swift in Sources */,
 			);
@@ -618,13 +649,18 @@
 				DEVELOPMENT_ASSET_PATHS = "\"electricityBot/Preview Content\"";
 				DEVELOPMENT_TEAM = 8HRLLHKWCW;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = electricityBot/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Electricity Bot";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_OUTPUT_FORMAT = binary;
+				INFOPLIST_PREPROCESS = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -648,13 +684,18 @@
 				DEVELOPMENT_ASSET_PATHS = "\"electricityBot/Preview Content\"";
 				DEVELOPMENT_TEAM = 8HRLLHKWCW;
 				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = electricityBot/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Electricity Bot";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_OUTPUT_FORMAT = binary;
+				INFOPLIST_PREPROCESS = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -780,6 +821,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		BAD4A1D62E02AE53001E7B21 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BAD4A1D72E02AE53001E7B21 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BAD4A1D62E02AE53001E7B21 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		BAD4A1D92E02AE53001E7B21 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BAD4A1D62E02AE53001E7B21 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BA8391642DF8772E00C3EA55 /* Project object */;
 }

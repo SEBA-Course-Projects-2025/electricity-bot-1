@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import GoogleSignIn
+import GoogleSignInSwift
 
 struct LoginView: View {
     @State private var email = ""
@@ -50,6 +52,8 @@ struct LoginView: View {
                 .cornerRadius(8.0)
                 .padding(.top, 32.0)
                 .padding(.horizontal, 16.0)
+                
+                GoogleSignInButtonView()
                 
                 // sign up navigation
                 

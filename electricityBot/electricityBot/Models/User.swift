@@ -12,6 +12,12 @@ struct User: Identifiable, Codable {
     let fullName: String
     let email: String
     
+    enum CodingKeys: String, CodingKey {
+            case id = "user_id"
+            case fullName = "full_name"
+            case email
+        }
+    
     var initials: String {
         let formatter = PersonNameComponentsFormatter()
         if let components = formatter.personNameComponents(from: fullName) {
