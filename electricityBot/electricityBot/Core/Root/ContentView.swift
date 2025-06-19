@@ -5,9 +5,11 @@ extension Color {
     static let yellowGlow = Color(red: 1, green: 0.98, blue: 0.42)
     static let textColor = Color(hue: 0.855, saturation: 0.1137, brightness: 0.0588)
     static let foregroundLow = Color(hue: 0.855, saturation: 0.0588, brightness: 0.2745)
+    static let blueAccentButton = Color(red: 0.6863, green: 0.812, blue: 1)
 }
 
 struct ContentView: View {
+    @EnvironmentObject var userSession: UserSession
     var animation: Namespace.ID
     
     var body: some View {
@@ -30,7 +32,11 @@ struct ContentView: View {
                 
                 // nav button to LoginView
                 NavigationLink{
-                    LoginView()
+                    if userSession.isLoggedIn {
+                        ProfileView()
+                    } else {
+                        LoginView()
+                    }
                 } label: {
                     Text("Start")
                         .font(.custom("Poppins-SemiBold", size: 16))

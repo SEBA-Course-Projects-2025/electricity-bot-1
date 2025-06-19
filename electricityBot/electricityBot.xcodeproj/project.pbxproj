@@ -16,7 +16,7 @@
 		BA83919F2DF878C300C3EA55 /* Berlin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919A2DF878C300C3EA55 /* Berlin.ttf */; };
 		BA8391A02DF878C300C3EA55 /* BerlinBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919B2DF878C300C3EA55 /* BerlinBold.ttf */; };
 		BA8391A12DF878C300C3EA55 /* BerlinX-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919C2DF878C300C3EA55 /* BerlinX-Bold.ttf */; };
-		BA8391A92DF878D100C3EA55 /* GoogleSignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391A72DF878D100C3EA55 /* GoogleSignIn.swift */; };
+		BA8391A92DF878D100C3EA55 /* GoogleAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391A72DF878D100C3EA55 /* GoogleAuthService.swift */; };
 		BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391AA2DF878D800C3EA55 /* ContentView.swift */; };
 		BA8391B02DF878D800C3EA55 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */; };
 		BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391B32DF8799500C3EA55 /* electricityBotApp.swift */; };
@@ -82,7 +82,7 @@
 		BA83919A2DF878C300C3EA55 /* Berlin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Berlin.ttf; sourceTree = "<group>"; };
 		BA83919B2DF878C300C3EA55 /* BerlinBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BerlinBold.ttf; sourceTree = "<group>"; };
 		BA83919C2DF878C300C3EA55 /* BerlinX-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BerlinX-Bold.ttf"; sourceTree = "<group>"; };
-		BA8391A72DF878D100C3EA55 /* GoogleSignIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleSignIn.swift; sourceTree = "<group>"; };
+		BA8391A72DF878D100C3EA55 /* GoogleAuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAuthService.swift; sourceTree = "<group>"; };
 		BA8391AA2DF878D800C3EA55 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		BA8391B32DF8799500C3EA55 /* electricityBotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = electricityBotApp.swift; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 		BA8391A82DF878D100C3EA55 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				BA8391A72DF878D100C3EA55 /* GoogleSignIn.swift */,
+				BA8391A72DF878D100C3EA55 /* GoogleAuthService.swift */,
 				BAD4A1DF2E02FC82001E7B21 /* AppDelegate.swift */,
 			);
 			path = Network;
@@ -473,7 +473,7 @@
 				BAD4A1E52E030BBD001E7B21 /* UserSession.swift in Sources */,
 				BA8391BB2DF94C3900C3EA55 /* LoginView.swift in Sources */,
 				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
-				BA8391A92DF878D100C3EA55 /* GoogleSignIn.swift in Sources */,
+				BA8391A92DF878D100C3EA55 /* GoogleAuthService.swift in Sources */,
 				BAD4A1DC2E02F157001E7B21 /* GoogleSignInButtonView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
 				BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */,

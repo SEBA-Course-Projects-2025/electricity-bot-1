@@ -6,20 +6,24 @@
 //
 
 import SwiftUI
+import SafariServices
+import GoogleSignIn
 
 struct ProfileView: View {
+    @EnvironmentObject var userSession: UserSession
+
     var body: some View {
         NavigationStack {
             
             VStack(alignment: .leading) {
                 // hello message
-                Text("Hello, \(User.MOCK_USER.fullName)!")
+                Text("Hello, \(userSession.user?.fullName ?? "User")!")
                     .font(.custom("Poppins-Medium", size: 32))
                     .padding(.top, 50.0)
                 
                 // account card + change user
                 HStack(spacing: 12) {
-                    Text(User.MOCK_USER.initials)
+                    Text(userSession.user?.initials ?? "NA")
                         .font(.custom("Poppins-Medium", size: 21))
                         .frame(width: 40, height: 40)
                         .background(Color.foregroundLow.opacity(0.35))
@@ -27,7 +31,7 @@ struct ProfileView: View {
                         .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                     
                     VStack(alignment: .leading) {
-                        Text(User.MOCK_USER.email)
+                        Text(userSession.user?.email ?? "noname@gmail.com")
                             .font(.custom("Poppins-SemiBold", size: 15))
                             .foregroundColor(.foregroundLow.opacity(0.75))
                         
@@ -68,16 +72,7 @@ struct ProfileView: View {
                 Spacer()
                 
                 // logout
-                NavigationLink() {
-                    SplashScreenView()
-                        .navigationBarBackButtonHidden(true)
-                } label: {
-                    Text("Log Out")
-                        .frame(maxWidth: .infinity)
-                        .multilineTextAlignment(.center)
-                        .font(.custom("Poppins-Regular", size: 16))
-                        .foregroundColor(Color.foregroundLow)
-                }
+                LogOutView()
             }
             .padding(32)
             .background(Color.backgroundColor)

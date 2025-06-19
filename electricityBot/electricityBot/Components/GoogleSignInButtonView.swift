@@ -53,7 +53,7 @@ struct GoogleSignInButtonView: View {
                 return
             }
 
-            GoogleSignIn.sendTokenToBackend(idToken: idToken) { result in
+            GoogleAuthService.sendTokenToBackend(idToken: idToken) { result in
                 switch result {
                     case .success(let user):
                         DispatchQueue.main.async {
