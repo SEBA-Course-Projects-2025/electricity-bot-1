@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from application.database import session
 from application.models import (
     DeviceModel,
@@ -8,6 +9,7 @@ from application.models import (
 )
 from application.device.model.mapper.device_mapper import dto_to_entity
 from application.device.model.dto.device import Device as DeviceDTO
+from uuid import UUID
 
 
 class DeviceService:
@@ -18,11 +20,19 @@ class DeviceService:
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.db.close()
 
+    @staticmethod
+    def is_valid_uuid(value: str) -> bool:
+        try:
+            UUID(value)
+            return True
+        except ValueError:
+            return False
+
     def create_device(self, dto: DeviceDTO, user_id: str) -> DeviceModel:
         try:
-            print(
-                f"[CREATE DEVICE] Start: user_id={user_id}, device_id={dto.device_id}"
-            )
+
+            if dto.last_seen is None:
+                dto.last_seen = datetime.now(timezone.utc)
 
             existing_device = (
                 self.db.query(DeviceModel).filter_by(device_id=dto.device_id).first()
@@ -51,38 +61,21 @@ class DeviceService:
             traceback.print_exc()
             raise exception
 
-    def get_devices(self, page: int = 1, per_page: int = 3):
-        return (
-            self.db.query(DeviceModel)
-            .offset((page - 1) * per_page)
-            .limit(per_page)
-            .all()
-        )
-
     def get_device_by_id(self, device_id: str):
         return self.db.query(DeviceModel).filter_by(device_id=device_id).first()
 
-    def get_devices_by_owner(self, user_id: str, page: int = 1, per_page: int = 3):
-        return (
-            self.db.query(DeviceModel)
-            .join(
-                user_device_association,
-                user_device_association.c.device_id == DeviceModel.device_id,
-            )
-            .filter(user_device_association.c.user_id == user_id)
-            .offset((page - 1) * per_page)
-            .limit(per_page)
-            .all()
-        )
+    def get_device_owners(self, device_id: str) -> list[UserModel]:
+        device = self.db.query(DeviceModel).filter_by(device_id=device_id).first()
+        if not device:
+            return []
+        return device.users
 
-    def get_devices_by_user(self, user_id: str, page: int, per_page: int):
+    def get_devices_by_user(self, user_id: str):
         return (
             self.db.query(DeviceModel)
-            .join(DeviceModel.users)  # many-to-many
+            .join(DeviceModel.users)
             .filter(UserModel.user_id == user_id)
             .order_by(DeviceModel.device_id)
-            .limit(per_page)
-            .offset((page - 1) * per_page)
             .all()
         )
 
@@ -101,3 +94,6 @@ class DeviceService:
         self.db.delete(device)
         self.db.commit()
         return True
+
+    def get_all_devices(self):
+        return self.db.query(DeviceModel).all()

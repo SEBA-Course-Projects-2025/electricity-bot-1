@@ -6,7 +6,7 @@ from application.measurement.measurement_service import MeasurementService
 # are not active anymore
 def start_scheduler():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(func=lambda: run_periodic_check(), trigger="interval", seconds=60)
+    scheduler.add_job(func=lambda: run_periodic_check(), trigger="interval", seconds=65)
     scheduler.start()
 
 
