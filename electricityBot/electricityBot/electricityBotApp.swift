@@ -10,6 +10,7 @@ import GoogleSignIn
 
 @main
 struct electricityBot: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var userSession = UserSession()
     
     var body: some Scene {

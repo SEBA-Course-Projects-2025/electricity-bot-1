@@ -50,6 +50,10 @@
 		BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E12E030051001E7B21 /* Helpers.swift */; };
 		BAD4A1E52E030BBD001E7B21 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E42E030BBD001E7B21 /* UserSession.swift */; };
 		BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E62E03269D001E7B21 /* LogOutView.swift */; };
+		BAD4A1EA2E06CF2F001E7B21 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E92E06CF2F001E7B21 /* ChartView.swift */; };
+		BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1EB2E06CFE0001E7B21 /* PowerStats.swift */; };
+		BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */; };
+		BAD4A1F02E06E675001E7B21 /* PowerStatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1EF2E06E675001E7B21 /* PowerStatsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +119,10 @@
 		BAD4A1E12E030051001E7B21 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BAD4A1E42E030BBD001E7B21 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		BAD4A1E62E03269D001E7B21 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
+		BAD4A1E92E06CF2F001E7B21 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		BAD4A1EB2E06CFE0001E7B21 /* PowerStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStats.swift; sourceTree = "<group>"; };
+		BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatistics.swift; sourceTree = "<group>"; };
+		BAD4A1EF2E06E675001E7B21 /* PowerStatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStatsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +178,7 @@
 				BA8391B62DF8A50500C3EA55 /* Core */,
 				BA8391B52DF8A4E600C3EA55 /* Components */,
 				BA8391A82DF878D100C3EA55 /* Network */,
+				BAF8B34E2E07077700B454F7 /* ViewModels */,
 				BA8391A42DF878CC00C3EA55 /* Models */,
 				BA8391732DF8772F00C3EA55 /* Assets.xcassets */,
 				BA83919D2DF878C300C3EA55 /* Fonts */,
@@ -221,6 +230,7 @@
 			children = (
 				BAD4A1E42E030BBD001E7B21 /* UserSession.swift */,
 				BA8391EC2DF9AE7100C3EA55 /* User.swift */,
+				BAD4A1EB2E06CFE0001E7B21 /* PowerStats.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -230,6 +240,7 @@
 			children = (
 				BA8391A72DF878D100C3EA55 /* GoogleAuthService.swift */,
 				BAD4A1DF2E02FC82001E7B21 /* AppDelegate.swift */,
+				BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -248,6 +259,7 @@
 		BA8391B62DF8A50500C3EA55 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BAD4A1E82E06CF11001E7B21 /* Statistics */,
 				BA8391B82DF8A69B00C3EA55 /* Authentification */,
 				BA8391B92DF8A6A900C3EA55 /* Profile */,
 				BA8391B72DF8A65300C3EA55 /* Root */,
@@ -305,6 +317,22 @@
 				BA8391CE2DF94EA200C3EA55 /* Poppins-ThinItalic.ttf */,
 			);
 			path = Poppins;
+			sourceTree = "<group>";
+		};
+		BAD4A1E82E06CF11001E7B21 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				BAD4A1E92E06CF2F001E7B21 /* ChartView.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		BAF8B34E2E07077700B454F7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BAD4A1EF2E06E675001E7B21 /* PowerStatsViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -470,10 +498,14 @@
 				BA8391E92DF9737C00C3EA55 /* RegisterView.swift in Sources */,
 				BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */,
 				BA8391EB2DF99EED00C3EA55 /* ProfileView.swift in Sources */,
+				BAD4A1F02E06E675001E7B21 /* PowerStatsViewModel.swift in Sources */,
 				BAD4A1E52E030BBD001E7B21 /* UserSession.swift in Sources */,
 				BA8391BB2DF94C3900C3EA55 /* LoginView.swift in Sources */,
 				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
+				BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */,
+				BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */,
 				BA8391A92DF878D100C3EA55 /* GoogleAuthService.swift in Sources */,
+				BAD4A1EA2E06CF2F001E7B21 /* ChartView.swift in Sources */,
 				BAD4A1DC2E02F157001E7B21 /* GoogleSignInButtonView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
 				BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */,
