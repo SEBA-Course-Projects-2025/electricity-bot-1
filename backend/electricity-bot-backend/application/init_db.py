@@ -1,4 +1,4 @@
 from database import base, engine
-from models import MeasurementModel, DeviceModel, UserModel
+import models
 
 base.metadata.create_all(bind=engine)  # to create real tables from orm models

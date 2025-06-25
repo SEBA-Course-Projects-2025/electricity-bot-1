@@ -12,6 +12,32 @@
             "name": "electricity-bot-db",
             "database": "electricity_bot_bd",
             "username": "root"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "mysql",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "electricity-bot-db",
+            "database": "electricity-bot-bd",
+            "username": "user"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3307,
+            "driver": "MariaDB",
+            "name": "bd",
+            "database": "electricity_bot_bd",
+            "username": "user"
         }
     ]
 }

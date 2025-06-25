@@ -51,10 +51,11 @@ class UserModel(base):
     user_id = Column(
         String(255), primary_key=True, default=lambda: str(uuid.uuid4()), nullable=False
     )
+    google_sub = Column(
+        String(255), nullable=False, unique=True
+    )  # unique identifier from Google
     email = Column(String(255), nullable=False, unique=True)
-    # first_name = Column(String(255), nullable=False)
-    # last_name = Column(String(255), nullable=False)
-
+    name = Column(String(255), nullable=True)  # here info which is parsed from token
     devices = relationship(
         "DeviceModel", secondary=user_device_association, back_populates="users"
     )
