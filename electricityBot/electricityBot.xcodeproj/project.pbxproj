@@ -50,10 +50,12 @@
 		BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E12E030051001E7B21 /* Helpers.swift */; };
 		BAD4A1E52E030BBD001E7B21 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E42E030BBD001E7B21 /* UserSession.swift */; };
 		BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E62E03269D001E7B21 /* LogOutView.swift */; };
-		BAD4A1EA2E06CF2F001E7B21 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E92E06CF2F001E7B21 /* ChartView.swift */; };
+		BAD4A1EA2E06CF2F001E7B21 /* DayStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E92E06CF2F001E7B21 /* DayStatsView.swift */; };
 		BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1EB2E06CFE0001E7B21 /* PowerStats.swift */; };
 		BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */; };
 		BAD4A1F02E06E675001E7B21 /* PowerStatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1EF2E06E675001E7B21 /* PowerStatsViewModel.swift */; };
+		BAF8B3502E0718BC00B454F7 /* BackNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8B34F2E0718BC00B454F7 /* BackNavigationView.swift */; };
+		BAF8B3532E0744D100B454F7 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = BAF8B3522E0744D100B454F7 /* Algorithms */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,10 +121,11 @@
 		BAD4A1E12E030051001E7B21 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BAD4A1E42E030BBD001E7B21 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		BAD4A1E62E03269D001E7B21 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
-		BAD4A1E92E06CF2F001E7B21 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		BAD4A1E92E06CF2F001E7B21 /* DayStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStatsView.swift; sourceTree = "<group>"; };
 		BAD4A1EB2E06CFE0001E7B21 /* PowerStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStats.swift; sourceTree = "<group>"; };
 		BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatistics.swift; sourceTree = "<group>"; };
 		BAD4A1EF2E06E675001E7B21 /* PowerStatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStatsViewModel.swift; sourceTree = "<group>"; };
+		BAF8B34F2E0718BC00B454F7 /* BackNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackNavigationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +133,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAF8B3532E0744D100B454F7 /* Algorithms in Frameworks */,
 				BAD4A1D82E02AE53001E7B21 /* GoogleSignIn in Frameworks */,
 				BAD4A1DA2E02AE53001E7B21 /* GoogleSignInSwift in Frameworks */,
 			);
@@ -252,6 +256,7 @@
 				BAD4A1DB2E02F157001E7B21 /* GoogleSignInButtonView.swift */,
 				BAD4A1E12E030051001E7B21 /* Helpers.swift */,
 				BAD4A1E62E03269D001E7B21 /* LogOutView.swift */,
+				BAF8B34F2E0718BC00B454F7 /* BackNavigationView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -322,7 +327,7 @@
 		BAD4A1E82E06CF11001E7B21 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
-				BAD4A1E92E06CF2F001E7B21 /* ChartView.swift */,
+				BAD4A1E92E06CF2F001E7B21 /* DayStatsView.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 			packageProductDependencies = (
 				BAD4A1D72E02AE53001E7B21 /* GoogleSignIn */,
 				BAD4A1D92E02AE53001E7B21 /* GoogleSignInSwift */,
+				BAF8B3522E0744D100B454F7 /* Algorithms */,
 			);
 			productName = electricityBot;
 			productReference = BA83916C2DF8772E00C3EA55 /* electricityBot.app */;
@@ -429,6 +435,7 @@
 			mainGroup = BA8391632DF8772E00C3EA55;
 			packageReferences = (
 				BAD4A1D62E02AE53001E7B21 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				BAF8B3512E0744A200B454F7 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = BA83916D2DF8772E00C3EA55 /* Products */;
 			projectDirPath = "";
@@ -505,9 +512,10 @@
 				BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */,
 				BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */,
 				BA8391A92DF878D100C3EA55 /* GoogleAuthService.swift in Sources */,
-				BAD4A1EA2E06CF2F001E7B21 /* ChartView.swift in Sources */,
+				BAD4A1EA2E06CF2F001E7B21 /* DayStatsView.swift in Sources */,
 				BAD4A1DC2E02F157001E7B21 /* GoogleSignInButtonView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
+				BAF8B3502E0718BC00B454F7 /* BackNavigationView.swift in Sources */,
 				BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */,
 				BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */,
 				BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */,
@@ -859,6 +867,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		BAF8B3512E0744A200B454F7 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -871,6 +887,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BAD4A1D62E02AE53001E7B21 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		BAF8B3522E0744D100B454F7 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BAF8B3512E0744A200B454F7 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

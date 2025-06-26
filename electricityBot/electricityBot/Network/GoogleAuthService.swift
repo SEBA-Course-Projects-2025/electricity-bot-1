@@ -5,7 +5,7 @@ import SafariServices
 struct GoogleAuthService {
     static func sendTokenToBackend(idToken: String, completion: @escaping (Result<User, Error>) -> Void) {
         // server endpoint
-        guard let url = URL(string: "http://192.168.0.103:5050/api/auth/login") else { return }
+        guard let url = URL(string: "http://192.168.0.104:5050/api/auth/login") else { return }
 
         // JSON POST request
         var request = URLRequest(url: url)
@@ -46,7 +46,7 @@ struct GoogleAuthService {
         GIDSignIn.sharedInstance.signOut()
         
         // check the endpoint and assign it url
-        guard let url = URL(string: "http://192.168.0.103:5050/api/auth/logout") else {
+        guard let url = URL(string: "http://192.168.0.104:5050/api/auth/logout") else {
             print("Invalid URL")
             return
         }

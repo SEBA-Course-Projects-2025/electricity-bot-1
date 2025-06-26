@@ -16,6 +16,7 @@ struct electricityBot: App {
     var body: some Scene {
         WindowGroup {
             SplashScreenView()
+                .preferredColorScheme(.light)
                 .environmentObject(userSession)
                 .onOpenURL { url in
                           GIDSignIn.sharedInstance.handle(url)
