@@ -47,3 +47,13 @@ class UserService:
         self.db.delete(user)
         self.db.commit()
         return True
+
+    def get_devices_for_user(self, user_id: str) -> list[dict]:
+        user = self.db.query(UserModel).filter_by(user_id=user_id).first()
+        if not user:
+            return []
+
+        return [
+            {"device_id": device.device_id, "last_seen": device.last_seen.isoformat()}
+            for device in user.devices
+        ]

@@ -14,7 +14,14 @@ def keycloak_callback():
     is_web = data.get("is_web", True)
 
     if not code:
-        return jsonify({"error": "Authorization code is required"}), 400
+        return (
+            jsonify(
+                {
+                    "error": "Authorization code is required. Please ensure 'code' is included in the request body."
+                }
+            ),
+            400,
+        )
 
     try:
         kc = KeycloakAuthClient()
@@ -22,7 +29,9 @@ def keycloak_callback():
 
         access_token = tokens.get("access_token")
         if not access_token:
-            raise Exception("Access token missing in response")
+            raise Exception(
+                "Access token missing in response. Keycloak did not return a valid token."
+            )
 
         userinfo = kc.get_userinfo_from_token(access_token)
 
@@ -49,7 +58,15 @@ def keycloak_callback():
         ), (201 if created else 200)
 
     except Exception as exception:
-        return jsonify({"error": str(exception)}), 400
+        return (
+            jsonify(
+                {
+                    "error": f"Login failed: {str(exception)}",
+                    "hint": "Check that the authorization code is valid and not expired. Also verify Keycloak configuration.",
+                }
+            ),
+            400,
+        )
 
 
 @auth_bp.route("/auth/logout", methods=["POST"])
@@ -62,13 +79,26 @@ def logout_user():
     is_web = data.get("is_web", True)
 
     if not refresh_token:
-        return jsonify({"error": "Refresh token required"}), 400
+        return (
+            jsonify(
+                {"error": "Refresh token required. Provide it in the request body."}
+            ),
+            400,
+        )
 
     try:
         kc = KeycloakAuthClient()
         kc.logout(refresh_token, is_web=is_web)
     except Exception as exception:
-        return jsonify({"error": str(exception)}), 400
+        return (
+            jsonify(
+                {
+                    "error": f"Logout failed: {str(exception)}",
+                    "hint": "Ensure the refresh token is still valid and has not already been used or revoked.",
+                }
+            ),
+            400,
+        )
 
     with UserService() as user_service:
         user_service.delete_user_and_reassign_devices(user_id)
@@ -86,12 +116,27 @@ def refresh_tokens():
     is_web = data.get("is_web", True)
 
     if not refresh_token:
-        return jsonify({"error": "Refresh token is required"}), 400
+        return (
+            jsonify(
+                {
+                    "error": "Refresh token is required. Include 'refresh_token' in request body."
+                }
+            ),
+            400,
+        )
 
     kc = KeycloakAuthClient()
     try:
         tokens = kc.refresh_token(refresh_token, is_web=is_web)
     except Exception as exception:
-        return jsonify({"error": str(exception)}), 400
+        return (
+            jsonify(
+                {
+                    "error": f"Refresh failed: {str(exception)}",
+                    "hint": "Refresh token may be expired, used already, or associated session is not active.",
+                }
+            ),
+            400,
+        )
 
     return jsonify(tokens), 200
