@@ -1,4 +1,4 @@
-from application.database import session
+from application.database import SessionLocal
 from application.models import MeasurementModel, DeviceModel
 from application.measurement.model.mapper.measurement_mapper import dto_to_entity
 from application.measurement.model.dto.measurement import Measurement
@@ -8,7 +8,7 @@ import uuid
 
 class MeasurementService:
     def __enter__(self):
-        self.db = session()
+        self.db = SessionLocal()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):

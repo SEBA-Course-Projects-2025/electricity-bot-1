@@ -1,154 +1,33 @@
-import uuid
-from application import app
-from flask import request, jsonify
-from application.user.user_service import UserService
-from application.user.model.dto.user import CreateUserRequest
-from pydantic import ValidationError
+# from flask import Blueprint, request, jsonify
+# from application.auth.auth_server import exchange_code_for_token, get_userinfo_from_token
+# from application.user.user_service import get_or_create_user_by_keycloak_data
+# from application.email_utils.email_sender import send_welcome_email
+
+# user_bp = Blueprint("user_bp", __name__)
 
 
-@app.route(
-    "/api/users", methods=["POST"]
-)  # is not needed, because user is created by Google login
-# can be used for tests
-def create_user():
-    try:
-        data = request.get_json()
-        dto = CreateUserRequest(**data)
+# @user_bp.route("/user/signup", methods=["POST"])
+# def sign_up():
+#     data = request.get_json()
+#     code = data.get("code")
+#     is_web = data.get("is_web", True)
 
-        with UserService() as user_service:
-            result = user_service.create_user_with_device(dto)
+#     if not code:
+#         return jsonify({"error": "Authorization code is required"}), 400
 
-        return jsonify(result), 201
-
-    except ValidationError as validation_error:
-        return (
-            jsonify({"error": "Invalid input", "details": validation_error.errors()}),
-            422,
-        )
-    except KeyError as key_error:
-        return jsonify({"error": f"Missing required field: {str(key_error)}"}), 400
-    except Exception as exception:
-        return (
-            jsonify({"error": "Unexpected server error", "details": str(exception)}),
-            500,
-        )
-
-
-@app.route("/api/users", methods=["GET"])
-def list_users():
-    try:
-        page = int(request.args.get("page", 1))
-        per_page = int(request.args.get("per_page", 20))
-        # first_name = request.args.get("first_name")
-        # last_name = request.args.get("last_name")
-
-        if page < 1 or per_page < 1:
-            raise ValueError("page and per_page must be >= 1")
-
-        with UserService() as user_service:
-            # users = user_service.get_all_users(page, per_page, first_name, last_name)
-            users = user_service.get_all_users(page, per_page)
-        return (
-            jsonify(
-                {
-                    "page": page,
-                    "per_page": per_page,
-                    "users": [
-                        {
-                            "user_id": user.user_id,
-                            "email": user.email,
-                            # "first_name": user.first_name,
-                            # "last_name": user.last_name,
-                        }
-                        for user in users
-                    ],
-                }
-            ),
-            200,
-        )
-
-    except ValueError:
-        return jsonify({"error": "Invalid pagination parameters"}), 400
-    except Exception as exception:
-        return (
-            jsonify({"error": "Failed to fetch users", "details": str(exception)}),
-            500,
-        )
-
-
-# not needed cause currently user does not have the first and last name
-# @app.route("/api/users/<user_id>", methods=["PATCH"])
-# def update_user(user_id):
 #     try:
-#         user_id = str(uuid.UUID(user_id))
-#         data = request.get_json()
-#         dto = UpdateUserRequest(**data)
+#         tokens = exchange_code_for_token(code, is_web=is_web)
 
-#         with UserService() as user_service:
-#             user = user_service.update_user(user_id, dto)
+#         if "access_token" not in tokens:
+#             raise Exception("Access token missing in response")
 
-#         if not user:
-#             return jsonify({"error": "User not found"}), 404
+#         userinfo = get_userinfo_from_token(tokens["access_token"])
 
-#         return jsonify({"message": "User updated"}), 200
+#         user, created = get_or_create_user_by_keycloak_data(userinfo)
 
-#     except ValueError:
-#         return jsonify({"error": "Invalid UUID format"}), 400
-#     except ValidationError as validation_error:
-#         return (
-#             jsonify({"error": "Invalid input", "details": validation_error.errors()}),
-#             422,
-#         )
+#         if created:
+#             send_welcome_email(user.email, user.name or "friend")
+
+#         return jsonify({"access_token": tokens["access_token"]}), 201
 #     except Exception as exception:
-#         return jsonify({"error": "Update failed", "details": str(exception)}), 400
-
-
-@app.route("/api/users/<user_id>", methods=["DELETE"])
-def delete_user_route(user_id):
-    try:
-        user_id = str(uuid.UUID(user_id))
-
-        with UserService() as user_service:
-            success = user_service.delete_user(user_id)
-
-        if success:
-            return jsonify({"message": "User deleted"}), 200
-        else:
-            return jsonify({"error": "User not found"}), 404
-
-    except ValueError:
-        return jsonify({"error": "Invalid UUID format"}), 400
-    except Exception as exception:
-        return jsonify({"error": "Delete failed", "details": str(exception)}), 400
-
-
-@app.route("/api/users/<user_id>", methods=["GET"])
-def get_user(user_id):
-    try:
-        user_id = str(uuid.UUID(user_id))
-
-        with UserService() as user_service:
-            user = user_service.get_user_by_id(user_id)
-
-        if user:
-            return (
-                jsonify(
-                    {
-                        "user_id": user.user_id,
-                        "email": user.email,
-                        # "first_name": user.first_name,
-                        # "last_name": user.last_name,
-                    }
-                ),
-                200,
-            )
-        else:
-            return jsonify({"error": "User not found"}), 404
-
-    except ValueError:
-        return jsonify({"error": "Invalid UUID format"}), 400
-    except Exception as exception:
-        return (
-            jsonify({"error": "Failed to fetch user", "details": str(exception)}),
-            500,
-        )
+#         return jsonify({"error": str(exception)}), 400

@@ -1,5 +1,4 @@
 from datetime import datetime, timezone
-from application.database import session
 from application.models import (
     DeviceModel,
     MeasurementModel,
@@ -10,11 +9,12 @@ from application.models import (
 from application.device.model.mapper.device_mapper import dto_to_entity
 from application.device.model.dto.device import Device as DeviceDTO
 from uuid import UUID
+from application.database import SessionLocal
 
 
 class DeviceService:
     def __enter__(self):
-        self.db = session()
+        self.db = SessionLocal()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):

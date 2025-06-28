@@ -1,13 +1,13 @@
 from sqlalchemy import Column, String, Boolean, DateTime, Table, ForeignKey
 from sqlalchemy.orm import relationship
-from application.database import base
+from application.database import Base
 import uuid
 from datetime import datetime, timezone
 
 
 user_device_association = Table(
     "user_device_association",  # for many-to-many relationship
-    base.metadata,
+    Base.metadata,
     Column("user_id", String(255), ForeignKey("users.user_id", ondelete="CASCADE")),
     Column(
         "device_id", String(255), ForeignKey("devices.device_id", ondelete="CASCADE")
@@ -17,7 +17,7 @@ user_device_association = Table(
 # ORM models
 
 
-class DeviceModel(base):
+class DeviceModel(Base):
     __tablename__ = "devices"
 
     device_id = Column(
@@ -32,7 +32,7 @@ class DeviceModel(base):
     )
 
 
-class MeasurementModel(base):
+class MeasurementModel(Base):
     __tablename__ = "measurements"
 
     measurement_id = Column(
@@ -45,7 +45,7 @@ class MeasurementModel(base):
     outgate_status = Column(Boolean, nullable=False)
 
 
-class UserModel(base):
+class UserModel(Base):
     __tablename__ = "users"
 
     user_id = Column(
@@ -61,7 +61,7 @@ class UserModel(base):
     )
 
 
-class UnassignedDeviceModel(base):
+class UnassignedDeviceModel(Base):
     __tablename__ = "unassigned_devices"  # table for devices not assigned to any user
     # device_id is moved there when device was delited, or user was deleted and device with them too
 

@@ -11,7 +11,9 @@ services:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ./backend/initdb.d:/docker-entrypoint-initdb.d 
+    #  - ./backend/initdb.d:/docker-entrypoint-initdb.d
+    networks:
+      - electricity
 
   flask:
     build:
@@ -20,10 +22,16 @@ services:
     restart: always
     depends_on:
       - mysql
+      - keycloak
     ports:
       - "5000:5000"
     env_file:
       - .env
+    networks:
+      - electricity
+    
+    extra_hosts:
+      - "localhost:host-gateway"
 
   keycloak:
     image: quay.io/keycloak/keycloak:24.0.3
@@ -34,7 +42,7 @@ services:
     depends_on:
       - mysql
     env_file:
-      - .env 
+      - .env
     environment:
       KC_DB: mysql
       KC_DB_URL: jdbc:mysql://mysql:3306/keycloak
@@ -44,7 +52,12 @@ services:
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
     volumes:
       - ./electricity-bot-backend/keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
+    networks:
+      - electricity
 
 volumes:
   mysql_data:
-  
+
+networks:
+  electricity:
+    driver: bridge

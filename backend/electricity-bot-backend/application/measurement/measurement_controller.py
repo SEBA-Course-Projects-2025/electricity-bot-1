@@ -1,7 +1,7 @@
 import uuid
 from flask import request, jsonify
 from application import app
-from application.database import session
+from application.database import SessionLocal
 from application.models import DeviceModel, UnassignedDeviceModel
 from application.measurement.model.dto.measurement import Measurement as MeasurementDTO
 from application.measurement.measurement_service import MeasurementService
@@ -44,7 +44,7 @@ def receive_measurement():
             timestamp=timestamp,
         )
 
-        with session() as db:
+        with SessionLocal() as db:
             dev = db.query(DeviceModel).filter_by(device_id=str(dto.device_id)).first()
             if not dev:
                 orphaned = (
@@ -101,7 +101,7 @@ def _get_statistics(device_id: str, days: int):
     try:
         uuid_obj = uuid.UUID(device_id)
 
-        with session() as db:
+        with SessionLocal() as db:
             device_exists = (
                 db.query(DeviceModel).filter_by(device_id=str(uuid_obj)).first()
             )

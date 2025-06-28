@@ -7,7 +7,7 @@ from alembic import context
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from application.database import base
+from application.database import Base
 from application.models import (
     MeasurementModel,
     DeviceModel,
@@ -29,7 +29,7 @@ if database_url:
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-target_metadata = base.metadata
+target_metadata = Base.metadata
 
 
 def run_migrations_offline() -> None:
