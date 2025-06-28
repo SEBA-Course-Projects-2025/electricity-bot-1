@@ -1,55 +1,54 @@
-from application.database import session
-from application.models import UserModel, DeviceModel, MeasurementModel
-from datetime import datetime, timedelta, timezone
+import os
 import uuid
-import random
+from datetime import datetime, timedelta, timezone
 
-db = session()
+os.environ["DATABASE_URL"] = (
+    "mysql+pymysql://user:88888888@127.0.0.1:3307/electricity_bot_bd"
+)
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from application.models import MeasurementModel
+from application.database import Base
+
+DATABASE_URL = os.environ["DATABASE_URL"]
+engine = create_engine(DATABASE_URL, echo=False)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+device_id = "b0c87254-0c85-47be-8b35-e8d49c6d2a92"
+now = datetime.now(timezone.utc)
+
+measurements = [
+    MeasurementModel(
+        measurement_id=str(uuid.uuid4()),
+        device_id=device_id,
+        timestamp=now - timedelta(hours=23),
+        outgate_status=True,
+    ),
+    MeasurementModel(
+        measurement_id=str(uuid.uuid4()),
+        device_id=device_id,
+        timestamp=now - timedelta(hours=18),
+        outgate_status=False,
+    ),
+    MeasurementModel(
+        measurement_id=str(uuid.uuid4()),
+        device_id=device_id,
+        timestamp=now - timedelta(hours=8),
+        outgate_status=True,
+    ),
+    MeasurementModel(
+        measurement_id=str(uuid.uuid4()),
+        device_id=device_id,
+        timestamp=now - timedelta(hours=3),
+        outgate_status=False,
+    ),
+]
 
 try:
-    # table users
-    users = []
-    for i in range(8):
-        user = UserModel(
-            user_id=str(uuid.uuid4()),
-            email=f"user{i}@example.com",
-            first_name=f"FirstName{i}",
-            last_name=f"LastName{i}",
-        )
-        db.add(user)
-        users.append(user)
-
-    db.commit()
-
-    # table devices
-    devices = []
-    for i in range(8):
-        device = DeviceModel(
-            device_id=str(uuid.uuid4()),
-            owner_id=users[i % len(users)].user_id,
-            owner_email=users[i % len(users)].email,
-            last_seen=datetime.now(timezone.utc) - timedelta(minutes=i * 3),
-        )
-        db.add(device)
-        devices.append(device)
-
-    db.commit()
-
-    # table measurements
-    for i in range(8):
-        measurement = MeasurementModel(
-            measurement_id=str(uuid.uuid4()),
-            device_id=devices[i % len(devices)].device_id,
-            timestamp=datetime.now(timezone.utc) - timedelta(hours=i),
-            outgate_status=random.choice([True, False]),
-        )
-        db.add(measurement)
-
-    db.commit()
-    print("8 users, 8 devices, 8 measurements were added to the database")
-
-except Exception as exception:
-    db.rollback()
-    print("Error during seeding:", exception)
-finally:
-    db.close()
+    with SessionLocal() as db:
+        db.add_all(measurements)
+        db.commit()
+    print("✅ Measurements successfully inserted for device:", device_id)
+except Exception as e:
+    print("❌ Error inserting measurements:", str(e))

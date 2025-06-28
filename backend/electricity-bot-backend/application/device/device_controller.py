@@ -1,23 +1,22 @@
 import uuid
 from datetime import datetime, timezone
 from flask import request, jsonify
+from flask_jwt_extended import jwt_required, get_jwt_identity
 from application import app
 from application.device.model.dto.device import Device as DeviceDTO
 from application.device.device_service import DeviceService
 from pydantic import ValidationError
 
 
-@app.route("/api/devices", methods=["GET"])
+@app.route("/devices", methods=["GET"])
+@jwt_required()
 def list_devices():
     try:
         with DeviceService() as service:
             devices = service.get_all_devices()
 
         if not devices:
-            return (
-                jsonify({"message": "No devices found in the database"}),
-                200,
-            )
+            return jsonify({"message": "No devices found in the database"}), 200
 
         return (
             jsonify(
@@ -36,7 +35,8 @@ def list_devices():
         return jsonify({"error": "Device fetch failed", "details": str(exception)}), 500
 
 
-@app.route("/api/devices/<device_id>", methods=["GET"])
+@app.route("/devices/<device_id>", methods=["GET"])
+@jwt_required()
 def get_device(device_id):
     if not DeviceService.is_valid_uuid(device_id):
         return jsonify({"error": "Invalid device ID format"}), 400
@@ -67,7 +67,8 @@ def get_device(device_id):
         )
 
 
-@app.route("/api/devices/<device_id>/owners", methods=["GET"])
+@app.route("/devices/<device_id>/owners", methods=["GET"])
+@jwt_required()
 def get_device_owners(device_id):
     if not DeviceService.is_valid_uuid(device_id):
         return jsonify({"error": "Invalid device ID format"}), 400
@@ -93,7 +94,8 @@ def get_device_owners(device_id):
         )
 
 
-@app.route("/api/devices/<device_id>", methods=["DELETE"])
+@app.route("/devices/<device_id>", methods=["DELETE"])
+@jwt_required()
 def delete_device_api(device_id):
     if not DeviceService.is_valid_uuid(device_id):
         return jsonify({"error": "Invalid device ID format"}), 400
@@ -114,7 +116,8 @@ def delete_device_api(device_id):
         )
 
 
-@app.route("/api/devices", methods=["POST"])
+@app.route("/devices", methods=["POST"])
+@jwt_required()
 def create_device():
     try:
         data = request.get_json() or {}
@@ -162,7 +165,8 @@ def create_device():
         )
 
 
-@app.route("/api/users/<user_id>/devices", methods=["GET"])
+@app.route("/users/<user_id>/devices", methods=["GET"])
+@jwt_required()
 def list_user_devices(user_id):
     try:
         if not DeviceService.is_valid_uuid(user_id):
@@ -183,5 +187,6 @@ def list_user_devices(user_id):
             ),
             200,
         )
+
     except Exception as exception:
         return jsonify({"error": str(exception)}), 500

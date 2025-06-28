@@ -1,4 +1,4 @@
-# to see the specification at https://editor.swagger.io, copy the code below and paste it into the editor
+# https://editor.swagger.io
 openapi: 3.0.0
 info:
   title: Electricity Bot API
@@ -8,170 +8,353 @@ info:
     Supports Google-based authentication via Keycloak, user/device management,
     power-status measurements, real-time status checks and statistics.
 
+servers:
+  - url: http://localhost:5000
+    description: Local Development Server
+
 paths:
-  /api/devices:
+  /devices:
     get:
       summary: Get all devices
+      description: Returns a list of all devices associated with the authenticated user.
       responses:
-        200:
-          description: List of devices or empty list
+        '200':
+          description: A list of devices.
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Device'
-        500:
-          description: Failed to fetch devices
-
+                  type: object
+                  properties:
+                    device_id:
+                      type: string
+                      description: Unique identifier of the device.
+                    last_seen:
+                      type: string
+                      format: date-time
+                      description: The last time the device was seen.
+        '401':
+          description: Unauthorized access, token missing or invalid.
+        '500':
+          description: Internal server error.
     post:
-      summary: Create a new device
+      summary: Create a device (will be an error if the same parameters will be passed)
+      description: Creates a device and assigns it to the specified user. An error is returned if the same device parameters are provided.
       requestBody:
-        required: true
         content:
           application/json:
             schema:
               type: object
-              required:
-                - user_id
-                - device_id
               properties:
                 user_id:
                   type: string
-                  format: uuid
+                  description: The ID of the user to whom the device will be assigned.
                 device_id:
                   type: string
-                  format: uuid
+                  description: The unique device ID.
       responses:
-        201:
-          description: Device successfully created
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  device_id:
-                    type: string
-                  user_id:
-                    type: string
-                  message:
-                    type: string
-        400:
-          description: Invalid input or duplicate ID
-        422:
-          description: Validation error
-        500:
-          description: Server error
+        '201':
+          description: Device successfully created and assigned to user.
+        '400':
+          description: Missing or invalid fields in the request.
+        '500':
+          description: Internal server error.
 
-  /api/devices/{device_id}:
+  /devices/286cd1fb-083c-4b4a-b7bf-b30f279ed8ea:
     get:
       summary: Get a particular device
-      parameters:
-        - in: path
-          name: device_id
-          required: true
-          schema:
-            type: string
-            format: uuid
+      description: Retrieves the details of a specific device by its device_id.
       responses:
-        200:
-          description: Device found
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Device'
-        400:
-          description: Invalid device ID format
-        404:
-          description: Device not found
-        500:
-          description: Server error
+        '200':
+          description: Device details.
+        '404':
+          description: Device not found.
+        '500':
+          description: Internal server error.
+
+  /devices/286cd1fb-083c-4b4a-b7bf-b30f279ed8eq:
+    get:
+      summary: Get a particular device (invalid device_id validation)
+      description: Attempts to fetch a device with an invalid device_id format.
+      responses:
+        '400':
+          description: Invalid device ID format.
+        '500':
+          description: Internal server error.
+
+  /devices/abcd:
+    get:
+      summary: Get a particular device (invalid device_id validation)
+      description: Attempts to fetch a device with an invalid device_id format.
+      responses:
+        '400':
+          description: Invalid device ID format.
+        '500':
+          description: Internal server error.
+
+  /devices/286cd1fb-083c-4b4a-b7bf-b30f279ed8ea/owners:
+    get:
+      summary: Get either 1 or all owners of a particular device
+      description: Retrieves a list of owners associated with a specific device.
+      responses:
+        '200':
+          description: A list of owners.
+        '404':
+          description: No owners found or device does not exist.
+        '500':
+          description: Internal server error.
+
+  /devices/286cd1fb-083c-4b4a-b7bf-b30f279ed811/owners:
+    get:
+      summary: Get either 1 or all owners of a particular device (device_id validation)
+      description: Retrieves a list of owners for the device with a validated device_id.
+      responses:
+        '200':
+          description: A list of owners.
+        '400':
+          description: Invalid device ID format.
+        '404':
+          description: Device not found.
+        '500':
+          description: Internal server error.
+
+  /devices/asdfghn/owners:
+    get:
+      summary: Get either 1 or all owners of a particular device (device_id validation)
+      description: Retrieves owners for a device with invalid device_id validation.
+      responses:
+        '200':
+          description: A list of owners.
+        '400':
+          description: Invalid device ID format.
+        '500':
+          description: Internal server error.
+
+  /devices/b0c87254-0c85-47be-8b35-e8d49c6d2a17:
+    delete:
+      summary: Delete a particular user
+      description: Deletes the user associated with the given device_id and unassigns their devices.
+      responses:
+        '200':
+          description: Device successfully deleted.
+        '404':
+          description: Device not found.
+        '500':
+          description: Internal server error.
+
+  /devices/sdfghnjcvbn:
+    delete:
+      summary: Delete user (device_id validation)
+      description: Attempts to delete a user based on an invalid device_id.
+      responses:
+        '400':
+          description: Invalid device ID format.
+        '500':
+          description: Internal server error.
+
+  /users/9322710c-8e0d-40af-99b8-814f71aae1e7/devices:
+    get:
+      summary: Get all devices associated with a particular user
+      description: Retrieves all devices associated with the user identified by user_id.
+      responses:
+        '200':
+          description: List of devices associated with the user.
+        '404':
+          description: User not found or no devices associated.
+        '500':
+          description: Internal server error.
+
+  /users/286cd1fb-083c-4b4a-b7bf-b30f279ed8ea/devices:
+    get:
+      summary: Get all devices associated with a particular user (there is no such user_id in a db)
+      description: Retrieves devices for a user that does not exist in the database.
+      responses:
+        '404':
+          description: No user found.
+        '500':
+          description: Internal server error.
+
+  /users/івапро/devices:
+    get:
+      summary: Get all devices associated with a particular user (user_id validation)
+      description: Retrieves devices for a user with an invalid user_id format.
+      responses:
+        '400':
+          description: Invalid user ID format.
+        '500':
+          description: Internal server error.
+
+  /users/00000000-0000-0000-0000-000000000000/devices:
+    get:
+      summary: Get all devices associated with a particular user (there is no such user_id in a db)
+      description: Retrieves devices for a user that does not exist in the database.
+      responses:
+        '404':
+          description: No user found.
+        '500':
+          description: Internal server error.
+
+  /measurements:
+    post:
+      summary: Save a measurement from Raspberry Pi (error if the device is not in the db; missing or invalid fields)
+      description: Saves a measurement sent from Raspberry Pi, with validation for device existence and required fields.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                device_id:
+                  type: string
+                outgate_status:
+                  type: boolean
+                timestamp:
+                  type: string
+                  format: date-time
+      responses:
+        '201':
+          description: Measurement successfully saved.
+        '400':
+          description: Missing or invalid fields.
+        '404':
+          description: Device not registered.
+        '500':
+          description: Internal server error.
+
+  /status/b0c87254-0c85-47be-8b35-e8d49c6d2a92:
+    get:
+      summary: Get a current status of the particular device
+      description: Fetches the current status of the device identified by the device_id.
+      responses:
+        '200':
+          description: Current status of the device.
+        '404':
+          description: No data for the device.
+        '500':
+          description: Internal server error.
+
+  /statistics/day/b0c87254-0c85-47be-8b35-e8d49c6d2a92:
+    get:
+      summary: Get daily electricity statistics for a particular device
+      description: Retrieves the daily electricity statistics for the device.
+      responses:
+        '200':
+          description: Daily statistics.
+        '404':
+          description: Device not found.
+        '500':
+          description: Internal server error.
+
+  /statistics/week/b0c87254-0c85-47be-8b35-e8d49c6d2a92:
+    get:
+      summary: Get weekly electricity statistics for a particular device
+      description: Retrieves the weekly electricity statistics for the device.
+      responses:
+        '200':
+          description: Weekly statistics.
+        '404':
+          description: Device not found.
+        '500':
+          description: Internal server error.
+
+  /auth/callback:
+    post:
+      summary: Create a user via Google using Keycloak from website (if this entry is not the first one, then message about logging in)
+      description: Handles the Google OAuth callback to create or log in a user via Keycloak.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                code:
+                  type: string
+                is_web:
+                  type: boolean
+      responses:
+        '200':
+          description: User successfully created or logged in.
+        '400':
+          description: Missing or invalid authorization code.
+        '500':
+          description: Internal server error.
+
+  /auth/logout:
+    post:
+      summary: Log out the user using access_token and refresh_token (in app - "is_web":false)
+      description: Logs out the user by invalidating the session using the provided refresh token.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+                is_web:
+                  type: boolean
+      responses:
+        '200':
+          description: User successfully logged out.
+        '400':
+          description: Invalid refresh token.
+        '500':
+          description: Internal server error.
+
+  /auth/refresh:
+    post:
+      summary: Create a refresh_token for longer performance
+      description: Generates a new refresh token for continued user sessions.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                refresh_token:
+                  type: string
+                is_web:
+                  type: boolean
+      responses:
+        '200':
+          description: New refresh token generated.
+        '400':
+          description: Invalid refresh token.
+        '500':
+          description: Internal server error.
+
+  /user:
+    get:
+      summary: Get the info about the particular user
+      description: Retrieves the information of the currently authenticated user.
+      responses:
+        '200':
+          description: User details.
+        '401':
+          description: Unauthorized access.
+        '500':
+          description: Internal server error.
 
     delete:
-      summary: Delete a particular device
-      parameters:
-        - in: path
-          name: device_id
-          required: true
-          schema:
-            type: string
-            format: uuid
+      summary: Delete the particular user
+      description: Deletes the currently authenticated user.
       responses:
-        200:
-          description: Device deleted
-        400:
-          description: Invalid device ID format
-        404:
-          description: Device not found
-        500:
-          description: Server error
+        '200':
+          description: User successfully deleted.
+        '404':
+          description: User not found.
+        '500':
+          description: Internal server error.
 
-  /api/devices/{device_id}/owners:
+  /user/devices:
     get:
-      summary: Get owners of a device
-      parameters:
-        - in: path
-          name: device_id
-          required: true
-          schema:
-            type: string
-            format: uuid
+      summary: Get devices that are related to the particular user
+      description: Returns a list of devices associated with the currently authenticated user.
       responses:
-        200:
-          description: List of owners
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User'
-        400:
-          description: Invalid device ID format
-        404:
-          description: No owners found or device does not exist
-        500:
-          description: Server error
-
-  /api/users/{user_id}/devices:
-    get:
-      summary: Get devices associated with a user
-      parameters:
-        - in: path
-          name: user_id
-          required: true
-          schema:
-            type: string
-            format: uuid
-      responses:
-        200:
-          description: List of devices
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Device'
-        400:
-          description: Invalid user_id format
-        500:
-          description: Server error
-
-components:
-  schemas:
-    Device:
-      type: object
-      properties:
-        device_id:
-          type: string
-          format: uuid
-        last_seen:
-          type: string
-          format: date-time
-    User:
-      type: object
-      properties:
-        user_id:
-          type: string
-          format: uuid
-        email:
-          type: string
+        '200':
+          description: List of devices associated with the user.
+        '401':
+          description: Unauthorized access.
+        '500':
+          description: Internal server error.

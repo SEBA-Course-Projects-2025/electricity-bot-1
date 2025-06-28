@@ -7,9 +7,10 @@ from application.measurement.model.dto.measurement import Measurement as Measure
 from application.measurement.measurement_service import MeasurementService
 from pydantic import ValidationError
 from datetime import datetime, timezone, timedelta
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
-@app.route("/api/measurements", methods=["POST"])
+@app.route("/measurements", methods=["POST"])
 def receive_measurement():
     try:
         data = request.get_json() or {}
@@ -87,12 +88,14 @@ def receive_measurement():
         )
 
 
-@app.route("/api/statistics/day/<device_id>", methods=["GET"])
+@app.route("/statistics/day/<device_id>", methods=["GET"])
+@jwt_required()
 def get_statistics_day(device_id):
     return _get_statistics(device_id, days=1)
 
 
-@app.route("/api/statistics/week/<device_id>", methods=["GET"])
+@app.route("/statistics/week/<device_id>", methods=["GET"])
+@jwt_required()
 def get_statistics_week(device_id):
     return _get_statistics(device_id, days=7)
 
@@ -100,13 +103,16 @@ def get_statistics_week(device_id):
 def _get_statistics(device_id: str, days: int):
     try:
         uuid_obj = uuid.UUID(device_id)
+        user_id = get_jwt_identity()
 
         with SessionLocal() as db:
-            device_exists = (
-                db.query(DeviceModel).filter_by(device_id=str(uuid_obj)).first()
-            )
-            if not device_exists:
+            device = db.query(DeviceModel).filter_by(device_id=str(uuid_obj)).first()
+
+            if not device:
                 return jsonify({"error": "Device not registered"}), 404
+
+            if user_id not in [u.user_id for u in device.users]:
+                return jsonify({"error": "Access denied"}), 403
 
         with MeasurementService() as service:
             data = service.get_power_events(str(uuid_obj), days=days)
@@ -136,7 +142,8 @@ def _get_statistics(device_id: str, days: int):
         )
 
 
-@app.route("/api/status/<device_id>", methods=["GET"])
+@app.route("/status/<device_id>", methods=["GET"])
+@jwt_required()
 def get_current_status(device_id: str):
     try:
         uuid_obj = uuid.UUID(device_id)
