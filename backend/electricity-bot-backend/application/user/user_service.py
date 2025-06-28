@@ -1,20 +1,27 @@
 import uuid
 from application.database import SessionLocal
-from application.models import UserModel
+from application.models import UserModel, UnassignedDeviceModel
 
 
-def get_user_by_id(user_id: str) -> UserModel | None:
-    with SessionLocal() as db:
-        return db.query(UserModel).filter_by(user_id=user_id).first()
+class UserService:
+    def __enter__(self):
+        self.db = SessionLocal()
+        return self
 
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.db.close()
 
-def get_or_create_user_by_keycloak_data(userinfo: dict) -> tuple[UserModel, bool]:
-    sub = userinfo.get("sub")
-    email = userinfo.get("email")
-    name = userinfo.get("name", "")
+    def get_user_by_id(self, user_id: str) -> UserModel | None:
+        return self.db.query(UserModel).filter_by(user_id=user_id).first()
 
-    with SessionLocal() as db:
-        user = db.query(UserModel).filter_by(google_sub=sub).first()
+    def get_or_create_user_by_keycloak_data(
+        self, userinfo: dict
+    ) -> tuple[UserModel, bool]:
+        sub = userinfo.get("sub")
+        email = userinfo.get("email")
+        name = userinfo.get("name", "")
+
+        user = self.db.query(UserModel).filter_by(google_sub=sub).first()
         if user:
             return user, False
 
@@ -24,7 +31,19 @@ def get_or_create_user_by_keycloak_data(userinfo: dict) -> tuple[UserModel, bool
             email=email,
             name=name,
         )
-        db.add(user)
-        db.commit()
-        db.refresh(user)
+        self.db.add(user)
+        self.db.commit()
+        self.db.refresh(user)
         return user, True
+
+    def delete_user_and_reassign_devices(self, user_id: str) -> bool:
+        user = self.db.query(UserModel).filter_by(user_id=user_id).first()
+        if not user:
+            return False
+
+        for device in user.devices:
+            self.db.add(UnassignedDeviceModel(device_id=device.device_id))
+
+        self.db.delete(user)
+        self.db.commit()
+        return True

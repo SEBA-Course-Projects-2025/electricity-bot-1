@@ -1,33 +1,34 @@
-# from flask import Blueprint, request, jsonify
-# from application.auth.auth_server import exchange_code_for_token, get_userinfo_from_token
-# from application.user.user_service import get_or_create_user_by_keycloak_data
-# from application.email_utils.email_sender import send_welcome_email
+from flask import Blueprint, jsonify
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from application.user.user_service import UserService
 
-# user_bp = Blueprint("user_bp", __name__)
+user_bp = Blueprint("user_bp", __name__)
 
 
-# @user_bp.route("/user/signup", methods=["POST"])
-# def sign_up():
-#     data = request.get_json()
-#     code = data.get("code")
-#     is_web = data.get("is_web", True)
+@user_bp.route("/user", methods=["GET"])
+@jwt_required()
+def get_current_user():
+    user_id = get_jwt_identity()
+    with UserService() as user_service:
+        user = user_service.get_user_by_id(user_id)
 
-#     if not code:
-#         return jsonify({"error": "Authorization code is required"}), 400
+        if not user:
+            return jsonify({"error": "User not found"}), 404
 
-#     try:
-#         tokens = exchange_code_for_token(code, is_web=is_web)
+        return (
+            jsonify({"user_id": user.user_id, "email": user.email, "name": user.name}),
+            200,
+        )
 
-#         if "access_token" not in tokens:
-#             raise Exception("Access token missing in response")
 
-#         userinfo = get_userinfo_from_token(tokens["access_token"])
+@user_bp.route("/user", methods=["DELETE"])
+@jwt_required()
+def delete_current_user():
+    user_id = get_jwt_identity()
+    with UserService() as user_service:
+        success = user_service.delete_user_and_reassign_devices(user_id)
 
-#         user, created = get_or_create_user_by_keycloak_data(userinfo)
+    if not success:
+        return jsonify({"error": "User not found"}), 404
 
-#         if created:
-#             send_welcome_email(user.email, user.name or "friend")
-
-#         return jsonify({"access_token": tokens["access_token"]}), 201
-#     except Exception as exception:
-#         return jsonify({"error": str(exception)}), 400
+    return jsonify({"message": "User deleted and devices unassigned"}), 200
