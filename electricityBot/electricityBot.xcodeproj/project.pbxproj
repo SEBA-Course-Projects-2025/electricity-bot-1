@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA4EDDA82E11663E00CB8F15 /* DayStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDA72E11663E00CB8F15 /* DayStatsView.swift */; };
+		BA4EDDAA2E11693500CB8F15 /* WeekStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */; };
+		BA4EDDAC2E11699D00CB8F15 /* DailyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */; };
+		BA4EDDAE2E1169AC00CB8F15 /* HourlyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */; };
 		BA8391742DF8772F00C3EA55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391732DF8772F00C3EA55 /* Assets.xcassets */; };
 		BA8391772DF8772F00C3EA55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */; };
 		BA8391812DF8772F00C3EA55 /* electricityBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391802DF8772F00C3EA55 /* electricityBotTests.swift */; };
@@ -50,7 +54,7 @@
 		BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E12E030051001E7B21 /* Helpers.swift */; };
 		BAD4A1E52E030BBD001E7B21 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E42E030BBD001E7B21 /* UserSession.swift */; };
 		BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E62E03269D001E7B21 /* LogOutView.swift */; };
-		BAD4A1EA2E06CF2F001E7B21 /* DayStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E92E06CF2F001E7B21 /* DayStatsView.swift */; };
+		BAD4A1EA2E06CF2F001E7B21 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E92E06CF2F001E7B21 /* StatsView.swift */; };
 		BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1EB2E06CFE0001E7B21 /* PowerStats.swift */; };
 		BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */; };
 		BAD4A1F02E06E675001E7B21 /* PowerStatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1EF2E06E675001E7B21 /* PowerStatsViewModel.swift */; };
@@ -76,6 +80,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA4EDDA72E11663E00CB8F15 /* DayStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStatsView.swift; sourceTree = "<group>"; };
+		BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekStatsView.swift; sourceTree = "<group>"; };
+		BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPowerStat.swift; sourceTree = "<group>"; };
+		BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyPowerStat.swift; sourceTree = "<group>"; };
 		BA83916C2DF8772E00C3EA55 /* electricityBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = electricityBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8391732DF8772F00C3EA55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -121,7 +129,7 @@
 		BAD4A1E12E030051001E7B21 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BAD4A1E42E030BBD001E7B21 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		BAD4A1E62E03269D001E7B21 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
-		BAD4A1E92E06CF2F001E7B21 /* DayStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStatsView.swift; sourceTree = "<group>"; };
+		BAD4A1E92E06CF2F001E7B21 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
 		BAD4A1EB2E06CFE0001E7B21 /* PowerStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStats.swift; sourceTree = "<group>"; };
 		BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatistics.swift; sourceTree = "<group>"; };
 		BAD4A1EF2E06E675001E7B21 /* PowerStatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStatsViewModel.swift; sourceTree = "<group>"; };
@@ -327,7 +335,9 @@
 		BAD4A1E82E06CF11001E7B21 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
-				BAD4A1E92E06CF2F001E7B21 /* DayStatsView.swift */,
+				BAD4A1E92E06CF2F001E7B21 /* StatsView.swift */,
+				BA4EDDA72E11663E00CB8F15 /* DayStatsView.swift */,
+				BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -336,6 +346,8 @@
 			isa = PBXGroup;
 			children = (
 				BAD4A1EF2E06E675001E7B21 /* PowerStatsViewModel.swift */,
+				BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */,
+				BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -506,13 +518,17 @@
 				BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */,
 				BA8391EB2DF99EED00C3EA55 /* ProfileView.swift in Sources */,
 				BAD4A1F02E06E675001E7B21 /* PowerStatsViewModel.swift in Sources */,
+				BA4EDDAC2E11699D00CB8F15 /* DailyPowerStat.swift in Sources */,
 				BAD4A1E52E030BBD001E7B21 /* UserSession.swift in Sources */,
+				BA4EDDAE2E1169AC00CB8F15 /* HourlyPowerStat.swift in Sources */,
 				BA8391BB2DF94C3900C3EA55 /* LoginView.swift in Sources */,
+				BA4EDDAA2E11693500CB8F15 /* WeekStatsView.swift in Sources */,
 				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
 				BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */,
+				BA4EDDA82E11663E00CB8F15 /* DayStatsView.swift in Sources */,
 				BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */,
 				BA8391A92DF878D100C3EA55 /* GoogleAuthService.swift in Sources */,
-				BAD4A1EA2E06CF2F001E7B21 /* DayStatsView.swift in Sources */,
+				BAD4A1EA2E06CF2F001E7B21 /* StatsView.swift in Sources */,
 				BAD4A1DC2E02F157001E7B21 /* GoogleSignInButtonView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
 				BAF8B3502E0718BC00B454F7 /* BackNavigationView.swift in Sources */,
