@@ -103,17 +103,17 @@ struct StatsView: View {
                 .background()
                 .cornerRadius(8.0)
             }
+            Spacer()
             
             // button to toggle between weekly / daily stats
-            Button {
-                weeklyStats.toggle()
+            SimpleButtonView(title: weeklyStats ? "Show Daily Stats" : "Show Weekly Stats", action:  {
+                withAnimation {
+                    weeklyStats.toggle()
+                }
                 loadStats()
-            } label: {
-                Text(weeklyStats ? "Show Daily Stats" : "Show Weekly Stats")
-            }
-            .padding(.top)
-            
-            Spacer()
+            }, size: 150)
+            .frame(maxWidth: .infinity)
+            .padding()
         }
         .padding(32)
     }
@@ -168,16 +168,17 @@ struct StatsView: View {
                 .cornerRadius(8.0)
             }
             
-            // button to toggle between weekly / daily
-            Button {
-                weeklyStats.toggle()
-                loadStats()
-            } label: {
-                Text(weeklyStats ? "Show Daily Stats" : "Show Weekly Stats")
-            }
-            .padding(.top)
-            
             Spacer()
+            
+            // button to toggle between weekly / daily stats
+            SimpleButtonView(title: weeklyStats ? "Show Daily Stats" : "Show Weekly Stats", action:  {
+                withAnimation {
+                    weeklyStats.toggle()
+                }
+                loadStats()
+            }, size: 150)
+            .frame(maxWidth: .infinity)
+            .padding()
         }
         .padding(32)
     }

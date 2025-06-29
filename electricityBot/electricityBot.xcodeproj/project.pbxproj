@@ -11,6 +11,7 @@
 		BA4EDDAA2E11693500CB8F15 /* WeekStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */; };
 		BA4EDDAC2E11699D00CB8F15 /* DailyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */; };
 		BA4EDDAE2E1169AC00CB8F15 /* HourlyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */; };
+		BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */; };
 		BA8391742DF8772F00C3EA55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391732DF8772F00C3EA55 /* Assets.xcassets */; };
 		BA8391772DF8772F00C3EA55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */; };
 		BA8391812DF8772F00C3EA55 /* electricityBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391802DF8772F00C3EA55 /* electricityBotTests.swift */; };
@@ -84,6 +85,7 @@
 		BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekStatsView.swift; sourceTree = "<group>"; };
 		BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPowerStat.swift; sourceTree = "<group>"; };
 		BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyPowerStat.swift; sourceTree = "<group>"; };
+		BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButtonView.swift; sourceTree = "<group>"; };
 		BA83916C2DF8772E00C3EA55 /* electricityBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = electricityBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8391732DF8772F00C3EA55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 				BAD4A1E12E030051001E7B21 /* Helpers.swift */,
 				BAD4A1E62E03269D001E7B21 /* LogOutView.swift */,
 				BAF8B34F2E0718BC00B454F7 /* BackNavigationView.swift */,
+				BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				BA4EDDAE2E1169AC00CB8F15 /* HourlyPowerStat.swift in Sources */,
 				BA8391BB2DF94C3900C3EA55 /* LoginView.swift in Sources */,
 				BA4EDDAA2E11693500CB8F15 /* WeekStatsView.swift in Sources */,
+				BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */,
 				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
 				BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */,
 				BA4EDDA82E11663E00CB8F15 /* DayStatsView.swift in Sources */,
