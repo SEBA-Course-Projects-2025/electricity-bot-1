@@ -34,8 +34,22 @@ struct StatsView: View {
                 }
                 .padding()
             } else {
-                StatsChoice
+                VStack {
+                    TabView(selection: $weeklyStats) {
+                        DayStatsView
+                            .tag(false)
+
+                        WeekStatsView
+                            .tag(true)
+                    }
+                    .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+                    .onChange(of: weeklyStats) {
+                        loadStats()
+                    }
+                }
+                .padding(.bottom)
             }
+
         }
         .onAppear(perform: loadStats)
         .navigationBarBackButtonHidden(true)
