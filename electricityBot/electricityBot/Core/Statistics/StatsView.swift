@@ -65,7 +65,7 @@ struct StatsView: View {
         VStack(alignment: .leading) {
             Text("Last 7 days\nStatistics")
                 .font(.custom("Poppins-Medium", size: 32))
-                .padding(.top, 50.0)
+                // .padding(.top, 50.0)
             
             // total time with power off
             VStack(alignment: .leading) {
@@ -73,6 +73,7 @@ struct StatsView: View {
                 Text("The power was off for\n\(viewModel.powerOffDurationFormatted)")
                     .font(.custom("Poppins", size: 24))
                     .padding(.top, 30.0)
+                    .fixedSize(horizontal: false, vertical: true)
                 
                 // graph
                 ScrollView(.horizontal) {
@@ -130,13 +131,14 @@ struct StatsView: View {
             // title
             Text("Last 24h\nStatistics")
                 .font(.custom("Poppins-Medium", size: 32))
-                .padding(.top, 50.0)
+                // .padding(.top, 50.0)
             
             // total time off
             VStack(alignment: .leading) {
                 Text("The power was off for\n\(viewModel.powerOffDurationFormatted)")
                     .font(.custom("Poppins", size: 24))
                     .padding(.top, 30.0)
+                    .fixedSize(horizontal: false, vertical: true)
                 
                 // graph
                 ScrollView(.horizontal) {
