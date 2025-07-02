@@ -43,7 +43,7 @@ struct RegisterView: View {
                     // sign up button
                     
                     NavigationLink {
-                        ProfileView()
+                        RootView()
                     } label: {
                         Text("Create account")
                             .font(.custom("Poppins-SemiBold", size: 16))

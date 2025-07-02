@@ -1,5 +1,5 @@
 //
-//  MainView.swift
+//  RootView.swift
 //  electricityBot
 //
 //  Created by Dana Litvak on 02.07.2025.
@@ -27,15 +27,17 @@ enum TabBar: String, CaseIterable, CustomTabProtocol {
         }
     }
 }
-struct MainView: View {
+struct RootView: View {
     @State private var activeTab: TabBar = .main
     @Environment(\.dismiss) var dismiss
     var body: some View {
         CustomTabView(selection: $activeTab) { tab, tabBarHeight in
             switch tab {
             case .statistics: StatsView(deviceID: "d4dba214-e012-4dd2-b1a7-9256788a0b2a")
-            case .main: Text("Main")
+            case .main: MainView()
+                    .environmentObject(UserSession())
             case .settings: ProfileView()
+                    .environmentObject(UserSession())
             }
         }
         .navigationBarBackButtonHidden(true)
@@ -48,5 +50,5 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    RootView()
 }

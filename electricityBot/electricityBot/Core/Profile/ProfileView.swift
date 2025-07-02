@@ -14,72 +14,65 @@ struct ProfileView: View {
 
     var body: some View {
         NavigationStack {
-            
-            VStack(alignment: .leading) {
-                // hello message
-                Text("Hello, \(userSession.user?.fullName ?? "User")!")
-                    .font(.custom("Poppins-Medium", size: 32))
+            ZStack(alignment: .leading) {
+                Color.backgroundColor
+                    .ignoresSafeArea()
                 
-                // account card + change user
-                HStack(spacing: 12) {
-                    Text(userSession.user?.initials ?? "NA")
-                        .font(.custom("Poppins-Medium", size: 21))
-                        .frame(width: 40, height: 40)
-                        .background(Color.foregroundLow.opacity(0.35))
-                        .foregroundColor(.white)
-                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                VStack(alignment: .leading) {
+                    // hello message
+                    Text("Hello, \(userSession.user?.fullName ?? "User")!")
+                        .font(.custom("Poppins-Medium", size: 32))
                     
-                    VStack(alignment: .leading) {
-                        Text(userSession.user?.email ?? "noname@gmail.com")
-                            .font(.custom("Poppins-SemiBold", size: 15))
-                            .foregroundColor(.foregroundLow.opacity(0.75))
+                    // account card + change user
+                    HStack(spacing: 12) {
+                        Text(userSession.user?.initials ?? "NA")
+                            .font(.custom("Poppins-Medium", size: 21))
+                            .frame(width: 40, height: 40)
+                            .background(Color.foregroundLow.opacity(0.35))
+                            .foregroundColor(.white)
+                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                         
-                        NavigationLink {
-                            LoginView()
-                        } label: {
-                            Text("Change user")
-                                .font(.custom("Poppins-Regular", size: 15))
+                        VStack(alignment: .leading) {
+                            Text(userSession.user?.email ?? "noname@gmail.com")
+                                .font(.custom("Poppins-SemiBold", size: 15))
                                 .foregroundColor(.foregroundLow.opacity(0.75))
+                            
+                            NavigationLink {
+                                LoginView()
+                            } label: {
+                                Text("Change user")
+                                    .font(.custom("Poppins-Regular", size: 15))
+                                    .foregroundColor(.foregroundLow.opacity(0.75))
+                            }
                         }
                     }
-                }
-                
-                // change device
-                VStack(alignment: .leading) {
-                    Text("Want to track\nanother device?")
-                        .font(.custom("Poppins-Medium", size: 22))
                     
-                    NavigationLink {
+                    // change device
+                    VStack(alignment: .leading) {
+                        Text("Want to remove this device?")
+                            .font(.custom("Poppins-Medium", size: 22))
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         
-                    } label: {
-                        Text("Choose")
-                            .font(.custom("Poppins-SemiBold", size: 16))
-                            .foregroundColor(Color.textColor.opacity(0.72))
-                            .frame(width: UIScreen.main.bounds.width - 270, height: 52)
+                        SimpleButtonView(title: "Reset", action: {})
+                            .padding(.top, -32)
+                            .padding(.horizontal, -16)
                     }
-                    .background(Color.white)
-                    .cornerRadius(8.0)
-                    .shadow(color: .black.opacity(0), radius: 51, x: 145, y: 112)
-                    .shadow(color: .black.opacity(0), radius: 47, x: 93, y: 72)
-                    .shadow(color: .black.opacity(0.01), radius: 40, x: 52, y: 40)
-                    .shadow(color: .black.opacity(0.02), radius: 29, x: 23, y: 18)
-                    .shadow(color: .black.opacity(0.02), radius: 16, x: 6, y: 4)
+                    .padding(.top, 75.0)
                     
+                    Spacer()
+                    
+                    // logout
+                    LogOutView()
+                    Spacer().frame(height: 80)
                 }
-                .padding(.top, 75.0)
-                
-                Spacer()
-                
-                // logout
-                // LogOutView()
+                .padding(32)
             }
-            .padding(32)
-            .background(Color.backgroundColor)
-            .navigationBarBackButtonHidden(true)
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
 #Preview {
     ProfileView()
+        .environmentObject(UserSession())
 }

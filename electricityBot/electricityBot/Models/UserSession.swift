@@ -11,5 +11,6 @@ import Combine
 class UserSession: ObservableObject {
     @Published var isLoggedIn = false
     @Published var user: User?
+    @Published var currentDeviceID: String? = nil
 }
 

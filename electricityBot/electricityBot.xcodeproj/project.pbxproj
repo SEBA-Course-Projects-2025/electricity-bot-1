@@ -13,7 +13,10 @@
 		BA4EDDAE2E1169AC00CB8F15 /* HourlyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */; };
 		BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */; };
 		BA4EDDB32E152E9A00CB8F15 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDB22E152E9A00CB8F15 /* CustomTabView.swift */; };
-		BA4EDDB52E1531C500CB8F15 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDB42E1531C500CB8F15 /* MainView.swift */; };
+		BA4EDDB52E1531C500CB8F15 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDB42E1531C500CB8F15 /* RootView.swift */; };
+		BA4EDDB82E15591A00CB8F15 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDB72E15591A00CB8F15 /* MainView.swift */; };
+		BA4EDDBA2E15635C00CB8F15 /* GetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDB92E15635C00CB8F15 /* GetStatus.swift */; };
+		BA4EDDBC2E1563B100CB8F15 /* PowerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDBB2E1563B100CB8F15 /* PowerStatus.swift */; };
 		BA8391742DF8772F00C3EA55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391732DF8772F00C3EA55 /* Assets.xcassets */; };
 		BA8391772DF8772F00C3EA55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */; };
 		BA8391812DF8772F00C3EA55 /* electricityBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391802DF8772F00C3EA55 /* electricityBotTests.swift */; };
@@ -89,7 +92,10 @@
 		BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyPowerStat.swift; sourceTree = "<group>"; };
 		BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButtonView.swift; sourceTree = "<group>"; };
 		BA4EDDB22E152E9A00CB8F15 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
-		BA4EDDB42E1531C500CB8F15 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		BA4EDDB42E1531C500CB8F15 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		BA4EDDB72E15591A00CB8F15 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		BA4EDDB92E15635C00CB8F15 /* GetStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatus.swift; sourceTree = "<group>"; };
+		BA4EDDBB2E1563B100CB8F15 /* PowerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStatus.swift; sourceTree = "<group>"; };
 		BA83916C2DF8772E00C3EA55 /* electricityBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = electricityBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8391732DF8772F00C3EA55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -178,6 +184,14 @@
 			path = TabView;
 			sourceTree = "<group>";
 		};
+		BA4EDDB62E15590800CB8F15 /* Main Page */ = {
+			isa = PBXGroup;
+			children = (
+				BA4EDDB72E15591A00CB8F15 /* MainView.swift */,
+			);
+			path = "Main Page";
+			sourceTree = "<group>";
+		};
 		BA8391632DF8772E00C3EA55 = {
 			isa = PBXGroup;
 			children = (
@@ -258,6 +272,7 @@
 				BAD4A1E42E030BBD001E7B21 /* UserSession.swift */,
 				BA8391EC2DF9AE7100C3EA55 /* User.swift */,
 				BAD4A1EB2E06CFE0001E7B21 /* PowerStats.swift */,
+				BA4EDDBB2E1563B100CB8F15 /* PowerStatus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -268,6 +283,7 @@
 				BA8391A72DF878D100C3EA55 /* GoogleAuthService.swift */,
 				BAD4A1DF2E02FC82001E7B21 /* AppDelegate.swift */,
 				BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */,
+				BA4EDDB92E15635C00CB8F15 /* GetStatus.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -288,6 +304,7 @@
 		BA8391B62DF8A50500C3EA55 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BA4EDDB62E15590800CB8F15 /* Main Page */,
 				BAD4A1E82E06CF11001E7B21 /* Statistics */,
 				BA8391B82DF8A69B00C3EA55 /* Authentification */,
 				BA8391B92DF8A6A900C3EA55 /* Profile */,
@@ -301,7 +318,7 @@
 			children = (
 				BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */,
 				BA8391AA2DF878D800C3EA55 /* ContentView.swift */,
-				BA4EDDB42E1531C500CB8F15 /* MainView.swift */,
+				BA4EDDB42E1531C500CB8F15 /* RootView.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -531,7 +548,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAD4A1E02E02FC82001E7B21 /* AppDelegate.swift in Sources */,
-				BA4EDDB52E1531C500CB8F15 /* MainView.swift in Sources */,
+				BA4EDDB52E1531C500CB8F15 /* RootView.swift in Sources */,
 				BA8391E92DF9737C00C3EA55 /* RegisterView.swift in Sources */,
 				BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */,
 				BA8391EB2DF99EED00C3EA55 /* ProfileView.swift in Sources */,
@@ -543,18 +560,21 @@
 				BA8391BB2DF94C3900C3EA55 /* LoginView.swift in Sources */,
 				BA4EDDAA2E11693500CB8F15 /* WeekStatsView.swift in Sources */,
 				BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */,
+				BA4EDDBC2E1563B100CB8F15 /* PowerStatus.swift in Sources */,
 				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
 				BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */,
 				BA4EDDA82E11663E00CB8F15 /* DayStatsView.swift in Sources */,
 				BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */,
 				BA8391A92DF878D100C3EA55 /* GoogleAuthService.swift in Sources */,
 				BAD4A1EA2E06CF2F001E7B21 /* StatsView.swift in Sources */,
+				BA4EDDB82E15591A00CB8F15 /* MainView.swift in Sources */,
 				BAD4A1DC2E02F157001E7B21 /* GoogleSignInButtonView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
 				BAF8B3502E0718BC00B454F7 /* BackNavigationView.swift in Sources */,
 				BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */,
 				BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */,
 				BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */,
+				BA4EDDBA2E15635C00CB8F15 /* GetStatus.swift in Sources */,
 				BA8391B02DF878D800C3EA55 /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

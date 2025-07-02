@@ -63,7 +63,6 @@ fileprivate struct CustomTabBar<Value: CaseIterable & Hashable & CustomTabProtoc
         HStack(spacing: 48) {
             ForEach(Value.allCases, id: \.hashValue) { tab in
                 let isActive = activeTab == tab
-                let index = (Value.allCases.firstIndex(of: tab) as? Int) ?? 0
                 
                 VStack(alignment: .center, spacing: 4) {
                     Text(tab.symbolImage)
@@ -114,5 +113,5 @@ fileprivate struct CustomTabBar<Value: CaseIterable & Hashable & CustomTabProtoc
 }
 
 #Preview {
-    MainView()
+    RootView()
 }
