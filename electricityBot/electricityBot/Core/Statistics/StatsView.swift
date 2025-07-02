@@ -46,8 +46,9 @@ struct StatsView: View {
                     .onChange(of: weeklyStats) {
                         loadStats()
                     }
+                    Spacer().frame(height: 80)
                 }
-                .padding(.bottom)
+                //.padding(.bottom, 16)
             }
 
         }
@@ -188,15 +189,6 @@ struct StatsView: View {
     private func loadStats() {
         let days = weeklyStats ? 7 : 1
         viewModel.requestStats(deviceID: deviceID, days: days)
-    }
-    
-    @ViewBuilder
-    private var StatsChoice: some View {
-        if weeklyStats {
-            WeekStatsView
-        } else {
-            DayStatsView
-        }
     }
 }
 

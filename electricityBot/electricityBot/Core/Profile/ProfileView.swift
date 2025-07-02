@@ -19,7 +19,6 @@ struct ProfileView: View {
                 // hello message
                 Text("Hello, \(userSession.user?.fullName ?? "User")!")
                     .font(.custom("Poppins-Medium", size: 32))
-                    .padding(.top, 50.0)
                 
                 // account card + change user
                 HStack(spacing: 12) {
@@ -72,7 +71,7 @@ struct ProfileView: View {
                 Spacer()
                 
                 // logout
-                LogOutView()
+                // LogOutView()
             }
             .padding(32)
             .background(Color.backgroundColor)
