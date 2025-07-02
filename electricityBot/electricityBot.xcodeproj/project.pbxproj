@@ -17,6 +17,7 @@
 		BA4EDDB82E15591A00CB8F15 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDB72E15591A00CB8F15 /* MainView.swift */; };
 		BA4EDDBA2E15635C00CB8F15 /* GetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDB92E15635C00CB8F15 /* GetStatus.swift */; };
 		BA4EDDBC2E1563B100CB8F15 /* PowerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDBB2E1563B100CB8F15 /* PowerStatus.swift */; };
+		BA4EDDBE2E1564F100CB8F15 /* PowerStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDBD2E1564F100CB8F15 /* PowerStatusViewModel.swift */; };
 		BA8391742DF8772F00C3EA55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391732DF8772F00C3EA55 /* Assets.xcassets */; };
 		BA8391772DF8772F00C3EA55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */; };
 		BA8391812DF8772F00C3EA55 /* electricityBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391802DF8772F00C3EA55 /* electricityBotTests.swift */; };
@@ -96,6 +97,7 @@
 		BA4EDDB72E15591A00CB8F15 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		BA4EDDB92E15635C00CB8F15 /* GetStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatus.swift; sourceTree = "<group>"; };
 		BA4EDDBB2E1563B100CB8F15 /* PowerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStatus.swift; sourceTree = "<group>"; };
+		BA4EDDBD2E1564F100CB8F15 /* PowerStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStatusViewModel.swift; sourceTree = "<group>"; };
 		BA83916C2DF8772E00C3EA55 /* electricityBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = electricityBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8391732DF8772F00C3EA55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				BAD4A1EF2E06E675001E7B21 /* PowerStatsViewModel.swift */,
 				BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */,
 				BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */,
+				BA4EDDBD2E1564F100CB8F15 /* PowerStatusViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 			files = (
 				BAD4A1E02E02FC82001E7B21 /* AppDelegate.swift in Sources */,
 				BA4EDDB52E1531C500CB8F15 /* RootView.swift in Sources */,
+				BA4EDDBE2E1564F100CB8F15 /* PowerStatusViewModel.swift in Sources */,
 				BA8391E92DF9737C00C3EA55 /* RegisterView.swift in Sources */,
 				BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */,
 				BA8391EB2DF99EED00C3EA55 /* ProfileView.swift in Sources */,
