@@ -12,3 +12,4 @@ flask-jwt-extended
 flask_cors
 premailer      
 python-dotenv
+gunicorn
