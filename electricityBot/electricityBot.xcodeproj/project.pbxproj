@@ -18,8 +18,10 @@
 		BA4EDDBA2E15635C00CB8F15 /* GetStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDB92E15635C00CB8F15 /* GetStatus.swift */; };
 		BA4EDDBC2E1563B100CB8F15 /* PowerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDBB2E1563B100CB8F15 /* PowerStatus.swift */; };
 		BA4EDDBE2E1564F100CB8F15 /* PowerStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDBD2E1564F100CB8F15 /* PowerStatusViewModel.swift */; };
+		BA7177C12E15A83100B01EB2 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7177C02E15A83100B01EB2 /* AuthService.swift */; };
+		BA7177C32E15AC8E00B01EB2 /* AuthContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7177C22E15AC8D00B01EB2 /* AuthContextProvider.swift */; };
+		BA7177C52E15CBE600B01EB2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA7177C42E15CBE600B01EB2 /* SceneDelegate.swift */; };
 		BA8391742DF8772F00C3EA55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391732DF8772F00C3EA55 /* Assets.xcassets */; };
-		BA8391772DF8772F00C3EA55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */; };
 		BA8391812DF8772F00C3EA55 /* electricityBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391802DF8772F00C3EA55 /* electricityBotTests.swift */; };
 		BA83918B2DF8772F00C3EA55 /* electricityBotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA83918A2DF8772F00C3EA55 /* electricityBotUITests.swift */; };
 		BA83918D2DF8772F00C3EA55 /* electricityBotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA83918C2DF8772F00C3EA55 /* electricityBotUITestsLaunchTests.swift */; };
@@ -98,9 +100,11 @@
 		BA4EDDB92E15635C00CB8F15 /* GetStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatus.swift; sourceTree = "<group>"; };
 		BA4EDDBB2E1563B100CB8F15 /* PowerStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStatus.swift; sourceTree = "<group>"; };
 		BA4EDDBD2E1564F100CB8F15 /* PowerStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStatusViewModel.swift; sourceTree = "<group>"; };
+		BA7177C02E15A83100B01EB2 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
+		BA7177C22E15AC8D00B01EB2 /* AuthContextProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthContextProvider.swift; sourceTree = "<group>"; };
+		BA7177C42E15CBE600B01EB2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BA83916C2DF8772E00C3EA55 /* electricityBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = electricityBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8391732DF8772F00C3EA55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BA83917C2DF8772F00C3EA55 /* electricityBotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = electricityBotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8391802DF8772F00C3EA55 /* electricityBotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = electricityBotTests.swift; sourceTree = "<group>"; };
 		BA8391862DF8772F00C3EA55 /* electricityBotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = electricityBotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -225,18 +229,10 @@
 				BA8391A42DF878CC00C3EA55 /* Models */,
 				BA8391732DF8772F00C3EA55 /* Assets.xcassets */,
 				BA83919D2DF878C300C3EA55 /* Fonts */,
-				BA8391752DF8772F00C3EA55 /* Preview Content */,
 				BA8391B32DF8799500C3EA55 /* electricityBotApp.swift */,
+				BA7177C22E15AC8D00B01EB2 /* AuthContextProvider.swift */,
 			);
 			path = electricityBot;
-			sourceTree = "<group>";
-		};
-		BA8391752DF8772F00C3EA55 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		BA83917F2DF8772F00C3EA55 /* electricityBotTests */ = {
@@ -286,6 +282,8 @@
 				BAD4A1DF2E02FC82001E7B21 /* AppDelegate.swift */,
 				BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */,
 				BA4EDDB92E15635C00CB8F15 /* GetStatus.swift */,
+				BA7177C02E15A83100B01EB2 /* AuthService.swift */,
+				BA7177C42E15CBE600B01EB2 /* SceneDelegate.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -505,7 +503,6 @@
 				BA8391D12DF94EA200C3EA55 /* Poppins-Black.ttf in Resources */,
 				BA8391DA2DF94EA200C3EA55 /* Poppins-Light.ttf in Resources */,
 				BA8391A12DF878C300C3EA55 /* BerlinX-Bold.ttf in Resources */,
-				BA8391772DF8772F00C3EA55 /* Preview Assets.xcassets in Resources */,
 				BA8391D52DF94EA200C3EA55 /* Poppins-ExtraBold.ttf in Resources */,
 				BA8391D62DF94EA200C3EA55 /* Poppins-ExtraBoldItalic.ttf in Resources */,
 				BA8391DB2DF94EA200C3EA55 /* Poppins-LightItalic.ttf in Resources */,
@@ -551,6 +548,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAD4A1E02E02FC82001E7B21 /* AppDelegate.swift in Sources */,
+				BA7177C12E15A83100B01EB2 /* AuthService.swift in Sources */,
 				BA4EDDB52E1531C500CB8F15 /* RootView.swift in Sources */,
 				BA4EDDBE2E1564F100CB8F15 /* PowerStatusViewModel.swift in Sources */,
 				BA8391E92DF9737C00C3EA55 /* RegisterView.swift in Sources */,
@@ -571,12 +569,14 @@
 				BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */,
 				BA8391A92DF878D100C3EA55 /* GoogleAuthService.swift in Sources */,
 				BAD4A1EA2E06CF2F001E7B21 /* StatsView.swift in Sources */,
+				BA7177C32E15AC8E00B01EB2 /* AuthContextProvider.swift in Sources */,
 				BA4EDDB82E15591A00CB8F15 /* MainView.swift in Sources */,
 				BAD4A1DC2E02F157001E7B21 /* GoogleSignInButtonView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
 				BAF8B3502E0718BC00B454F7 /* BackNavigationView.swift in Sources */,
 				BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */,
 				BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */,
+				BA7177C52E15CBE600B01EB2 /* SceneDelegate.swift in Sources */,
 				BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */,
 				BA4EDDBA2E15635C00CB8F15 /* GetStatus.swift in Sources */,
 				BA8391B02DF878D800C3EA55 /* SplashScreenView.swift in Sources */,
@@ -742,7 +742,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"electricityBot/Preview Content\"";
 				DEVELOPMENT_TEAM = 8HRLLHKWCW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -777,7 +776,6 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"electricityBot/Preview Content\"";
 				DEVELOPMENT_TEAM = 8HRLLHKWCW;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;

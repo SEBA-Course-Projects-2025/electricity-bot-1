@@ -10,7 +10,7 @@ import Foundation
 struct GetStatistics {
     static func sendRequestToBackend(deviceID: String, days: Int, completion: @escaping (Result<PowerStatsRequest, Error>) -> Void) {
         // server endpoint
-        let urlString = "http://192.168.0.103:5050/api/statistics/\(days == 1 ? "day" : "week")/\(deviceID)"
+        let urlString = "http://172.16.98.143:3000/api/statistics/\(days == 1 ? "day" : "week")/\(deviceID)"
         guard let url = URL(string: urlString) else { return }
         print("Requesting URL:", urlString)
 

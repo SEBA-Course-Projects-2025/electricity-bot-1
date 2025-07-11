@@ -10,7 +10,7 @@ import Foundation
 struct GetStatus {
     static func sendRequestToBackend(deviceID: String, completion: @escaping (Result<PowerStatus, Error>) -> Void) {
         // server endpoint
-        let urlString = "http://192.168.0.102:5050/api/status/\(deviceID)"
+        let urlString = "http://172.16.98.143:3000/api/status/\(deviceID)"
         guard let url = URL(string: urlString) else { return }
         print("Requesting URL:", urlString)
 
