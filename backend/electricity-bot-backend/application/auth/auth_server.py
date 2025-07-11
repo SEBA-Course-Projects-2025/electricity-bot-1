@@ -45,7 +45,7 @@ class KeycloakAuthClient:
         }
 
         token_url = (
-            f"{self.keycloak_url}/realms/{self.realm}/protocol/openid-connect/token"
+            f"{self.public_url}/realms/{self.realm}/protocol/openid-connect/token"
         )
         response = requests.post(token_url, data=data)
 
@@ -89,7 +89,7 @@ class KeycloakAuthClient:
         }
 
         token_url = (
-            f"{self.keycloak_url}/realms/{self.realm}/protocol/openid-connect/token"
+            f"{self.public_url}/realms/{self.realm}/protocol/openid-connect/token"
         )
         response = requests.post(token_url, data=data)
 
@@ -109,7 +109,7 @@ class KeycloakAuthClient:
         }
 
         logout_url = (
-            f"{self.keycloak_url}/realms/{self.realm}/protocol/openid-connect/logout"
+            f"{self.public_url}/realms/{self.realm}/protocol/openid-connect/logout"
         )
         response = requests.post(logout_url, data=data)
 
