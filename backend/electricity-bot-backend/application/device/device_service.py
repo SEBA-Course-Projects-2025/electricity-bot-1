@@ -30,30 +30,38 @@ class DeviceService:
 
     def create_device(self, dto: DeviceDTO, user_id: str) -> DeviceModel:
         try:
-
             if dto.last_seen is None:
                 dto.last_seen = datetime.now(timezone.utc)
 
+            device_id_str = str(dto.device_id)
+            user_id_str = str(user_id)
+
             existing_device = (
-                self.db.query(DeviceModel).filter_by(device_id=dto.device_id).first()
+                self.db.query(DeviceModel).filter_by(device_id=device_id_str).first()
             )
             if existing_device:
-                raise ValueError("Device with this ID already exists")
+                device = existing_device
+            else:
+                device = DeviceModel(device_id=device_id_str, last_seen=dto.last_seen)
+                self.db.add(device)
+                self.db.flush()
 
-            device = DeviceModel(device_id=dto.device_id, last_seen=dto.last_seen)
-            self.db.add(device)
-
-            self.db.flush()
-
-            self.db.execute(
-                user_device_association.insert().values(
-                    user_id=user_id, device_id=dto.device_id
-                )
+            existing_association = (
+                self.db.query(user_device_association)
+                .filter_by(user_id=user_id_str, device_id=device_id_str)
+                .first()
             )
+
+            if not existing_association:
+                self.db.execute(
+                    user_device_association.insert().values(
+                        user_id=user_id_str, device_id=device_id_str
+                    )
+                )
 
             self.db.commit()
 
-            return {"device_id": str(dto.device_id)}
+            return {"device_id": device_id_str}
 
         except Exception as exception:
             import traceback
