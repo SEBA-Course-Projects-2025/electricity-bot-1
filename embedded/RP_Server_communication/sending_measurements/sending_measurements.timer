@@ -3,6 +3,7 @@ Description=Run sending_measurement.service every minute
 
 [Timer]
 OnCalendar=*-*-* *:*:00
+RandomizedDelaySec=10s
 AccuracySec=1s
 Persistent=true
 
