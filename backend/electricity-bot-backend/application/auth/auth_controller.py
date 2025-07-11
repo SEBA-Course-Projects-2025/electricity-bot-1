@@ -12,6 +12,9 @@ def keycloak_callback():
     data = request.get_json()
     code = data.get("code")
     is_web = data.get("is_web", True)
+    is_custom_mobile = data.get(
+        "is_custom_mobile", False
+    )  # updated to handle custom mobile
 
     if not code:
         return (
@@ -25,7 +28,9 @@ def keycloak_callback():
 
     try:
         kc = KeycloakAuthClient()
-        tokens = kc.exchange_code_for_token(code, is_web=is_web)
+        tokens = kc.exchange_code_for_token(
+            code, is_web=is_web, is_custom_mobile=is_custom_mobile
+        )
 
         access_token = tokens.get("access_token")
         if not access_token:
@@ -77,6 +82,7 @@ def logout_user():
 
     refresh_token = data.get("refresh_token")
     is_web = data.get("is_web", True)
+    is_custom_mobile = data.get("is_custom_mobile", False)
 
     if not refresh_token:
         return (
@@ -114,6 +120,7 @@ def refresh_tokens():
     data = request.get_json()
     refresh_token = data.get("refresh_token")
     is_web = data.get("is_web", True)
+    is_custom_mobile = data.get("is_custom_mobile", False)
 
     if not refresh_token:
         return (

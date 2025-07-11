@@ -19,8 +19,11 @@ class KeycloakAuthClient:
 
         self.redirect_uri_web = os.getenv("KEYCLOAK_REDIRECT_URI_WEB")
         self.redirect_uri_mobile = os.getenv("KEYCLOAK_REDIRECT_URI_MOBILE")
+        self.redirect_uri_mobile_custom = "com.electricitybot://callback"
 
-    def _get_redirect_uri(self, is_web: bool) -> str:
+    def _get_redirect_uri(self, is_web: bool, is_custom_mobile: bool = False) -> str:
+        if is_custom_mobile:
+            return self.redirect_uri_mobile_custom  # for custom mobile redirect URI
         return self.redirect_uri_web if is_web else self.redirect_uri_mobile
 
     def _get_client_id(self, is_web: bool) -> str:
@@ -35,11 +38,13 @@ class KeycloakAuthClient:
         fallback_url = url.replace("localhost", "host.docker.internal")
         return requests.post(fallback_url, data=data, headers=headers or {})
 
-    def exchange_code_for_token(self, code: str, is_web: bool = True) -> dict:
+    def exchange_code_for_token(
+        self, code: str, is_web: bool = True, is_custom_mobile: bool = False
+    ) -> dict:
         data = {
             "grant_type": "authorization_code",
             "code": code,
-            "redirect_uri": self._get_redirect_uri(is_web),
+            "redirect_uri": self._get_redirect_uri(is_web, is_custom_mobile),
             "client_id": self._get_client_id(is_web),
             "client_secret": self._get_client_secret(is_web),
         }
@@ -119,6 +124,8 @@ class KeycloakAuthClient:
         if response.status_code != 204:
             raise Exception(f"Logout failed: {response.text}")
 
-    def google_callback_exchange(self, code: str) -> str:
-        tokens = self.exchange_code_for_token(code, is_web=True)
+    def google_callback_exchange(
+        self, code: str, is_web: bool = True, is_custom_mobile: bool = False
+    ) -> str:
+        tokens = self.exchange_code_for_token(code, is_web, is_custom_mobile)
         return tokens["access_token"]
