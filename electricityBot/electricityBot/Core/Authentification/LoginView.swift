@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import GoogleSignIn
-import GoogleSignInSwift
 
 struct LoginView: View {
     @EnvironmentObject var userSession: UserSession

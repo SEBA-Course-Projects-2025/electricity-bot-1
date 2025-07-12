@@ -10,8 +10,6 @@
 		BA21A88D2E216CEA00572135 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A88C2E216CEA00572135 /* Keychain.swift */; };
 		BA21A88F2E217CB600572135 /* TokenHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A88E2E217CB600572135 /* TokenHandler.swift */; };
 		BA21A8912E21831E00572135 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A8902E21831E00572135 /* APIService.swift */; };
-		BA4EDDA82E11663E00CB8F15 /* DayStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDA72E11663E00CB8F15 /* DayStatsView.swift */; };
-		BA4EDDAA2E11693500CB8F15 /* WeekStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */; };
 		BA4EDDAC2E11699D00CB8F15 /* DailyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */; };
 		BA4EDDAE2E1169AC00CB8F15 /* HourlyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */; };
 		BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */; };
@@ -91,8 +89,6 @@
 		BA21A88C2E216CEA00572135 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		BA21A88E2E217CB600572135 /* TokenHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenHandler.swift; sourceTree = "<group>"; };
 		BA21A8902E21831E00572135 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		BA4EDDA72E11663E00CB8F15 /* DayStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStatsView.swift; sourceTree = "<group>"; };
-		BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekStatsView.swift; sourceTree = "<group>"; };
 		BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPowerStat.swift; sourceTree = "<group>"; };
 		BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyPowerStat.swift; sourceTree = "<group>"; };
 		BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButtonView.swift; sourceTree = "<group>"; };
@@ -375,8 +371,6 @@
 			isa = PBXGroup;
 			children = (
 				BAD4A1E92E06CF2F001E7B21 /* StatsView.swift */,
-				BA4EDDA72E11663E00CB8F15 /* DayStatsView.swift */,
-				BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */,
 			);
 			path = Statistics;
 			sourceTree = "<group>";
@@ -564,13 +558,11 @@
 				BAD4A1E52E030BBD001E7B21 /* UserSession.swift in Sources */,
 				BA4EDDAE2E1169AC00CB8F15 /* HourlyPowerStat.swift in Sources */,
 				BA8391BB2DF94C3900C3EA55 /* LoginView.swift in Sources */,
-				BA4EDDAA2E11693500CB8F15 /* WeekStatsView.swift in Sources */,
 				BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */,
 				BA4EDDBC2E1563B100CB8F15 /* PowerStatus.swift in Sources */,
 				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
 				BA21A88D2E216CEA00572135 /* Keychain.swift in Sources */,
 				BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */,
-				BA4EDDA82E11663E00CB8F15 /* DayStatsView.swift in Sources */,
 				BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */,
 				BAD4A1EA2E06CF2F001E7B21 /* StatsView.swift in Sources */,
 				BA7177C32E15AC8E00B01EB2 /* AuthContextProvider.swift in Sources */,
