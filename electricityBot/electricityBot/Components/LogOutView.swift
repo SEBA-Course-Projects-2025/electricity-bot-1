@@ -10,10 +10,12 @@ import GoogleSignIn
 
 struct LogOutView: View {
     @EnvironmentObject var userSession: UserSession
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         Button() {
-            GoogleAuthService.handleLogout(userSession: userSession)
+            userSession.logout()
+            dismiss()
         } label: {
             Text("Log Out")
                 .frame(maxWidth: .infinity)

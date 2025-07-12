@@ -10,13 +10,18 @@ import Foundation
 struct GetStatistics {
     static func sendRequestToBackend(deviceID: String, days: Int, completion: @escaping (Result<PowerStatsRequest, Error>) -> Void) {
         // server endpoint
-        let urlString = "http://172.16.98.143:3000/api/statistics/\(days == 1 ? "day" : "week")/\(deviceID)"
+        let urlString = "https://bot-1.electricity-bot.online/statistics/\(days == 1 ? "day" : "week")/\(deviceID)"
         guard let url = URL(string: urlString) else { return }
         print("Requesting URL:", urlString)
 
         // JSON GET request
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
+        
+        // Auth Bearer Header
+        if let accessToken = KeychainHelper.read(forKey: "access_token") {
+            request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        }
         
         // network request where data - actual data recieved, response - metadata, error - any errors
         URLSession.shared.dataTask(with: request) { data, response, error in
@@ -42,24 +47,14 @@ struct GetStatistics {
                 return
             }
             
-            // "timestamp": "2025-06-21T13:50:44.072137Z"
+            // "timestamp": "2025-06-21T13:50:44"
             do {
                 let decoder = JSONDecoder()
                 
-                // 072137Z (fractional seconds) are not handled by iso8601 by default
-                let formatter = ISO8601DateFormatter()
-                formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-                
-                // use custom date decoder
-                decoder.dateDecodingStrategy = .custom { decoder in
-                    let container = try decoder.singleValueContainer()
-                    let dateStr = try container.decode(String.self)
-                    if let date = formatter.date(from: dateStr) {
-                        return date
-                    } else {
-                        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(dateStr)")
-                    }
-                }
+                let formatter = DateFormatter()
+                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+
+                decoder.dateDecodingStrategy = .formatted(formatter)
 
                 let result = try decoder.decode(PowerStatsRequest.self, from: data)
                 completion(.success(result))

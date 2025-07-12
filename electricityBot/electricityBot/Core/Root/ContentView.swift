@@ -56,6 +56,13 @@ struct ContentView: View {
     
                 Spacer()
             }
+            .onAppear {
+                if userSession.isLoggedIn {
+                    userSession.fetchCurrentUser()
+                } else {
+                    userSession.tryAutoLogin()
+                }
+            }
         }
     }
 }

@@ -7,10 +7,10 @@
 
 import SwiftUI
 import SafariServices
-import GoogleSignIn
 
 struct ProfileView: View {
     @EnvironmentObject var userSession: UserSession
+    @Environment(\.dismiss) var dismiss
 
     var body: some View {
         NavigationStack {
@@ -69,6 +69,9 @@ struct ProfileView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            print("User in profile: \(userSession.user?.fullName ?? "nil")")
+        }
     }
 }
 

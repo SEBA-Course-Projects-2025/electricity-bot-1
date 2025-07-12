@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA21A88D2E216CEA00572135 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A88C2E216CEA00572135 /* Keychain.swift */; };
+		BA21A88F2E217CB600572135 /* TokenHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A88E2E217CB600572135 /* TokenHandler.swift */; };
+		BA21A8912E21831E00572135 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A8902E21831E00572135 /* APIService.swift */; };
 		BA4EDDA82E11663E00CB8F15 /* DayStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDA72E11663E00CB8F15 /* DayStatsView.swift */; };
 		BA4EDDAA2E11693500CB8F15 /* WeekStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */; };
 		BA4EDDAC2E11699D00CB8F15 /* DailyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */; };
@@ -29,7 +32,6 @@
 		BA83919F2DF878C300C3EA55 /* Berlin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919A2DF878C300C3EA55 /* Berlin.ttf */; };
 		BA8391A02DF878C300C3EA55 /* BerlinBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919B2DF878C300C3EA55 /* BerlinBold.ttf */; };
 		BA8391A12DF878C300C3EA55 /* BerlinX-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919C2DF878C300C3EA55 /* BerlinX-Bold.ttf */; };
-		BA8391A92DF878D100C3EA55 /* GoogleAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391A72DF878D100C3EA55 /* GoogleAuthService.swift */; };
 		BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391AA2DF878D800C3EA55 /* ContentView.swift */; };
 		BA8391B02DF878D800C3EA55 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */; };
 		BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391B32DF8799500C3EA55 /* electricityBotApp.swift */; };
@@ -53,13 +55,10 @@
 		BA8391E12DF94EA200C3EA55 /* Poppins-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA8391CD2DF94EA200C3EA55 /* Poppins-Thin.ttf */; };
 		BA8391E22DF94EA200C3EA55 /* Poppins-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA8391CE2DF94EA200C3EA55 /* Poppins-ThinItalic.ttf */; };
 		BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391E62DF95FAB00C3EA55 /* InputFieldView.swift */; };
-		BA8391E92DF9737C00C3EA55 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391E82DF9737C00C3EA55 /* RegisterView.swift */; };
 		BA8391EB2DF99EED00C3EA55 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391EA2DF99EED00C3EA55 /* ProfileView.swift */; };
 		BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391EC2DF9AE7100C3EA55 /* User.swift */; };
 		BAD4A1D82E02AE53001E7B21 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = BAD4A1D72E02AE53001E7B21 /* GoogleSignIn */; };
 		BAD4A1DA2E02AE53001E7B21 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BAD4A1D92E02AE53001E7B21 /* GoogleSignInSwift */; };
-		BAD4A1DC2E02F157001E7B21 /* GoogleSignInButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1DB2E02F157001E7B21 /* GoogleSignInButtonView.swift */; };
-		BAD4A1E02E02FC82001E7B21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1DF2E02FC82001E7B21 /* AppDelegate.swift */; };
 		BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E12E030051001E7B21 /* Helpers.swift */; };
 		BAD4A1E52E030BBD001E7B21 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E42E030BBD001E7B21 /* UserSession.swift */; };
 		BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E62E03269D001E7B21 /* LogOutView.swift */; };
@@ -89,6 +88,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA21A88C2E216CEA00572135 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		BA21A88E2E217CB600572135 /* TokenHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenHandler.swift; sourceTree = "<group>"; };
+		BA21A8902E21831E00572135 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		BA4EDDA72E11663E00CB8F15 /* DayStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStatsView.swift; sourceTree = "<group>"; };
 		BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekStatsView.swift; sourceTree = "<group>"; };
 		BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPowerStat.swift; sourceTree = "<group>"; };
@@ -114,7 +116,6 @@
 		BA83919A2DF878C300C3EA55 /* Berlin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Berlin.ttf; sourceTree = "<group>"; };
 		BA83919B2DF878C300C3EA55 /* BerlinBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BerlinBold.ttf; sourceTree = "<group>"; };
 		BA83919C2DF878C300C3EA55 /* BerlinX-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BerlinX-Bold.ttf"; sourceTree = "<group>"; };
-		BA8391A72DF878D100C3EA55 /* GoogleAuthService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAuthService.swift; sourceTree = "<group>"; };
 		BA8391AA2DF878D800C3EA55 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		BA8391B32DF8799500C3EA55 /* electricityBotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = electricityBotApp.swift; sourceTree = "<group>"; };
@@ -139,11 +140,8 @@
 		BA8391CD2DF94EA200C3EA55 /* Poppins-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Thin.ttf"; sourceTree = "<group>"; };
 		BA8391CE2DF94EA200C3EA55 /* Poppins-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ThinItalic.ttf"; sourceTree = "<group>"; };
 		BA8391E62DF95FAB00C3EA55 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
-		BA8391E82DF9737C00C3EA55 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		BA8391EA2DF99EED00C3EA55 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		BA8391EC2DF9AE7100C3EA55 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		BAD4A1DB2E02F157001E7B21 /* GoogleSignInButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButtonView.swift; sourceTree = "<group>"; };
-		BAD4A1DF2E02FC82001E7B21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BAD4A1E12E030051001E7B21 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BAD4A1E42E030BBD001E7B21 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		BAD4A1E62E03269D001E7B21 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
@@ -182,6 +180,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA21A88B2E216CCB00572135 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BAD4A1E12E030051001E7B21 /* Helpers.swift */,
+				BA21A88C2E216CEA00572135 /* Keychain.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		BA4EDDB12E152E7700CB8F15 /* TabView */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +228,7 @@
 		BA83916E2DF8772E00C3EA55 /* electricityBot */ = {
 			isa = PBXGroup;
 			children = (
+				BA21A88B2E216CCB00572135 /* Helpers */,
 				BA4EDDB12E152E7700CB8F15 /* TabView */,
 				BA8391B62DF8A50500C3EA55 /* Core */,
 				BA8391B52DF8A4E600C3EA55 /* Components */,
@@ -278,12 +286,12 @@
 		BA8391A82DF878D100C3EA55 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				BA8391A72DF878D100C3EA55 /* GoogleAuthService.swift */,
-				BAD4A1DF2E02FC82001E7B21 /* AppDelegate.swift */,
 				BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */,
 				BA4EDDB92E15635C00CB8F15 /* GetStatus.swift */,
 				BA7177C02E15A83100B01EB2 /* AuthService.swift */,
 				BA7177C42E15CBE600B01EB2 /* SceneDelegate.swift */,
+				BA21A88E2E217CB600572135 /* TokenHandler.swift */,
+				BA21A8902E21831E00572135 /* APIService.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -292,8 +300,6 @@
 			isa = PBXGroup;
 			children = (
 				BA8391E62DF95FAB00C3EA55 /* InputFieldView.swift */,
-				BAD4A1DB2E02F157001E7B21 /* GoogleSignInButtonView.swift */,
-				BAD4A1E12E030051001E7B21 /* Helpers.swift */,
 				BAD4A1E62E03269D001E7B21 /* LogOutView.swift */,
 				BAF8B34F2E0718BC00B454F7 /* BackNavigationView.swift */,
 				BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */,
@@ -327,7 +333,6 @@
 			isa = PBXGroup;
 			children = (
 				BA8391BA2DF94C3900C3EA55 /* LoginView.swift */,
-				BA8391E82DF9737C00C3EA55 /* RegisterView.swift */,
 			);
 			path = Authentification;
 			sourceTree = "<group>";
@@ -547,11 +552,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BAD4A1E02E02FC82001E7B21 /* AppDelegate.swift in Sources */,
 				BA7177C12E15A83100B01EB2 /* AuthService.swift in Sources */,
 				BA4EDDB52E1531C500CB8F15 /* RootView.swift in Sources */,
 				BA4EDDBE2E1564F100CB8F15 /* PowerStatusViewModel.swift in Sources */,
-				BA8391E92DF9737C00C3EA55 /* RegisterView.swift in Sources */,
+				BA21A88F2E217CB600572135 /* TokenHandler.swift in Sources */,
 				BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */,
 				BA8391EB2DF99EED00C3EA55 /* ProfileView.swift in Sources */,
 				BA4EDDB32E152E9A00CB8F15 /* CustomTabView.swift in Sources */,
@@ -564,14 +568,13 @@
 				BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */,
 				BA4EDDBC2E1563B100CB8F15 /* PowerStatus.swift in Sources */,
 				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
+				BA21A88D2E216CEA00572135 /* Keychain.swift in Sources */,
 				BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */,
 				BA4EDDA82E11663E00CB8F15 /* DayStatsView.swift in Sources */,
 				BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */,
-				BA8391A92DF878D100C3EA55 /* GoogleAuthService.swift in Sources */,
 				BAD4A1EA2E06CF2F001E7B21 /* StatsView.swift in Sources */,
 				BA7177C32E15AC8E00B01EB2 /* AuthContextProvider.swift in Sources */,
 				BA4EDDB82E15591A00CB8F15 /* MainView.swift in Sources */,
-				BAD4A1DC2E02F157001E7B21 /* GoogleSignInButtonView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
 				BAF8B3502E0718BC00B454F7 /* BackNavigationView.swift in Sources */,
 				BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */,
@@ -579,6 +582,7 @@
 				BA7177C52E15CBE600B01EB2 /* SceneDelegate.swift in Sources */,
 				BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */,
 				BA4EDDBA2E15635C00CB8F15 /* GetStatus.swift in Sources */,
+				BA21A8912E21831E00572135 /* APIService.swift in Sources */,
 				BA8391B02DF878D800C3EA55 /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
