@@ -14,7 +14,7 @@ struct User: Identifiable, Codable {
     
     enum CodingKeys: String, CodingKey {
             case id = "user_id"
-            case fullName = "full_name"
+            case fullName = "name"
             case email
         }
     

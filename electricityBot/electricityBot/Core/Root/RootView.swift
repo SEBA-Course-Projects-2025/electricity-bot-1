@@ -28,16 +28,17 @@ enum TabBar: String, CaseIterable, CustomTabProtocol {
     }
 }
 struct RootView: View {
+    @EnvironmentObject var userSession: UserSession
     @State private var activeTab: TabBar = .main
     @Environment(\.dismiss) var dismiss
     var body: some View {
         CustomTabView(selection: $activeTab) { tab, tabBarHeight in
             switch tab {
-            case .statistics: StatsView(deviceID: "d4dba214-e012-4dd2-b1a7-9256788a0b2a")
-            case .main: MainView(deviceID: "d4dba214-e012-4dd2-b1a7-9256788a0b2a")
-                    .environmentObject(UserSession())
+            case .statistics: StatsView(deviceID: "286cd1fb-083c-4b4a-b7bf-b30f279ed8ea")
+            case .main: MainView(deviceID: "286cd1fb-083c-4b4a-b7bf-b30f279ed8ea")
+                    .environmentObject(userSession)
             case .settings: ProfileView()
-                    .environmentObject(UserSession())
+                    .environmentObject(userSession)
             }
         }
         .navigationBarBackButtonHidden(true)
