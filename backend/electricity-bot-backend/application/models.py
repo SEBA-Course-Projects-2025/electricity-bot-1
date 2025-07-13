@@ -66,3 +66,4 @@ class UnassignedDeviceModel(Base):
     # device_id is moved there when device was delited, or user was deleted and device with them too
 
     device_id = Column(String(255), primary_key=True, nullable=False)
+    previous_owner_id = Column(String, nullable=False)

@@ -12,9 +12,7 @@ def keycloak_callback():
     data = request.get_json()
     code = data.get("code")
     is_web = data.get("is_web", True)
-    is_custom_mobile = data.get(
-        "is_custom_mobile", False
-    )  # updated to handle custom mobile
+    is_custom_mobile = data.get("is_custom_mobile", False)
 
     if not code:
         return (
@@ -42,11 +40,14 @@ def keycloak_callback():
 
         with UserService() as user_service:
             user, created = user_service.get_or_create_user_by_keycloak_data(userinfo)
+            user_id = user.user_id
+            user_email = user.email
+            user_name = user.name
 
-        jwt_token = create_access_token(identity=user.user_id)
+        jwt_token = create_access_token(identity=user_id)
 
         if created:
-            send_welcome_email(user.email, user.name or "friend")
+            send_welcome_email(user_email, user_name or "friend")
 
         return jsonify(
             {
@@ -56,7 +57,7 @@ def keycloak_callback():
                     else "User already exists, logged in"
                 ),
                 "access_token": jwt_token,
-                "user_id": user.user_id,
+                "user_id": user_id,
                 "email_sent": created,
                 "refresh_token": tokens.get("refresh_token"),
             }
@@ -107,7 +108,7 @@ def logout_user():
         )
 
     with UserService() as user_service:
-        user_service.delete_user_and_reassign_devices(user_id)
+        user_service.unassign_devices_and_logout(user_id)
 
     return (
         jsonify({"message": "User logged out, session revoked, devices unassigned"}),

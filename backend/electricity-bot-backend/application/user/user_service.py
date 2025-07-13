@@ -1,6 +1,6 @@
 import uuid
 from application.database import SessionLocal
-from application.models import UserModel, UnassignedDeviceModel
+from application.models import UserModel, UnassignedDeviceModel, DeviceModel
 
 
 class UserService:
@@ -22,29 +22,55 @@ class UserService:
         name = userinfo.get("name", "")
 
         user = self.db.query(UserModel).filter_by(google_sub=sub).first()
-        if user:
-            return user, False
 
-        user = UserModel(
-            user_id=str(uuid.uuid4()),
-            google_sub=sub,
-            email=email,
-            name=name,
-        )
-        self.db.add(user)
+        if not user:
+            user = self.db.query(UserModel).filter_by(email=email).first()
+            if user:
+                user.google_sub = sub
+
+        created = False
+        if not user:
+            user = UserModel(
+                user_id=str(uuid.uuid4()),
+                google_sub=sub,
+                email=email,
+                name=name,
+            )
+            self.db.add(user)
+            created = True
+
         self.db.commit()
         self.db.refresh(user)
-        return user, True
 
-    def delete_user_and_reassign_devices(self, user_id: str) -> bool:
+        unassigned_devices = (
+            self.db.query(UnassignedDeviceModel)
+            .filter_by(previous_owner_id=user.user_id)
+            .all()
+        )
+        for device in unassigned_devices:
+            device_obj = (
+                self.db.query(DeviceModel).filter_by(device_id=device.device_id).first()
+            )
+            if device_obj:
+                user.devices.append(device_obj)
+            self.db.delete(device)
+
+        self.db.commit()
+        return user, created
+
+    def unassign_devices_and_logout(self, user_id: str) -> bool:
         user = self.db.query(UserModel).filter_by(user_id=user_id).first()
         if not user:
             return False
 
         for device in user.devices:
-            self.db.add(UnassignedDeviceModel(device_id=device.device_id))
+            self.db.add(
+                UnassignedDeviceModel(
+                    device_id=device.device_id, previous_owner_id=user.user_id
+                )
+            )
 
-        self.db.delete(user)
+        user.devices.clear()
         self.db.commit()
         return True
 
@@ -57,3 +83,15 @@ class UserService:
             {"device_id": device.device_id, "last_seen": device.last_seen.isoformat()}
             for device in user.devices
         ]
+
+    def unassign_devices(self, user_id: str) -> bool:
+        user = self.db.query(UserModel).filter_by(user_id=user_id).first()
+        if not user:
+            return False
+
+        for device in user.devices:
+            self.db.add(UnassignedDeviceModel(device_id=device.device_id))
+
+        user.devices.clear()
+        self.db.commit()
+        return True
