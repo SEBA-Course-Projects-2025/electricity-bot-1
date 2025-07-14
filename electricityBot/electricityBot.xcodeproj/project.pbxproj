@@ -10,6 +10,12 @@
 		BA21A88D2E216CEA00572135 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A88C2E216CEA00572135 /* Keychain.swift */; };
 		BA21A88F2E217CB600572135 /* TokenHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A88E2E217CB600572135 /* TokenHandler.swift */; };
 		BA21A8912E21831E00572135 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A8902E21831E00572135 /* APIService.swift */; };
+		BA21A8942E22FB6700572135 /* UserDevicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A8932E22FB6700572135 /* UserDevicesView.swift */; };
+		BA21A8962E22FB7200572135 /* GetDevices.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A8952E22FB7200572135 /* GetDevices.swift */; };
+		BA21A8982E24100400572135 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A8972E24100400572135 /* Device.swift */; };
+		BA21A89A2E2431C600572135 /* DevicesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A8992E2431C600572135 /* DevicesListView.swift */; };
+		BA21A89C2E25197800572135 /* DeleteDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A89B2E25197800572135 /* DeleteDevice.swift */; };
+		BA21A89E2E25852C00572135 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A89D2E25852C00572135 /* NetworkManager.swift */; };
 		BA4EDDAC2E11699D00CB8F15 /* DailyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */; };
 		BA4EDDAE2E1169AC00CB8F15 /* HourlyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */; };
 		BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */; };
@@ -89,6 +95,12 @@
 		BA21A88C2E216CEA00572135 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		BA21A88E2E217CB600572135 /* TokenHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenHandler.swift; sourceTree = "<group>"; };
 		BA21A8902E21831E00572135 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		BA21A8932E22FB6700572135 /* UserDevicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDevicesView.swift; sourceTree = "<group>"; };
+		BA21A8952E22FB7200572135 /* GetDevices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDevices.swift; sourceTree = "<group>"; };
+		BA21A8972E24100400572135 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		BA21A8992E2431C600572135 /* DevicesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesListView.swift; sourceTree = "<group>"; };
+		BA21A89B2E25197800572135 /* DeleteDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDevice.swift; sourceTree = "<group>"; };
+		BA21A89D2E25852C00572135 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPowerStat.swift; sourceTree = "<group>"; };
 		BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyPowerStat.swift; sourceTree = "<group>"; };
 		BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButtonView.swift; sourceTree = "<group>"; };
@@ -185,6 +197,15 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		BA21A8922E22F90A00572135 /* Provisioning */ = {
+			isa = PBXGroup;
+			children = (
+				BA21A8932E22FB6700572135 /* UserDevicesView.swift */,
+				BA21A8992E2431C600572135 /* DevicesListView.swift */,
+			);
+			path = Provisioning;
+			sourceTree = "<group>";
+		};
 		BA4EDDB12E152E7700CB8F15 /* TabView */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,6 +296,7 @@
 				BA8391EC2DF9AE7100C3EA55 /* User.swift */,
 				BAD4A1EB2E06CFE0001E7B21 /* PowerStats.swift */,
 				BA4EDDBB2E1563B100CB8F15 /* PowerStatus.swift */,
+				BA21A8972E24100400572135 /* Device.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -288,6 +310,9 @@
 				BA7177C42E15CBE600B01EB2 /* SceneDelegate.swift */,
 				BA21A88E2E217CB600572135 /* TokenHandler.swift */,
 				BA21A8902E21831E00572135 /* APIService.swift */,
+				BA21A8952E22FB7200572135 /* GetDevices.swift */,
+				BA21A89B2E25197800572135 /* DeleteDevice.swift */,
+				BA21A89D2E25852C00572135 /* NetworkManager.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -306,6 +331,7 @@
 		BA8391B62DF8A50500C3EA55 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BA21A8922E22F90A00572135 /* Provisioning */,
 				BA4EDDB62E15590800CB8F15 /* Main Page */,
 				BAD4A1E82E06CF11001E7B21 /* Statistics */,
 				BA8391B82DF8A69B00C3EA55 /* Authentification */,
@@ -546,6 +572,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA21A89E2E25852C00572135 /* NetworkManager.swift in Sources */,
+				BA21A8982E24100400572135 /* Device.swift in Sources */,
 				BA7177C12E15A83100B01EB2 /* AuthService.swift in Sources */,
 				BA4EDDB52E1531C500CB8F15 /* RootView.swift in Sources */,
 				BA4EDDBE2E1564F100CB8F15 /* PowerStatusViewModel.swift in Sources */,
@@ -560,17 +588,21 @@
 				BA8391BB2DF94C3900C3EA55 /* LoginView.swift in Sources */,
 				BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */,
 				BA4EDDBC2E1563B100CB8F15 /* PowerStatus.swift in Sources */,
+				BA21A8962E22FB7200572135 /* GetDevices.swift in Sources */,
 				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
 				BA21A88D2E216CEA00572135 /* Keychain.swift in Sources */,
 				BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */,
 				BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */,
+				BA21A8942E22FB6700572135 /* UserDevicesView.swift in Sources */,
 				BAD4A1EA2E06CF2F001E7B21 /* StatsView.swift in Sources */,
 				BA7177C32E15AC8E00B01EB2 /* AuthContextProvider.swift in Sources */,
 				BA4EDDB82E15591A00CB8F15 /* MainView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
 				BAF8B3502E0718BC00B454F7 /* BackNavigationView.swift in Sources */,
+				BA21A89A2E2431C600572135 /* DevicesListView.swift in Sources */,
 				BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */,
 				BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */,
+				BA21A89C2E25197800572135 /* DeleteDevice.swift in Sources */,
 				BA7177C52E15CBE600B01EB2 /* SceneDelegate.swift in Sources */,
 				BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */,
 				BA4EDDBA2E15635C00CB8F15 /* GetStatus.swift in Sources */,

@@ -11,9 +11,8 @@ struct StatsView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = PowerStatsViewModel()
     @State private var weeklyStats = false
-    
-    let deviceID: String
-    
+    @EnvironmentObject var userSession: UserSession
+
     var body: some View {
         ZStack {
             Color.backgroundColor
@@ -188,10 +187,15 @@ struct StatsView: View {
 
     private func loadStats() {
         let days = weeklyStats ? 7 : 1
+        guard let deviceID = userSession.currentDeviceID else {
+            print("Error fetching device id.")
+            return
+        }
         viewModel.requestStats(deviceID: deviceID, days: days)
     }
 }
 
 #Preview {
-    StatsView(deviceID: "286cd1fb-083c-4b4a-b7bf-b30f279ed8ea")
+    StatsView()
+        .environmentObject(UserSession())
 }

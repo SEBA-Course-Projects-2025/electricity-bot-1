@@ -10,13 +10,10 @@ import GoogleSignIn
 
 struct LogOutView: View {
     @EnvironmentObject var userSession: UserSession
-    @Environment(\.dismiss) var dismiss
+    let action: () -> Void
     
     var body: some View {
-        Button() {
-            userSession.logout()
-            dismiss()
-        } label: {
+        Button(action: action) {
             Text("Log Out")
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
@@ -26,6 +23,3 @@ struct LogOutView: View {
     }
 }
 
-#Preview {
-    LogOutView()
-}

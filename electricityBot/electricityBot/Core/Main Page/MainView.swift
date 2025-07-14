@@ -11,8 +11,6 @@ struct MainView: View {
     @EnvironmentObject var userSession: UserSession
     @StateObject private var viewModel = PowerStatusViewModel()
     
-    let deviceID: String
-    
     var body: some View {
         ZStack(alignment: .leading) {
             Color.backgroundColor
@@ -91,11 +89,15 @@ struct MainView: View {
     }
     
     private func loadStatus() {
+        guard let deviceID = userSession.currentDeviceID else {
+            print("No device id current.")
+            return
+        }
         viewModel.requestStatus(deviceID: deviceID)
     }
 }
 
 #Preview {
-    MainView(deviceID: "286cd1fb-083c-4b4a-b7bf-b30f279ed8ea")
+    MainView()
         .environmentObject(UserSession())
 }

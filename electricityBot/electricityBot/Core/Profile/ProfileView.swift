@@ -11,6 +11,7 @@ import SafariServices
 struct ProfileView: View {
     @EnvironmentObject var userSession: UserSession
     @Environment(\.dismiss) var dismiss
+    @State private var navAfterLogOut = false
 
     var body: some View {
         NavigationStack {
@@ -53,7 +54,28 @@ struct ProfileView: View {
                             .font(.custom("Poppins-Medium", size: 22))
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
-                        SimpleButtonView(title: "Reset", action: {})
+                        SimpleButtonView(title: "Reset", action: {
+                            guard let deviceId = userSession.currentDeviceID else {
+                                print("No device selected to delete.")
+                                return
+                            }
+                            
+                            guard let userId = userSession.user?.id else {
+                                print("No user selected.")
+                                return
+                            }
+                            
+                            DeleteDevice.deleteUserDevice(deviceId: deviceId, userId: userId) { result in
+                                switch result {
+                                case .success(let message):
+                                    print("Deleted successfully: \(message)")
+                                case .failure(let error):
+                                    print("Error deleting device: \(error.localizedDescription)")
+                                }
+                            }
+                            
+                            dismiss()
+                        })
                             .padding(.top, -32)
                             .padding(.horizontal, -16)
                     }
@@ -62,7 +84,10 @@ struct ProfileView: View {
                     Spacer()
                     
                     // logout
-                    LogOutView()
+                    LogOutView {
+                        userSession.logout()
+                        navAfterLogOut = true
+                    }
                     Spacer().frame(height: 80)
                 }
                 .padding(32)
@@ -71,6 +96,9 @@ struct ProfileView: View {
         .navigationBarBackButtonHidden(true)
         .onAppear {
             print("User in profile: \(userSession.user?.fullName ?? "nil")")
+        }
+        .navigationDestination(isPresented: $navAfterLogOut) {
+            LoginView()
         }
     }
 }
