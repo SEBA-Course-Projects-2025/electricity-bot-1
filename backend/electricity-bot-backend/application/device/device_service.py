@@ -92,13 +92,24 @@ class DeviceService:
         if not device:
             return False
 
+        owners = device.users
+        if not owners:
+            raise ValueError("Device has no known owner")
+
+        previous_owner_id = owners[0].user_id
+
         self.db.query(MeasurementModel).filter_by(device_id=device_id).delete()
-        self.db.execute(
-            user_device_association.delete().where(
-                user_device_association.c.device_id == device_id
+
+        device.users.clear()
+        self.db.flush()
+
+        self.db.add(
+            UnassignedDeviceModel(
+                device_id=device_id,
+                previous_owner_id=previous_owner_id,
             )
         )
-        self.db.add(UnassignedDeviceModel(device_id=device_id))
+
         self.db.delete(device)
         self.db.commit()
         return True
