@@ -9,29 +9,28 @@ import Foundation
 import Combine
 import Algorithms
 
+@MainActor
 class PowerStatusViewModel: ObservableObject {
     @Published var status: Bool = false
     @Published var time: Date = Date()
     @Published var isLoading = false
     @Published var errorMessage: String?
 
-    func requestStatus(deviceID: String) {
+    func requestStatus(deviceID: String) async {
         isLoading = true
         errorMessage = nil
         
-        GetStatus.sendRequestToBackend(deviceID: deviceID) { [weak self] result in
-            DispatchQueue.main.async {
-                self?.isLoading = false
-                    
-                switch result {
-                    case .success(let response):
-                        self?.status = response.status
-                        self?.time = response.timestamp
-                    case .failure(let error):
-                        self?.errorMessage = "Failed to load stats: \(error.localizedDescription)"
-                }
-            }
+        do {
+            let response = try await GetStatus.sendRequestToBackend(deviceID: deviceID)
+            self.status = response.status
+            self.time = response.timestamp
+            
+            print(response)
+        } catch {
+            self.errorMessage = "Failed to load status: \(error.localizedDescription)"
         }
+        
+        isLoading = false
     }
     
     var currentStatusDuration: TimeInterval {

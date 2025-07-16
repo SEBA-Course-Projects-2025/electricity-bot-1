@@ -191,6 +191,7 @@
 		BA21A88B2E216CCB00572135 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BA7177C42E15CBE600B01EB2 /* SceneDelegate.swift */,
 				BAD4A1E12E030051001E7B21 /* Helpers.swift */,
 				BA21A88C2E216CEA00572135 /* Keychain.swift */,
 			);
@@ -307,7 +308,6 @@
 				BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */,
 				BA4EDDB92E15635C00CB8F15 /* GetStatus.swift */,
 				BA7177C02E15A83100B01EB2 /* AuthService.swift */,
-				BA7177C42E15CBE600B01EB2 /* SceneDelegate.swift */,
 				BA21A88E2E217CB600572135 /* TokenHandler.swift */,
 				BA21A8902E21831E00572135 /* APIService.swift */,
 				BA21A8952E22FB7200572135 /* GetDevices.swift */,

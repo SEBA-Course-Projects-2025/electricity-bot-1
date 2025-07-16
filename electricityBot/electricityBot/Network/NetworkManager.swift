@@ -25,47 +25,45 @@ struct NetworkManager {
                                body: Data? = nil,
                                dateFormatter: DateFormatter? = nil,
                                retries: Int = 1) async throws -> T {
-        var request = URLRequest(url: url)
-        request.httpMethod = method
-        request.httpBody = body
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        if let token = TokenHandler.getToken(forKey: "access_token") {
-            request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        func makeRequest(token: String?) async throws -> (Data, HTTPURLResponse) {
+            var urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = method
+            urlRequest.httpBody = body
+            urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            if let token = token {
+                urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
+            let (data, response) = try await URLSession.shared.data(for: urlRequest)
+            guard let httpResponse = response as? HTTPURLResponse else {
+                throw NetworkError.noData
+            }
+            return (data, httpResponse)
         }
         
-        let (data, response): (Data, URLResponse)
+        let token = TokenHandler.getToken(forKey: "access_token")
+        var (data, response) = try await makeRequest(token: token)
         
-        do {
-            (data, response) = try await URLSession.shared.data(for: request)
-        } catch {
-            throw NetworkError.other(error)
-        }
-        
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw NetworkError.noData
-        }
-        
-        // handling error when token is expired
-        if httpResponse.statusCode == 401 && retries > 0 {
+        if response.statusCode == 401 && retries > 0 {
             print("Token is expired. Trying to refresh it.")
             
-            let refreshToken = await TokenHandler.refreshAccessToken()
-            if refreshToken {
-                return try await request(url: url, method: method, dateFormatter: dateFormatter, retries: retries - 1)
+            let refreshSuccess = await TokenHandler.refreshAccessToken()
+            if refreshSuccess {
+                let newToken = TokenHandler.getToken(forKey: "access_token")
+                (data, response) = try await makeRequest(token: newToken)
+                print("Retrying with new token:", newToken ?? "")
             } else {
                 throw NetworkError.unauthorized
             }
         }
         
-        // handling other statuses
-        guard (200...299).contains(httpResponse.statusCode) else {
-            throw NetworkError.other(NSError(domain: "Bad status: \(httpResponse.statusCode)", code: httpResponse.statusCode))
+        guard (200...299).contains(response.statusCode) else {
+            throw NetworkError.other(NSError(domain: "Bad status: \(response.statusCode)", code: response.statusCode))
         }
         
-        // default date formatter
         let decoder = JSONDecoder()
-        
         if let formatter = dateFormatter {
             decoder.dateDecodingStrategy = .formatted(formatter)
         }
@@ -75,6 +73,5 @@ struct NetworkManager {
         } catch {
             throw NetworkError.decodingError(error)
         }
-        
     }
 }

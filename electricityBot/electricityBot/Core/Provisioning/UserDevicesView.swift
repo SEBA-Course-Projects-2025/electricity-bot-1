@@ -34,8 +34,9 @@ struct UserDevicesView: View {
                     print("Cannot fetch user, failure.")
                     return
                 }
-                
-                getDevices(userId: userId)
+                Task {
+                    await getDevices(userId: userId)
+                }
             }
             .navigationDestination(isPresented: Binding<Bool>(
                 get: { selectedDevice != nil },
@@ -46,20 +47,19 @@ struct UserDevicesView: View {
         }
     }
         
-    func getDevices (userId: String) {
-        GetDevices.getUserDevices(userId: userId) { result in
-            DispatchQueue.main.async {
-                isLoading = false
-                switch result {
-                case .success(let devices):
-                    print("All devices: \(devices)")
-                    userDevices = devices
-                    
-                case .failure(let error):
-                    print("OOpsie. Failed to fetch devices: \(error)")
-                }
-            }
+    @MainActor
+    func getDevices (userId: String) async {
+        isLoading = true
+        
+        do {
+            let devices = try await GetDevices.getUserDevices(userID: userId)
+            print("All devices: \(devices)")
+            userDevices = devices
+        } catch {
+            print("Failed to fetch devices: \(error)")
         }
+        
+        isLoading = false
     }
 }
 

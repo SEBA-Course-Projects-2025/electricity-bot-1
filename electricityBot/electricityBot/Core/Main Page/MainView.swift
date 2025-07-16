@@ -52,7 +52,11 @@ struct MainView: View {
                 Spacer().frame(height: 80)
             }
             .padding(32)
-            .onAppear(perform: loadStatus)
+            .onAppear {
+                Task {
+                    await loadStatus()
+                }
+            }
         }
     }
     
@@ -88,12 +92,13 @@ struct MainView: View {
         .shadow(color: .black.opacity(0.1), radius: 20)
     }
     
-    private func loadStatus() {
+    @MainActor
+    private func loadStatus() async {
         guard let deviceID = userSession.currentDeviceID else {
             print("No device id current.")
             return
         }
-        viewModel.requestStatus(deviceID: deviceID)
+        await viewModel.requestStatus(deviceID: deviceID)
     }
 }
 

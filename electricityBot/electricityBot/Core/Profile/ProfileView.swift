@@ -38,8 +38,9 @@ struct ProfileView: View {
                                 .font(.custom("Poppins-SemiBold", size: 15))
                                 .foregroundColor(.foregroundLow.opacity(0.75))
                             
-                            NavigationLink {
-                                LoginView()
+                            Button {
+                                userSession.logout()
+                                navAfterLogOut = true
                             } label: {
                                 Text("Change user")
                                     .font(.custom("Poppins-Regular", size: 15))
@@ -60,17 +61,12 @@ struct ProfileView: View {
                                 return
                             }
                             
-                            guard let userId = userSession.user?.id else {
-                                print("No user selected.")
-                                return
-                            }
-                            
-                            DeleteDevice.deleteUserDevice(deviceId: deviceId, userId: userId) { result in
-                                switch result {
-                                case .success(let message):
-                                    print("Deleted successfully: \(message)")
-                                case .failure(let error):
-                                    print("Error deleting device: \(error.localizedDescription)")
+                            Task {
+                                do {
+                                    let msg = try await DeleteDevice.deleteUserDevice(deviceID: deviceId)
+                                    print("Delete success:", msg)
+                                } catch {
+                                    print("Deletion failed: \(error)")
                                 }
                             }
                             

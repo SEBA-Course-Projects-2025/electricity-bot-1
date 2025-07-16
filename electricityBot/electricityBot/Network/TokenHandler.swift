@@ -29,16 +29,19 @@ struct TokenHandler {
         let url = URL(string: "https://bot-1.electricity-bot.online/auth/refresh")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("aplication/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let body = ["refresh_token": refreshToken]
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         
         do {
             let (data, _) = try await URLSession.shared.data(for: request)
-            if let json = try JSONSerialization.jsonObject(with: data) as? [String: String],
-               let access = json["access_token"],
-               let refresh = json["refresh_token"] {
+            if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let access = json["access_token"] as? String,
+               let refresh = json["refresh_token"] as? String {
+                print("New access:", access)
+                print("New refresh:", refresh)
+
                 saveToken(access, forKey: "access_token")
                 saveToken(refresh, forKey: "refresh_token")
                 return true

@@ -8,60 +8,15 @@
 import Foundation
 
 struct GetStatus {
-    static func sendRequestToBackend(deviceID: String, completion: @escaping (Result<PowerStatus, Error>) -> Void) {
-        // server endpoint
-        let urlString = "https://bot-1.electricity-bot.online/status/\(deviceID)"
-        guard let url = URL(string: urlString) else { return }
-        print("Requesting URL:", urlString)
-
-        // JSON GET request
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        // Auth Bareer Header
-        if let accessToken = KeychainHelper.read(forKey: "access_token") {
-            request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+    static func sendRequestToBackend(deviceID: String) async throws -> PowerStatus {
+        guard let url = URL(string: "https://bot-1.electricity-bot.online/status/\(deviceID)") else {
+            throw URLError(.badURL)
         }
         
-        // network request where data - actual data recieved, response - metadata, error - any errors
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            //debugging
-            if let data = data, let responseStr = String(data: data, encoding: .utf8) {
-                print("Response data:", responseStr)
-            }
-            
-            // status code
-            if let httpResponse = response as? HTTPURLResponse {
-                print("HTTP status code:", httpResponse.statusCode)
-            }
-            
-            
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            
-            // if conenction is established but no data recieved
-            guard let data = data else {
-                completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "No data"])))
-                return
-            }
-            
-            // "timestamp": "2025-07-11T20:40:26", no need for custom decoder
-            do {
-                let decoder = JSONDecoder()
-                
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-
-                decoder.dateDecodingStrategy = .formatted(formatter)
-                
-                let result = try decoder.decode(PowerStatus.self, from: data)
-                completion(.success(result))
-            } catch {
-                print("Decoding error: \(error)")
-                completion(.failure(error))
-            }
-        }.resume()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        
+        return try await NetworkManager.shared.request(url: url, dateFormatter: formatter)
     }
 }

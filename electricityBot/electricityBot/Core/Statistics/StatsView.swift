@@ -43,7 +43,9 @@ struct StatsView: View {
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                     .onChange(of: weeklyStats) {
-                        loadStats()
+                        Task {
+                            await loadStats()
+                        }
                     }
                     Spacer().frame(height: 80)
                 }
@@ -51,7 +53,11 @@ struct StatsView: View {
             }
 
         }
-        .onAppear(perform: loadStats)
+        .onAppear {
+            Task {
+                await loadStats()
+            }
+        }
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
@@ -111,7 +117,9 @@ struct StatsView: View {
                 withAnimation {
                     weeklyStats.toggle()
                 }
-                loadStats()
+                Task {
+                    await loadStats()
+                }
             }, size: 150)
             .frame(maxWidth: .infinity)
             .padding()
@@ -177,7 +185,9 @@ struct StatsView: View {
                 withAnimation {
                     weeklyStats.toggle()
                 }
-                loadStats()
+                Task {
+                    await loadStats()
+                }
             }, size: 150)
             .frame(maxWidth: .infinity)
             .padding()
@@ -185,13 +195,13 @@ struct StatsView: View {
         .padding(32)
     }
 
-    private func loadStats() {
-        let days = weeklyStats ? 7 : 1
+    @MainActor
+    private func loadStats() async {
         guard let deviceID = userSession.currentDeviceID else {
-            print("Error fetching device id.")
+            print("Missing device ID")
             return
         }
-        viewModel.requestStats(deviceID: deviceID, days: days)
+        await viewModel.requestStats(deviceID: deviceID, days: weeklyStats ? 7 : 1)
     }
 }
 
