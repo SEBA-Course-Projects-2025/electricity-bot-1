@@ -16,6 +16,7 @@
 		BA21A89A2E2431C600572135 /* DevicesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A8992E2431C600572135 /* DevicesListView.swift */; };
 		BA21A89C2E25197800572135 /* DeleteDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A89B2E25197800572135 /* DeleteDevice.swift */; };
 		BA21A89E2E25852C00572135 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A89D2E25852C00572135 /* NetworkManager.swift */; };
+		BA21A8A12E28007200572135 /* BluetoothManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA21A8A02E28007200572135 /* BluetoothManager.swift */; };
 		BA4EDDAC2E11699D00CB8F15 /* DailyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */; };
 		BA4EDDAE2E1169AC00CB8F15 /* HourlyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */; };
 		BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */; };
@@ -101,6 +102,7 @@
 		BA21A8992E2431C600572135 /* DevicesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesListView.swift; sourceTree = "<group>"; };
 		BA21A89B2E25197800572135 /* DeleteDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteDevice.swift; sourceTree = "<group>"; };
 		BA21A89D2E25852C00572135 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		BA21A8A02E28007200572135 /* BluetoothManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BluetoothManager.swift; sourceTree = "<group>"; };
 		BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPowerStat.swift; sourceTree = "<group>"; };
 		BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyPowerStat.swift; sourceTree = "<group>"; };
 		BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButtonView.swift; sourceTree = "<group>"; };
@@ -207,6 +209,14 @@
 			path = Provisioning;
 			sourceTree = "<group>";
 		};
+		BA21A89F2E27F87500572135 /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				BA21A8A02E28007200572135 /* BluetoothManager.swift */,
+			);
+			path = BLE;
+			sourceTree = "<group>";
+		};
 		BA4EDDB12E152E7700CB8F15 /* TabView */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,6 +256,7 @@
 		BA83916E2DF8772E00C3EA55 /* electricityBot */ = {
 			isa = PBXGroup;
 			children = (
+				BA21A89F2E27F87500572135 /* BLE */,
 				BA21A88B2E216CCB00572135 /* Helpers */,
 				BA4EDDB12E152E7700CB8F15 /* TabView */,
 				BA8391B62DF8A50500C3EA55 /* Core */,
@@ -598,6 +609,7 @@
 				BA7177C32E15AC8E00B01EB2 /* AuthContextProvider.swift in Sources */,
 				BA4EDDB82E15591A00CB8F15 /* MainView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
+				BA21A8A12E28007200572135 /* BluetoothManager.swift in Sources */,
 				BAF8B3502E0718BC00B454F7 /* BackNavigationView.swift in Sources */,
 				BA21A89A2E2431C600572135 /* DevicesListView.swift in Sources */,
 				BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */,
