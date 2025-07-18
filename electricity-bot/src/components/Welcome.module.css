@@ -5,13 +5,6 @@
   font-style: normal;
 }
 
-@font-face {
-  font-family: 'BerlinRegular';
-  src: url('../fonts/BerlinRegular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 .welcomeScreen {
   background-color: #f0f6ff;
   height: 100vh;
@@ -42,7 +35,7 @@
   font-size: 1.8rem;
   background-color: #ffffff;
   color: #000;
-  font-family: 'BerlinRegular', sans-serif;
+  font-family: 'Poppins', sans-serif;
   border: none;
   border-radius: 12px;
   cursor: pointer;
