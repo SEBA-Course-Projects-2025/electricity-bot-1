@@ -11,44 +11,52 @@ struct DevicesListView: View {
     @EnvironmentObject var userSession: UserSession
     let userDevices: [Device]
     let onDeviceTap: (Device) -> Void
+    var size: CGFloat = 145
     
     var body: some View {
-        VStack(spacing: 16) {
-            ForEach(userDevices, id: \.id) { device in
-                Button(action : {onDeviceTap(device)}) {
+        if userDevices.isEmpty {
+            VStack {
+                Text("No devices added")
+                    .font(.custom("Poppins-Medium", size: 20))
+                    .foregroundColor(.gray)
+                    .multilineTextAlignment(.center)
+                Spacer()
+            }
+        } else {
+            VStack(spacing: 16) {
+                ForEach(userDevices, id: \.id) { device in
+                    Button(action : {onDeviceTap(device)}) {
                         HStack {
-                            Image(systemName: "bolt.fill")
-                                .foregroundColor(.yellow)
-                            VStack(alignment: .leading) {
+                            // emoji
+                            Text("🔋")
+                                .font(.custom("Poppins", size: 57))
+                            
+                            // device info
+                            VStack(alignment: .leading, spacing: 4) {
                                 Text("Device ID: \(device.id)")
-                                    .font(.headline)
+                                    .font(.custom("Poppins-SemiBold", size: 16))
                                 if let lastSeen = device.lastSeen {
                                     Text("Last seen: \(lastSeen)")
                                         .font(.subheadline)
                                         .foregroundColor(.gray)
                                 }
                             }
-                            Spacer()
+                            frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
+                            
                         }
                         .padding()
+                        .frame(height: size)
                         .background(Color.white)
-                        .cornerRadius(10)
-                        .shadow(radius: 3)
+                        .cornerRadius(12)
+                        .shadow(color: Color.black.opacity(0.1), radius: 20)
                     }
-            }
-            
-            Spacer()
-            
-            // find devices button
-            
-            // logout option
-            LogOutView {
-                userSession.logout()
-                
+                }
+                // find button
             }
         }
-        .padding()
     }
 }
+
 
 

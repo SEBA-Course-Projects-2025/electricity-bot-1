@@ -16,6 +16,9 @@ class BluetoothManager: NSObject, ObservableObject {
     private var centralManager: CBCentralManager!
     @Published var peripherals: [CBPeripheral] = []
     @Published var statusMessage: String = ""
+    @Published var isConnected = false
+    @Published var connectedPeripheral: CBPeripheral?
+    @Published var status: BluetoothStatus = .idle
     
     private var targetPeripheral: CBPeripheral?
     private var ssidChar: CBCharacteristic?
@@ -31,8 +34,21 @@ class BluetoothManager: NSObject, ObservableObject {
     }
     
     func scan() {
+        guard centralManager.state == .poweredOn else {
+            print("Bluetooth not ready, can’t scan yet")
+            status = .bluetoothOff
+            return
+        }
         peripherals = []
-        centralManager.scanForPeripherals(withServices: [serviceUUID], options: nil)
+        centralManager.scanForPeripherals(withServices: nil, options: nil)
+        status = .scanning
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            if self.peripherals.isEmpty {
+                self.status = .notFound
+                self.centralManager.stopScan()
+            }
+        }
     }
     
     func connect(to peripheral: CBPeripheral) {
@@ -40,6 +56,8 @@ class BluetoothManager: NSObject, ObservableObject {
         targetPeripheral = peripheral
         peripheral.delegate = self
         centralManager.connect(peripheral, options: nil)
+        self.connectedPeripheral = peripheral
+        status = .connected
     }
     
     func send(ssid: String, password: String) {
@@ -72,6 +90,9 @@ extension BluetoothManager: CBCentralManagerDelegate {
         }
     }
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
+        print("Connected to \(peripheral.name ?? "unknown")")
+        isConnected = true
+        
         peripheral.discoverServices([serviceUUID])
     }
 }
@@ -107,4 +128,13 @@ extension BluetoothManager: CBPeripheralDelegate {
             statusMessage = String(decoding: value, as: UTF8.self)
         }
     }
+}
+
+enum BluetoothStatus: Equatable {
+    case idle
+    case scanning
+    case notFound
+    case bluetoothOff
+    case connected
+    case error(String)
 }

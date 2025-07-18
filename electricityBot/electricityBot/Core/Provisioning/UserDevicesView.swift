@@ -15,20 +15,42 @@ struct UserDevicesView: View {
     
     var body: some View {
         NavigationStack {
-            ZStack(){
+            ZStack(alignment: .leading){
                 Color.backgroundColor
                     .ignoresSafeArea()
                 
-                if isLoading {
-                    ProgressView("Loading Devices...")
-                } else {
-                    DevicesListView(userDevices: userDevices) { device in
-                        userSession.currentDeviceID = device.id
-                        selectedDevice = device
+                VStack(alignment: .leading) {
+                    // choose device
+                    Text("Choose device")
+                        .font(.custom("Poppins-Medium", size: 32))
+                        .padding(.bottom, 32)
+                    
+                    if isLoading {
+                        VStack() {
+                            Spacer()
+                            CustomProgressView(text: "Loading devices...")
+                                .frame(maxWidth: .infinity)
+                            Spacer()
+                        }
+                    } //else if let error =  {
+                        
+                    
+                    else {
+                        DevicesListView(userDevices: userDevices) { device in
+                            userSession.currentDeviceID = device.id
+                            selectedDevice = device
+                        }
+                    }
+                    
+                    
+                    Spacer()
+                    LogOutView {
+                        userSession.logout()
                     }
                 }
+                .padding(32)
             }
-            .navigationTitle("Available Devices")
+            // .navigationTitle("Available Devices")
             .onAppear {
                 guard let userId = userSession.user?.id else {
                     print("Cannot fetch user, failure.")
@@ -64,6 +86,10 @@ struct UserDevicesView: View {
 }
 
 #Preview {
-    UserDevicesView()
-        .environmentObject(UserSession())
+    let mockSession = UserSession()
+    mockSession.user = User(id: "704e89bd-4fdc-48b6-b1ed-461dd7f312eb", fullName: "Test User", email: "test@example.com")
+    TokenHandler.saveToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1Mjc1NjMzNCwianRpIjoiOWQ1MmQzNTItYmIwYi00ZGE2LTk2OGMtYmJlYzUzMDE1ZmIzIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjcwNGU4OWJkLTRmZGMtNDhiNi1iMWVkLTQ2MWRkN2YzMTJlYiIsIm5iZiI6MTc1Mjc1NjMzNCwiY3NyZiI6ImMzOWNkNTFmLThmNzgtNGI0OC1iNjEzLTg2NmRmYTU2NzQ5MyIsImV4cCI6MTc1Mjc1NzIzNH0.ZT6r4nrRO9lHZhsbcu9gV6a20fd-XV3YlNv4olzCFjA", forKey: "access_token")
+    
+    return UserDevicesView()
+        .environmentObject(mockSession)
 }

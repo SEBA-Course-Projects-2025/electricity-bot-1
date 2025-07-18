@@ -19,9 +19,15 @@ struct StatsView: View {
                 .ignoresSafeArea()
             
             if viewModel.isLoading {
-                ProgressView("Loading data...")
+                VStack() {
+                    Spacer()
+                    CustomProgressView(text: "Loading info...")
+                        .frame(maxWidth: .infinity)
+                    Spacer()
+                }
             } else if let error = viewModel.errorMessage {
                 VStack {
+                    Spacer()
                     Text("⚠️ Error")
                         .font(.title)
                         .padding(.bottom, 4)
@@ -30,6 +36,7 @@ struct StatsView: View {
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
+                    Spacer()
                 }
                 .padding()
             } else {

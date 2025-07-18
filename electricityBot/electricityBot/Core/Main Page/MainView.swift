@@ -31,7 +31,12 @@ struct MainView: View {
                 
                 // graph
                 if viewModel.isLoading {
-                    ProgressView("Loading data...")
+                    VStack() {
+                        Spacer()
+                        CustomProgressView(text: "Loading info...")
+                            .frame(maxWidth: .infinity)
+                        Spacer()
+                    }
                 } else if let error = viewModel.errorMessage {
                     VStack {
                         Text("⚠️ Error")

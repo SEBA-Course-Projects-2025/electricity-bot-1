@@ -43,6 +43,8 @@
 	<string>155665261579-3s0vrnpbpfirr5te5moab5algu88doff.apps.googleusercontent.com</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>This app needs Bluetooth to connect to your Raspberry Pi.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Black.ttf</string>
@@ -95,10 +97,6 @@
 	</array>
 	<key>UISceneDelegateClassName</key>
 	<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
