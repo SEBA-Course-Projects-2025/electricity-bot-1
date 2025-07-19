@@ -32,14 +32,29 @@ struct NetworkManager {
             urlRequest.httpBody = body
             urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             
-            if let token = token {
+            if let token = token, !token.isEmpty {
                 urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+                print("Using token: \(token)")
+            } else {
+                print("No token provided for Authorization header")
             }
+            
+            print("Requesting URL: \(urlRequest.url?.absoluteString ?? "") with method \(method)")
+            
             
             let (data, response) = try await URLSession.shared.data(for: urlRequest)
             guard let httpResponse = response as? HTTPURLResponse else {
                 throw NetworkError.noData
             }
+            print(data, httpResponse)
+           
+            if let jsonString = String(data: data, encoding: .utf8) {
+                print("Response body:\n\(jsonString)")
+            } else {
+                print("Could not decode response body to UTF-8")
+            }
+
+
             return (data, httpResponse)
         }
         
