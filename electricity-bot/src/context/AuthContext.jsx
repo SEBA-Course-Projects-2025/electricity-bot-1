@@ -1,5 +1,5 @@
-import React, { createContext, useState, useEffect } from "react";
-import { getAccessToken } from "../services/AuthService";
+import { createContext, useContext, useState, useEffect } from "react";
+import { getAccessToken, logout as backendLogout } from "../services/AuthService";
 
 export const AuthContext = createContext();
 
@@ -7,13 +7,19 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const token = getAccessToken();
-    setIsAuthenticated(!!token);
+    setIsAuthenticated(!!getAccessToken());
   }, []);
 
+  const logout = async () => {
+    await backendLogout();
+    setIsAuthenticated(false);
+  };
+
   return (
-    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+    <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);

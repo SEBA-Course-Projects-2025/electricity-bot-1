@@ -17,6 +17,7 @@ export const exchangeCodeForToken = async (code) => {
     body: JSON.stringify({
       code,
       is_web: true,
+      is_custom_mobile: false,
     }),
   });
 
@@ -30,8 +31,44 @@ export const saveTokens = (access, refresh) => {
 };
 
 export const getAccessToken = () => localStorage.getItem("access_token");
+export const getRefreshToken = () => localStorage.getItem("refresh_token");
 
-export const logout = () => {
+export const logout = async () => {
+  const access = getAccessToken();
+  const refresh = getRefreshToken();
+
+  if (!access || !refresh) {
+    console.warn("No tokens found, redirecting to login");
+    redirectToLogin();
+    return;
+  }
+
+  try {
+    await fetch(`${API_BASE}/auth/logout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${access}`,
+      },
+      body: JSON.stringify({
+        refresh_token: refresh,
+        is_web: true,
+      }),
+    });
+  } catch (err) {
+    console.error("Logout request failed", err);
+  }
+
   localStorage.removeItem("access_token");
   localStorage.removeItem("refresh_token");
+
+  redirectToLogin();
+};
+
+const redirectToLogin = () => {
+  const realm = "electricity-bot";
+  const clientId = "electricity-web-client";
+  const redirect = encodeURIComponent("http://localhost:5173/auth");
+
+  window.location.href = `${API_BASE}/admin/realms/${realm}/protocol/openid-connect/logout?client_id=${clientId}&post_logout_redirect_uri=${redirect}`;
 };

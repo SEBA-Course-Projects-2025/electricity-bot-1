@@ -1,4 +1,3 @@
-// 📁 src/pages/Callback.jsx
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { exchangeCodeForToken, saveTokens } from "../services/AuthService";
@@ -17,25 +16,22 @@ const Callback = () => {
 
     if (!code) {
       console.error("❌ No code in callback URL");
-      navigate("/auth");
+      navigate("/auth", { replace: true });
       return;
     }
 
     exchangeCodeForToken(code)
-      .then((res) => {
-        console.log("✅ TOKEN RESPONSE:", res);
-        if (res.access_token && res.refresh_token) {
-          saveTokens(res.access_token, res.refresh_token);
-          setIsAuthenticated(true);
-          navigate("/dashboard");
-        } else {
-          console.error("❌ Missing tokens in response");
-          navigate("/auth");
-        }
+      .then(({ access_token, refresh_token }) => {
+        console.log("✅ TOKEN RESPONSE:", { access_token, refresh_token });
+        saveTokens(access_token, refresh_token);
+        setIsAuthenticated(true);
+
+        window.history.replaceState({}, document.title, "/dashboard");
+        navigate("/dashboard", { replace: true });
       })
       .catch((err) => {
         console.error("❌ Error exchanging code:", err);
-        navigate("/auth");
+        navigate("/auth", { replace: true });
       });
   }, [navigate, setIsAuthenticated]);
 

@@ -5,6 +5,7 @@ import Welcome from "./components/Welcome";
 import Login from "./components/Login";
 import Callback from "./pages/Callback";
 import Dashboard from "./pages/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -15,7 +16,14 @@ function App() {
           <Route path="/welcome" element={<Welcome />} />
           <Route path="/auth" element={<Login />} />
           <Route path="/web-callback" element={<Callback />} />
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
