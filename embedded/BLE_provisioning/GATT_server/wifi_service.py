@@ -3,8 +3,10 @@ import dbus
 from gi.repository import GLib
 import subprocess
 import time
+from pathlib import Path
 
 INTERNET_CONFIG_PATH = "/etc/wpa_supplicant/wpa_supplicant.conf"
+DEVICE_CONFIG_PATH = "/electricity_bot/device_config.txt"
 
 class WiFiProvisioningService(Service):
     def __init__(self, bus, index):
@@ -18,6 +20,8 @@ class WiFiProvisioningService(Service):
         self.status_characteristic = StatusCharacteristic(bus, 2, self)
         self.add_characteristic(self.status_characteristic)
         self.add_characteristic(ScannedNetworksCharacteristic(bus, 3, self))
+        self.add_characteristic(DeviceIDCharacteristic(bus, 4, self))
+
 
 class SSIDCharacteristic(Characteristic):
     def __init__(self, bus, index, service):
@@ -124,4 +128,20 @@ class ScannedNetworksCharacteristic(Characteristic):
         except Exception as e:
             print(f"Wi-Fi scan failed: {e}")
             return []
+
+
+
+class DeviceIDCharacteristic(Characteristic):
+    def __init__(self, bus, index, service):
+        super().__init__(bus, index, "a1ddeaf4-cfd8-4a7c-aa8d-ac18df3f8745", ["read"], service)
+
+    def ReadValue(self, options):
+        if not self.config_path.exists():
+            print("Device ID file not found.")
+            device_id = "UNKNOWN"
+        else:
+            device_id = self.config_path.read_text().strip()
+
+        print(f"Reading Device ID: {device_id}")
+        return dbus.ByteArray(device_id.encode("utf-8"))
 
