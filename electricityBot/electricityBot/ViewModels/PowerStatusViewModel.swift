@@ -11,11 +11,30 @@ import Algorithms
 
 @MainActor
 class PowerStatusViewModel: ObservableObject {
-    @Published var status: Bool = false
-    @Published var time: Date = Date()
+    @Published var status: Bool = false {
+        didSet {
+            UserDefaults.standard.set(status, forKey: "lastPowerStatus")
+        }
+    }
+    @Published var time: Date = Date() {
+        didSet {
+            print("Saving status \(status) to UserDefaults")
+            UserDefaults.standard.set(time, forKey: "lastPowerTimestamp")
+        }
+    }
     @Published var isLoading = false
     @Published var errorMessage: String?
 
+    init() {
+        // Load from UserDefaults if exists
+        let savedStatus = UserDefaults.standard.bool(forKey: "lastPowerStatus")
+        let timestampInterval = UserDefaults.standard.double(forKey: "lastPowerTimestamp")
+        if timestampInterval > 0 {
+            self.status = savedStatus
+            self.time = Date(timeIntervalSince1970: timestampInterval)
+        }
+    }
+    
     func requestStatus(deviceID: String) async {
         isLoading = true
         errorMessage = nil

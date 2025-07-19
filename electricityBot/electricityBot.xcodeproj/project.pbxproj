@@ -64,6 +64,9 @@
 		BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391E62DF95FAB00C3EA55 /* InputFieldView.swift */; };
 		BA8391EB2DF99EED00C3EA55 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391EA2DF99EED00C3EA55 /* ProfileView.swift */; };
 		BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391EC2DF9AE7100C3EA55 /* User.swift */; };
+		BAA2FB382E2BE5A5004E2CF4 /* PermissionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA2FB372E2BE5A5004E2CF4 /* PermissionRequest.swift */; };
+		BAA2FB3A2E2BE5CD004E2CF4 /* SendNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA2FB392E2BE5CD004E2CF4 /* SendNotification.swift */; };
+		BAA2FB3C2E2BEA41004E2CF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA2FB3B2E2BEA41004E2CF4 /* AppDelegate.swift */; };
 		BAC31EFE2E2BB248009DB0ED /* SendDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC31EFD2E2BB248009DB0ED /* SendDevice.swift */; };
 		BAD4A1D82E02AE53001E7B21 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = BAD4A1D72E02AE53001E7B21 /* GoogleSignIn */; };
 		BAD4A1DA2E02AE53001E7B21 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BAD4A1D92E02AE53001E7B21 /* GoogleSignInSwift */; };
@@ -157,6 +160,9 @@
 		BA8391E62DF95FAB00C3EA55 /* InputFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputFieldView.swift; sourceTree = "<group>"; };
 		BA8391EA2DF99EED00C3EA55 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		BA8391EC2DF9AE7100C3EA55 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BAA2FB372E2BE5A5004E2CF4 /* PermissionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionRequest.swift; sourceTree = "<group>"; };
+		BAA2FB392E2BE5CD004E2CF4 /* SendNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNotification.swift; sourceTree = "<group>"; };
+		BAA2FB3B2E2BEA41004E2CF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BAC31EFD2E2BB248009DB0ED /* SendDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDevice.swift; sourceTree = "<group>"; };
 		BAD4A1E12E030051001E7B21 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BAD4A1E42E030BBD001E7B21 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
@@ -274,6 +280,7 @@
 		BA83916E2DF8772E00C3EA55 /* electricityBot */ = {
 			isa = PBXGroup;
 			children = (
+				BAA2FB362E2BE546004E2CF4 /* Notifications */,
 				BA21A89F2E27F87500572135 /* BLE */,
 				BA21A88B2E216CCB00572135 /* Helpers */,
 				BA8391B62DF8A50500C3EA55 /* Core */,
@@ -419,6 +426,16 @@
 				BA8391CE2DF94EA200C3EA55 /* Poppins-ThinItalic.ttf */,
 			);
 			path = Poppins;
+			sourceTree = "<group>";
+		};
+		BAA2FB362E2BE546004E2CF4 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				BAA2FB372E2BE5A5004E2CF4 /* PermissionRequest.swift */,
+				BAA2FB392E2BE5CD004E2CF4 /* SendNotification.swift */,
+				BAA2FB3B2E2BEA41004E2CF4 /* AppDelegate.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		BAD4A1E82E06CF11001E7B21 /* Statistics */ = {
@@ -617,6 +634,7 @@
 				BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */,
 				BA21A8A32E280C6A00572135 /* BLEDevices.swift in Sources */,
 				BA21A8A52E280CE000572135 /* WiFiProvisioning.swift in Sources */,
+				BAA2FB382E2BE5A5004E2CF4 /* PermissionRequest.swift in Sources */,
 				BA4EDDBC2E1563B100CB8F15 /* PowerStatus.swift in Sources */,
 				BA21A8962E22FB7200572135 /* GetDevices.swift in Sources */,
 				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
@@ -627,11 +645,13 @@
 				BAD4A1EA2E06CF2F001E7B21 /* StatsView.swift in Sources */,
 				BA4EDDB82E15591A00CB8F15 /* MainView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
+				BAA2FB3A2E2BE5CD004E2CF4 /* SendNotification.swift in Sources */,
 				BA21A8A12E28007200572135 /* BluetoothManager.swift in Sources */,
 				BAF8B3502E0718BC00B454F7 /* BackNavigationView.swift in Sources */,
 				BA21A89A2E2431C600572135 /* DevicesListView.swift in Sources */,
 				BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */,
 				BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */,
+				BAA2FB3C2E2BEA41004E2CF4 /* AppDelegate.swift in Sources */,
 				BA21A89C2E25197800572135 /* DeleteDevice.swift in Sources */,
 				BA7177C52E15CBE600B01EB2 /* SceneDelegate.swift in Sources */,
 				BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */,

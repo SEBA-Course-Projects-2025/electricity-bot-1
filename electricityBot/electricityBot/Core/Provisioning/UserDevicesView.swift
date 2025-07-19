@@ -8,13 +8,14 @@
 import SwiftUI
 
 struct UserDevicesView: View {
-    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var userSession: UserSession
+    @Namespace var animation
     @State private var userDevices: [Device] = []
     @State private var isLoading = true
     @State private var selectedDevice: Device? = nil
-    @State private var findDevice = false
+    @State private var navToFindDevice = false
     @State private var navToRoot = false
+    @State private var navToContent = false
     
     var body: some View {
         NavigationStack {
@@ -23,7 +24,6 @@ struct UserDevicesView: View {
                     .ignoresSafeArea()
                 
                 VStack(alignment: .leading) {
-                    // choose device
                     Text("Choose device")
                         .font(.custom("Poppins-Medium", size: 32))
                         .padding(.bottom, 32)
@@ -35,46 +35,55 @@ struct UserDevicesView: View {
                                 .frame(maxWidth: .infinity)
                             Spacer()
                         }
-                    } //else if let error =  {
-                        
-                    
-                    else {
-                        DevicesListView(userDevices: userDevices) { device in
-                            userSession.currentDeviceID = device.id
-                            selectedDevice = device
-                            navToRoot = true
+                    } else {
+                        ZStack {
+                            DevicesListView(userDevices: userDevices) { device in
+                                userSession.currentDeviceID = device.id
+                                selectedDevice = device
+                                navToRoot = true
+                            }
+                            .padding(-32.0)
+                            .padding(.bottom, 16)
                         }
+                        .frame(maxWidth: .infinity)
                     }
                     
                     Spacer()
-                    SimpleButtonView(title: "Find Device 🔎", action: { findDevice = true }, size: 200)
+                    SimpleButtonView(title: "Find Device 🔎", action: { navToFindDevice = true }, size: 200)
                         .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/)
                         .padding(.bottom)
-                    //Spacer()
                     LogOutView {
                         userSession.logout()
                     }
                 }
                 .padding(32)
             }
-            // .navigationTitle("Available Devices")
             .onAppear {
                 Task {
                     guard let userId = userSession.user?.id else { return }
                     await getDevices(userId: userId)
                 }
             }
-            .navigationDestination(isPresented: $navToRoot) {
-                RootView().environmentObject(userSession)
-            }
-            .navigationDestination(isPresented: Binding<Bool>(
-                get: { selectedDevice != nil },
-                set: { if !$0 { selectedDevice = nil } }
-            )) {
-                RootView().environmentObject(userSession)
-            }
-            .navigationDestination(isPresented: $findDevice) {
-                BLEDevices()
+        }
+        .navigationBarBackButtonHidden(true)
+        .navigationDestination(isPresented: Binding<Bool>(
+            get: { selectedDevice != nil },
+            set: { if !$0 { selectedDevice = nil } }
+        )) {
+            RootView().environmentObject(userSession)
+        }
+        .navigationDestination(isPresented: $navToFindDevice) {
+            BLEDevices()
+        }
+        .navigationDestination(isPresented: $navToRoot) {
+            RootView().environmentObject(userSession)
+        }
+        .navigationDestination(isPresented: $navToContent) {
+            ContentView(animation: animation).environmentObject(userSession)
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                BackNavigation(navToContent: $navToContent)
             }
         }
     }
