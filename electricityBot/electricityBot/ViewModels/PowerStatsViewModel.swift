@@ -22,6 +22,7 @@ class PowerStatsViewModel: ObservableObject {
         do {
             let response = try await GetStatistics.sendRequestToBackend(deviceID: deviceID, days: days)
             stats = response.events
+            self.errorMessage = nil
             
             print(response)
         } catch {

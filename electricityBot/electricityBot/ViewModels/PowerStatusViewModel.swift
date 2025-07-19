@@ -24,7 +24,8 @@ class PowerStatusViewModel: ObservableObject {
             let response = try await GetStatus.sendRequestToBackend(deviceID: deviceID)
             self.status = response.status
             self.time = response.timestamp
-            
+            self.errorMessage = nil
+        
             print(response)
         } catch {
             self.errorMessage = "Failed to load status: \(error.localizedDescription)"
