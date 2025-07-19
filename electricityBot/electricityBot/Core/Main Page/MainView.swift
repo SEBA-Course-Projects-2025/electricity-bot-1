@@ -62,6 +62,14 @@ struct MainView: View {
                     await loadStatus()
                 }
             }
+            .task {
+                if let deviceID = userSession.currentDeviceID {
+                    await viewModel.requestStatus(deviceID: deviceID)
+                } else {
+                    print("Device ID not available yet!")
+                }
+            }
+
         }
     }
     
@@ -99,11 +107,13 @@ struct MainView: View {
     
     @MainActor
     private func loadStatus() async {
-        guard let deviceID = userSession.currentDeviceID else {
-            print("No device id current.")
-            return
+        Task {
+            guard let deviceID = userSession.currentDeviceID else {
+                print("No device id current.")
+                return
+            }
+            await viewModel.requestStatus(deviceID: deviceID)
         }
-        await viewModel.requestStatus(deviceID: deviceID)
     }
 }
 

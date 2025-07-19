@@ -43,8 +43,12 @@
 	<string>155665261579-3s0vrnpbpfirr5te5moab5algu88doff.apps.googleusercontent.com</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>This app needs Bluetooth to connect to your Raspberry Pi.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app needs location to scan for nearby devices over Bluetooth</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Poppins-Black.ttf</string>
@@ -102,5 +106,7 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>UISupportsDocumentBrowser</key>
+	<true/>
 </dict>
 </plist>

@@ -12,6 +12,7 @@ struct ProfileView: View {
     @EnvironmentObject var userSession: UserSession
     @Environment(\.dismiss) var dismiss
     @State private var navAfterLogOut = false
+    @State private var confirmChoice = false
 
     var body: some View {
         NavigationStack {
@@ -56,21 +57,7 @@ struct ProfileView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         SimpleButtonView(title: "Reset", action: {
-                            guard let deviceId = userSession.currentDeviceID else {
-                                print("No device selected to delete.")
-                                return
-                            }
-                            
-                            Task {
-                                do {
-                                    let msg = try await DeleteDevice.deleteUserDevice(deviceID: deviceId)
-                                    print("Delete success:", msg)
-                                } catch {
-                                    print("Deletion failed: \(error)")
-                                }
-                            }
-                            
-                            dismiss()
+                            confirmChoice = true
                         })
                             .padding(.top, -32)
                             .padding(.horizontal, -16)
@@ -95,6 +82,28 @@ struct ProfileView: View {
         }
         .navigationDestination(isPresented: $navAfterLogOut) {
             LoginView()
+        }
+        .alert(isPresented: $confirmChoice) {
+            Alert(
+                title: Text("Reset Device"),
+                message: Text("You're about to reset device. Are you sure?"),
+                primaryButton: .default(Text("Yes, Reset")) {
+                    guard let deviceId = userSession.currentDeviceID else {
+                        print("No device selected to delete.")
+                        return
+                    }
+                    Task {
+                        do {
+                            let msg = try await DeleteDevice.deleteUserDevice(deviceID: deviceId)
+                            print("Delete success:", msg)
+                        } catch {
+                            print("Deletion failed: \(error)")
+                        }
+                    }
+                    dismiss()
+                },
+                secondaryButton: .cancel()
+            )
         }
     }
 }
