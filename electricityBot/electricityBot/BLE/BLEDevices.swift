@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct BLEDevices: View {
+    @Environment(\.dismiss) var dismiss
     @ObservedObject var bluetooth = BluetoothManager.shared
     @State private var navToProvision = false
+    @EnvironmentObject var userSession: UserSession
 
     var body: some View {
         NavigationStack {
@@ -66,6 +68,9 @@ struct BLEDevices: View {
                 }
                 .padding(32)
             }
+        }
+        .onAppear {
+            bluetooth.userID = userSession.user?.id
         }
         .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $navToProvision) {

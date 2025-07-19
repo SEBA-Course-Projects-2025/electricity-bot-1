@@ -19,12 +19,16 @@ class BluetoothManager: NSObject, ObservableObject {
     @Published var isConnected = false
     @Published var connectedPeripheral: CBPeripheral?
     @Published var status: BluetoothStatus = .idle
+    @Published var availableNetworks: [String] = []
+    @Published var deviceID: String? = nil
+    @Published var userID: String? = nil
     
     private var targetPeripheral: CBPeripheral?
     private var ssidChar: CBCharacteristic?
     private var statusChar: CBCharacteristic?
     private var passChar: CBCharacteristic?
     private var scannedChar: CBCharacteristic?
+    private var deviceIDchar: CBCharacteristic?
     
     let serviceUUID = CBUUID(string: "a1ddeaf4-cfd8-4a7c-aa8d-ac18df3f8740")
     
@@ -62,8 +66,10 @@ class BluetoothManager: NSObject, ObservableObject {
     
     func send(ssid: String, password: String) {
         guard let ssidChar = ssidChar, let passChar = passChar, let peripheral = targetPeripheral else { return }
+        print("Writing SSID: \(ssid) to characteristic: \(ssidChar.uuid)")
         peripheral.writeValue(Data(ssid.utf8), for: ssidChar, type: .withResponse)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            print("Writing Password: \(password) to characteristic: \(passChar.uuid)")
             peripheral.writeValue(Data(password.utf8), for: passChar, type: .withResponse)
         }
     }
@@ -108,6 +114,8 @@ extension BluetoothManager: CBPeripheralDelegate {
     
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: (any Error)?) {
         for char in service.characteristics ?? [] {
+            print("Discovered characteristic: \(char.uuid) properties: \(char.properties)")
+            
             switch char.uuid.uuidString.lowercased() {
             case "a1ddeaf4-cfd8-4a7c-aa8d-ac18df3f8741":
                 ssidChar = char
@@ -117,6 +125,8 @@ extension BluetoothManager: CBPeripheralDelegate {
                 passChar = char
             case "a1ddeaf4-cfd8-4a7c-aa8d-ac18df3f8744":
                 scannedChar = char
+            case "a1ddeaf4-cfd8-4a7c-aa8d-ac18df3f8745":
+                deviceIDchar = char
             default: break
             }
         }
@@ -126,7 +136,52 @@ extension BluetoothManager: CBPeripheralDelegate {
         guard let value = characteristic.value else { return }
         if characteristic == statusChar {
             statusMessage = String(decoding: value, as: UTF8.self)
+        } else if characteristic == scannedChar {
+            let networksString = String(decoding: value, as: UTF8.self)
+            print("Networks received: \(networksString)")
+
+            let networks = networksString
+                .split(separator: ",")
+                .map { String($0).trimmingCharacters(in: .whitespacesAndNewlines) }
+            
+            DispatchQueue.main.async {
+                self.availableNetworks = networks
+            }
+        } else if characteristic == deviceIDchar {
+            let deviceID = String(decoding: value, as: UTF8.self)
+            print("Device ID: \(deviceID)")
+            self.deviceID = deviceID
+            
+            Task {
+                do {
+                    let result = try await SendDevice.sendDeviceToBackend(userID: userID ?? "", deviceID: deviceID)
+                    print("Success sending device info: \(result)")
+                } catch {
+                    print("Error sending device info: \(error)")
+                }
+            }
         }
+    }
+    
+    func peripheral(_ peripheral: CBPeripheral, didWriteValueFor characteristic: CBCharacteristic, error: Error?) {
+        if let error = error {
+            print("Write to \(characteristic.uuid) failed: \(error.localizedDescription)")
+            return
+        }
+        print("Successfully wrote to \(characteristic.uuid)")
+        if let deviceIDchar = deviceIDchar {
+            print("Reading device ID...")
+            peripheral.readValue(for: deviceIDchar)
+        }
+    }
+    
+    func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
+        if let error = error {
+            print("Disconnected from \(peripheral.name ?? "unknown") with error: \(error.localizedDescription)")
+        } else {
+            print("Disconnected from \(peripheral.name ?? "unknown")")
+        }
+        isConnected = false
     }
 }
 
