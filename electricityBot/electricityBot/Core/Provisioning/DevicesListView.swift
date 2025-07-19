@@ -41,7 +41,7 @@ struct DevicesListView: View {
                                         .foregroundColor(.gray)
                                 }
                             }
-                            frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
                             
                         }
@@ -52,7 +52,6 @@ struct DevicesListView: View {
                         .shadow(color: Color.black.opacity(0.1), radius: 20)
                     }
                 }
-                // find button
             }
         }
     }

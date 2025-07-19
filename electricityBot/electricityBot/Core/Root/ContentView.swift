@@ -31,7 +31,7 @@ struct ContentView: View {
                 .padding(.top, 200)
                 
                 // nav button to LoginView
-                NavigationLink(destination: userSession.isLoggedIn ? AnyView(UserDevicesView()) : AnyView(BLEDevices())) {
+                NavigationLink(destination: userSession.isLoggedIn ? AnyView(UserDevicesView().environmentObject(userSession)) : AnyView(LoginView())) {
                     Text("Start")
                         .font(.custom("Poppins-SemiBold", size: 16))
                         .foregroundColor(Color.textColor.opacity(0.72))

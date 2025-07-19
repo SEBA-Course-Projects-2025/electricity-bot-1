@@ -35,7 +35,9 @@ struct RootView: View {
         CustomTabView(selection: $activeTab) { tab, tabBarHeight in
             switch tab {
             case .statistics: StatsView()
+                    .environmentObject(userSession)
             case .main: MainView()
+                    .environmentObject(userSession)
             case .settings: ProfileView()
                     .environmentObject(userSession)
             }
