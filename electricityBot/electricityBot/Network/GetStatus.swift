@@ -1,16 +1,16 @@
 //
-//  GetStatistics.swift
+//  GetStatus.swift
 //  electricityBot
 //
-//  Created by Dana Litvak on 21.06.2025.
+//  Created by Dana Litvak on 02.07.2025.
 //
 
 import Foundation
 
-struct GetStatistics {
-    static func sendRequestToBackend(deviceID: String, days: Int, completion: @escaping (Result<PowerStatsRequest, Error>) -> Void) {
+struct GetStatus {
+    static func sendRequestToBackend(deviceID: String, completion: @escaping (Result<PowerStatus, Error>) -> Void) {
         // server endpoint
-        let urlString = "https://bot-1.electricity-bot.online/statistics/\(days == 1 ? "day" : "week")/\(deviceID)"
+        let urlString = "https://bot-1.electricity-bot.online/status/\(deviceID)"
         guard let url = URL(string: urlString) else { return }
         print("Requesting URL:", urlString)
 
@@ -18,7 +18,7 @@ struct GetStatistics {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        // Auth Bearer Header
+        // Auth Bareer Header
         if let accessToken = KeychainHelper.read(forKey: "access_token") {
             request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         }
@@ -47,7 +47,7 @@ struct GetStatistics {
                 return
             }
             
-            // "timestamp": "2025-06-21T13:50:44"
+            // "timestamp": "2025-07-11T20:40:26", no need for custom decoder
             do {
                 let decoder = JSONDecoder()
                 
@@ -55,8 +55,8 @@ struct GetStatistics {
                 formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
 
                 decoder.dateDecodingStrategy = .formatted(formatter)
-
-                let result = try decoder.decode(PowerStatsRequest.self, from: data)
+                
+                let result = try decoder.decode(PowerStatus.self, from: data)
                 completion(.success(result))
             } catch {
                 print("Decoding error: \(error)")

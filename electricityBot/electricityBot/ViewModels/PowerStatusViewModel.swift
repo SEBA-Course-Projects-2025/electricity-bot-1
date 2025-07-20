@@ -1,0 +1,49 @@
+//
+//  PowerStatusViewModel.swift
+//  electricityBot
+//
+//  Created by Dana Litvak on 02.07.2025.
+//
+
+import Foundation
+import Combine
+import Algorithms
+
+class PowerStatusViewModel: ObservableObject {
+    @Published var status: Bool = false
+    @Published var time: Date = Date()
+    @Published var isLoading = false
+    @Published var errorMessage: String?
+
+    func requestStatus(deviceID: String) {
+        isLoading = true
+        errorMessage = nil
+        
+        GetStatus.sendRequestToBackend(deviceID: deviceID) { [weak self] result in
+            DispatchQueue.main.async {
+                self?.isLoading = false
+                    
+                switch result {
+                    case .success(let response):
+                        self?.status = response.status
+                        self?.time = response.timestamp
+                    case .failure(let error):
+                        self?.errorMessage = "Failed to load stats: \(error.localizedDescription)"
+                }
+            }
+        }
+    }
+    
+    var currentStatusDuration: TimeInterval {
+        return Date().timeIntervalSince(time)
+    }
+    
+    var currentStatusDurationFormatted: String {
+        let seconds = Int(currentStatusDuration)
+        let hours = seconds / 3600
+        let minutes = (seconds % 3600) / 60
+        
+        return hours == 0 ? "\(minutes) minutes" : "\(hours) hours \(minutes) minutes"
+    }
+}
+

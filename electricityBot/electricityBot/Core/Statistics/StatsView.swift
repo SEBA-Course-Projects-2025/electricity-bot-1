@@ -193,5 +193,5 @@ struct StatsView: View {
 }
 
 #Preview {
-    StatsView(deviceID: "d4dba214-e012-4dd2-b1a7-9256788a0b2a")
+    StatsView(deviceID: "286cd1fb-083c-4b4a-b7bf-b30f279ed8ea")
 }

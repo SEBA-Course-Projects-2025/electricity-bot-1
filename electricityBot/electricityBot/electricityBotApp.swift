@@ -10,7 +10,6 @@ import GoogleSignIn
 
 @main
 struct electricityBot: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject private var userSession = UserSession()
     
     var body: some Scene {
@@ -18,9 +17,6 @@ struct electricityBot: App {
             SplashScreenView()
                 .preferredColorScheme(.light)
                 .environmentObject(userSession)
-                .onOpenURL { url in
-                          GIDSignIn.sharedInstance.handle(url)
-                        }
         }
     }
 }
