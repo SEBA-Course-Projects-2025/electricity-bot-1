@@ -1,6 +1,5 @@
 
 .DS_Store
-*.pbxproj
 *.plist
 *.xcworkspacedata
 *.resolved
