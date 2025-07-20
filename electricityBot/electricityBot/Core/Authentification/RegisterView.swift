@@ -65,17 +65,7 @@ struct RegisterView: View {
             
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss()
-                    } label: {
-                        HStack(spacing: 6) {
-                            Image(systemName: "chevron.left")
-                                .font(.system(size: 16, weight: .medium))
-                            Text("Back")
-                                .font(.custom("Poppins-Regular", size: 16))
-                        }
-                        .foregroundColor(.textColor)
-                    }
+                    BackNavigation { dismiss() }
                 }
             }
         }

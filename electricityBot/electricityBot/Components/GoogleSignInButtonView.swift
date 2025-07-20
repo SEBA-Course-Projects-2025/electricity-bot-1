@@ -38,6 +38,7 @@ struct GoogleSignInButtonView: View {
             return
         }
 
+        print("Sign-in started")
         GIDSignIn.sharedInstance.signIn(withPresenting: rootVC) { signInResult, error in
             guard let result = signInResult else {
                 print("Sign in failed or cancelled: \(error?.localizedDescription ?? "No error info")")

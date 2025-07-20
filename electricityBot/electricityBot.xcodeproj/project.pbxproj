@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BA4EDDA82E11663E00CB8F15 /* DayStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDA72E11663E00CB8F15 /* DayStatsView.swift */; };
+		BA4EDDAA2E11693500CB8F15 /* WeekStatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */; };
+		BA4EDDAC2E11699D00CB8F15 /* DailyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */; };
+		BA4EDDAE2E1169AC00CB8F15 /* HourlyPowerStat.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */; };
+		BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */; };
+		BA4EDDB32E152E9A00CB8F15 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDB22E152E9A00CB8F15 /* CustomTabView.swift */; };
+		BA4EDDB52E1531C500CB8F15 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA4EDDB42E1531C500CB8F15 /* MainView.swift */; };
 		BA8391742DF8772F00C3EA55 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391732DF8772F00C3EA55 /* Assets.xcassets */; };
 		BA8391772DF8772F00C3EA55 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */; };
 		BA8391812DF8772F00C3EA55 /* electricityBotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391802DF8772F00C3EA55 /* electricityBotTests.swift */; };
@@ -50,6 +57,12 @@
 		BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E12E030051001E7B21 /* Helpers.swift */; };
 		BAD4A1E52E030BBD001E7B21 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E42E030BBD001E7B21 /* UserSession.swift */; };
 		BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E62E03269D001E7B21 /* LogOutView.swift */; };
+		BAD4A1EA2E06CF2F001E7B21 /* StatsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1E92E06CF2F001E7B21 /* StatsView.swift */; };
+		BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1EB2E06CFE0001E7B21 /* PowerStats.swift */; };
+		BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */; };
+		BAD4A1F02E06E675001E7B21 /* PowerStatsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAD4A1EF2E06E675001E7B21 /* PowerStatsViewModel.swift */; };
+		BAF8B3502E0718BC00B454F7 /* BackNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAF8B34F2E0718BC00B454F7 /* BackNavigationView.swift */; };
+		BAF8B3532E0744D100B454F7 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = BAF8B3522E0744D100B454F7 /* Algorithms */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +83,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BA4EDDA72E11663E00CB8F15 /* DayStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayStatsView.swift; sourceTree = "<group>"; };
+		BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekStatsView.swift; sourceTree = "<group>"; };
+		BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPowerStat.swift; sourceTree = "<group>"; };
+		BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyPowerStat.swift; sourceTree = "<group>"; };
+		BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleButtonView.swift; sourceTree = "<group>"; };
+		BA4EDDB22E152E9A00CB8F15 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
+		BA4EDDB42E1531C500CB8F15 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		BA83916C2DF8772E00C3EA55 /* electricityBot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = electricityBot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA8391732DF8772F00C3EA55 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BA8391762DF8772F00C3EA55 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -115,6 +135,11 @@
 		BAD4A1E12E030051001E7B21 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BAD4A1E42E030BBD001E7B21 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		BAD4A1E62E03269D001E7B21 /* LogOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutView.swift; sourceTree = "<group>"; };
+		BAD4A1E92E06CF2F001E7B21 /* StatsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatsView.swift; sourceTree = "<group>"; };
+		BAD4A1EB2E06CFE0001E7B21 /* PowerStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStats.swift; sourceTree = "<group>"; };
+		BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetStatistics.swift; sourceTree = "<group>"; };
+		BAD4A1EF2E06E675001E7B21 /* PowerStatsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerStatsViewModel.swift; sourceTree = "<group>"; };
+		BAF8B34F2E0718BC00B454F7 /* BackNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackNavigationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAF8B3532E0744D100B454F7 /* Algorithms in Frameworks */,
 				BAD4A1D82E02AE53001E7B21 /* GoogleSignIn in Frameworks */,
 				BAD4A1DA2E02AE53001E7B21 /* GoogleSignInSwift in Frameworks */,
 			);
@@ -144,6 +170,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BA4EDDB12E152E7700CB8F15 /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				BA4EDDB22E152E9A00CB8F15 /* CustomTabView.swift */,
+			);
+			path = TabView;
+			sourceTree = "<group>";
+		};
 		BA8391632DF8772E00C3EA55 = {
 			isa = PBXGroup;
 			children = (
@@ -167,9 +201,11 @@
 		BA83916E2DF8772E00C3EA55 /* electricityBot */ = {
 			isa = PBXGroup;
 			children = (
+				BA4EDDB12E152E7700CB8F15 /* TabView */,
 				BA8391B62DF8A50500C3EA55 /* Core */,
 				BA8391B52DF8A4E600C3EA55 /* Components */,
 				BA8391A82DF878D100C3EA55 /* Network */,
+				BAF8B34E2E07077700B454F7 /* ViewModels */,
 				BA8391A42DF878CC00C3EA55 /* Models */,
 				BA8391732DF8772F00C3EA55 /* Assets.xcassets */,
 				BA83919D2DF878C300C3EA55 /* Fonts */,
@@ -221,6 +257,7 @@
 			children = (
 				BAD4A1E42E030BBD001E7B21 /* UserSession.swift */,
 				BA8391EC2DF9AE7100C3EA55 /* User.swift */,
+				BAD4A1EB2E06CFE0001E7B21 /* PowerStats.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -230,6 +267,7 @@
 			children = (
 				BA8391A72DF878D100C3EA55 /* GoogleAuthService.swift */,
 				BAD4A1DF2E02FC82001E7B21 /* AppDelegate.swift */,
+				BAD4A1ED2E06DDF8001E7B21 /* GetStatistics.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -241,6 +279,8 @@
 				BAD4A1DB2E02F157001E7B21 /* GoogleSignInButtonView.swift */,
 				BAD4A1E12E030051001E7B21 /* Helpers.swift */,
 				BAD4A1E62E03269D001E7B21 /* LogOutView.swift */,
+				BAF8B34F2E0718BC00B454F7 /* BackNavigationView.swift */,
+				BA4EDDAF2E11761200CB8F15 /* SimpleButtonView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -248,6 +288,7 @@
 		BA8391B62DF8A50500C3EA55 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				BAD4A1E82E06CF11001E7B21 /* Statistics */,
 				BA8391B82DF8A69B00C3EA55 /* Authentification */,
 				BA8391B92DF8A6A900C3EA55 /* Profile */,
 				BA8391B72DF8A65300C3EA55 /* Root */,
@@ -260,6 +301,7 @@
 			children = (
 				BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */,
 				BA8391AA2DF878D800C3EA55 /* ContentView.swift */,
+				BA4EDDB42E1531C500CB8F15 /* MainView.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -307,6 +349,26 @@
 			path = Poppins;
 			sourceTree = "<group>";
 		};
+		BAD4A1E82E06CF11001E7B21 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				BAD4A1E92E06CF2F001E7B21 /* StatsView.swift */,
+				BA4EDDA72E11663E00CB8F15 /* DayStatsView.swift */,
+				BA4EDDA92E11693500CB8F15 /* WeekStatsView.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		BAF8B34E2E07077700B454F7 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				BAD4A1EF2E06E675001E7B21 /* PowerStatsViewModel.swift */,
+				BA4EDDAB2E11699D00CB8F15 /* DailyPowerStat.swift */,
+				BA4EDDAD2E1169AC00CB8F15 /* HourlyPowerStat.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -326,6 +388,7 @@
 			packageProductDependencies = (
 				BAD4A1D72E02AE53001E7B21 /* GoogleSignIn */,
 				BAD4A1D92E02AE53001E7B21 /* GoogleSignInSwift */,
+				BAF8B3522E0744D100B454F7 /* Algorithms */,
 			);
 			productName = electricityBot;
 			productReference = BA83916C2DF8772E00C3EA55 /* electricityBot.app */;
@@ -401,6 +464,7 @@
 			mainGroup = BA8391632DF8772E00C3EA55;
 			packageReferences = (
 				BAD4A1D62E02AE53001E7B21 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				BAF8B3512E0744A200B454F7 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
 			);
 			productRefGroup = BA83916D2DF8772E00C3EA55 /* Products */;
 			projectDirPath = "";
@@ -467,15 +531,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				BAD4A1E02E02FC82001E7B21 /* AppDelegate.swift in Sources */,
+				BA4EDDB52E1531C500CB8F15 /* MainView.swift in Sources */,
 				BA8391E92DF9737C00C3EA55 /* RegisterView.swift in Sources */,
 				BAD4A1E72E03269D001E7B21 /* LogOutView.swift in Sources */,
 				BA8391EB2DF99EED00C3EA55 /* ProfileView.swift in Sources */,
+				BA4EDDB32E152E9A00CB8F15 /* CustomTabView.swift in Sources */,
+				BAD4A1F02E06E675001E7B21 /* PowerStatsViewModel.swift in Sources */,
+				BA4EDDAC2E11699D00CB8F15 /* DailyPowerStat.swift in Sources */,
 				BAD4A1E52E030BBD001E7B21 /* UserSession.swift in Sources */,
+				BA4EDDAE2E1169AC00CB8F15 /* HourlyPowerStat.swift in Sources */,
 				BA8391BB2DF94C3900C3EA55 /* LoginView.swift in Sources */,
+				BA4EDDAA2E11693500CB8F15 /* WeekStatsView.swift in Sources */,
+				BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */,
 				BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */,
+				BAD4A1EE2E06DDF8001E7B21 /* GetStatistics.swift in Sources */,
+				BA4EDDA82E11663E00CB8F15 /* DayStatsView.swift in Sources */,
+				BAD4A1EC2E06CFE0001E7B21 /* PowerStats.swift in Sources */,
 				BA8391A92DF878D100C3EA55 /* GoogleAuthService.swift in Sources */,
+				BAD4A1EA2E06CF2F001E7B21 /* StatsView.swift in Sources */,
 				BAD4A1DC2E02F157001E7B21 /* GoogleSignInButtonView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
+				BAF8B3502E0718BC00B454F7 /* BackNavigationView.swift in Sources */,
 				BA8391E72DF95FAB00C3EA55 /* InputFieldView.swift in Sources */,
 				BAD4A1E22E030051001E7B21 /* Helpers.swift in Sources */,
 				BA8391ED2DF9AE7100C3EA55 /* User.swift in Sources */,
@@ -827,6 +903,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		BAF8B3512E0744A200B454F7 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -839,6 +923,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BAD4A1D62E02AE53001E7B21 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		BAF8B3522E0744D100B454F7 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BAF8B3512E0744A200B454F7 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

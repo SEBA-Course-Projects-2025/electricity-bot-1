@@ -33,7 +33,7 @@ struct ContentView: View {
                 // nav button to LoginView
                 NavigationLink{
                     if userSession.isLoggedIn {
-                        ProfileView()
+                        MainView()
                     } else {
                         LoginView()
                     }
