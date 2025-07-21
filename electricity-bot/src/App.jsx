@@ -9,6 +9,7 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { DeviceProvider } from "./context/DeviceContext";
 import Layout from "./components/Layout";
+import Statistics from "./pages/Statistics";
 
 function App() {
   return (
@@ -25,6 +26,16 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Devices />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/statistics"
+              element={
+                <ProtectedRoute>
+                  <Layout>
+                    <Statistics />
+                  </Layout>
                 </ProtectedRoute>
               }
             />
