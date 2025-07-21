@@ -8,6 +8,7 @@ import Devices from "./pages/Devices";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { DeviceProvider } from "./context/DeviceContext";
+import Layout from "./components/Layout";
 
 function App() {
   return (
@@ -31,7 +32,9 @@ function App() {
               path="/dashboard"
               element={
                 <ProtectedRoute>
-                  <Dashboard />
+                  <Layout>
+                    <Dashboard />
+                  </Layout>
                 </ProtectedRoute>
               }
             />

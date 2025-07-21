@@ -1,0 +1,38 @@
+.tabBar {
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  background-color: white;
+  box-shadow: 0 -1px 10px rgba(0,0,0,0.1);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  color: #777;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 6px 12px;
+  transition: color 0.3s ease;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.tabButton:hover {
+  color: #f9b700;
+}
+
+.active {
+  color: #f9b700;
+}
+
+.icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
