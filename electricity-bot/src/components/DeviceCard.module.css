@@ -1,0 +1,42 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  cursor: pointer;
+  position: relative;
+}
+
+.card:hover {
+  box-shadow: 0 4px 14px rgba(0,0,0,.12);
+}
+
+.icon {
+  font-size: 24px;
+}
+
+.info {
+  flex: 1;
+}
+
+.title {
+  font-weight: 600;
+  color: #333;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #666;
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  color: #d11a2a;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}

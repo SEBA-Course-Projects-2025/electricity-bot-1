@@ -4,7 +4,7 @@ import SplashScreen from "./components/SplashScreen";
 import Welcome from "./components/Welcome";
 import Login from "./components/Login";
 import Callback from "./pages/Callback";
-import Dashboard from "./pages/Dashboard";
+import Devices from "./pages/Devices";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -17,10 +17,10 @@ function App() {
           <Route path="/auth" element={<Login />} />
           <Route path="/web-callback" element={<Callback />} />
           <Route
-            path="/dashboard"
+            path="/devices"
             element={
               <ProtectedRoute>
-                <Dashboard />
+                <Devices />
               </ProtectedRoute>
             }
           />

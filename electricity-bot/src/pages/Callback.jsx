@@ -25,9 +25,7 @@ const Callback = () => {
         console.log("✅ TOKEN RESPONSE:", { access_token, refresh_token });
         saveTokens(access_token, refresh_token);
         setIsAuthenticated(true);
-
-        window.history.replaceState({}, document.title, "/dashboard");
-        navigate("/dashboard", { replace: true });
+        navigate("/devices", { replace: true });
       })
       .catch((err) => {
         console.error("❌ Error exchanging code:", err);

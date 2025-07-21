@@ -33,6 +33,11 @@ export const saveTokens = (access, refresh) => {
 export const getAccessToken = () => localStorage.getItem("access_token");
 export const getRefreshToken = () => localStorage.getItem("refresh_token");
 
+export const saveUserId = (userId) => {
+  if (userId) localStorage.setItem("user_id", userId);
+};
+export const getUserId = () => localStorage.getItem("user_id");
+
 export const logout = async () => {
   const access = getAccessToken();
   const refresh = getRefreshToken();
