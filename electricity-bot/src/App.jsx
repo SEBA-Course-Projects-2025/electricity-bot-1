@@ -5,27 +5,39 @@ import Welcome from "./components/Welcome";
 import Login from "./components/Login";
 import Callback from "./pages/Callback";
 import Devices from "./pages/Devices";
+import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { DeviceProvider } from "./context/DeviceContext";
 
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<SplashScreen />} />
-          <Route path="/welcome" element={<Welcome />} />
-          <Route path="/auth" element={<Login />} />
-          <Route path="/web-callback" element={<Callback />} />
-          <Route
-            path="/devices"
-            element={
-              <ProtectedRoute>
-                <Devices />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </BrowserRouter>
+      <DeviceProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<SplashScreen />} />
+            <Route path="/welcome" element={<Welcome />} />
+            <Route path="/auth" element={<Login />} />
+            <Route path="/web-callback" element={<Callback />} />
+            <Route
+              path="/devices"
+              element={
+                <ProtectedRoute>
+                  <Devices />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
+          </Routes>
+        </BrowserRouter>
+      </DeviceProvider>
     </AuthProvider>
   );
 }

@@ -6,9 +6,12 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userId, setUserId] = useState(null);
+  const [accessToken, setAccessToken] = useState(null);
 
   useEffect(() => {
-    setIsAuthenticated(!!getAccessToken());
+    const token = getAccessToken();
+    setAccessToken(token);
+    setIsAuthenticated(!!token);
     setUserId(getUserId() || null);
   }, []);
 
@@ -16,11 +19,20 @@ export const AuthProvider = ({ children }) => {
     await backendLogout();
     setIsAuthenticated(false);
     setUserId(null);
+    setAccessToken(null);
   };
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, setIsAuthenticated, userId, setUserId, logout }}
+      value={{
+        isAuthenticated,
+        setIsAuthenticated,
+        userId,
+        setUserId,
+        accessToken,
+        setAccessToken,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

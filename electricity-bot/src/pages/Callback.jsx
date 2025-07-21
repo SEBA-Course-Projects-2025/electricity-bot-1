@@ -1,11 +1,11 @@
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { exchangeCodeForToken, saveTokens } from "../services/AuthService";
+import { exchangeCodeForToken, saveTokens, saveUserId } from "../services/AuthService";
 import { AuthContext } from "../context/AuthContext";
 
 const Callback = () => {
   const navigate = useNavigate();
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const { setIsAuthenticated, setAccessToken, setUserId } = useContext(AuthContext);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -21,9 +21,14 @@ const Callback = () => {
     }
 
     exchangeCodeForToken(code)
-      .then(({ access_token, refresh_token }) => {
-        console.log("✅ TOKEN RESPONSE:", { access_token, refresh_token });
+      .then(({ access_token, refresh_token, user_id }) => {
+        console.log("✅ TOKEN RESPONSE:", { access_token, refresh_token, user_id });
         saveTokens(access_token, refresh_token);
+        if (user_id) {
+          saveUserId(user_id);
+          setUserId(user_id);
+        }
+        setAccessToken(access_token);
         setIsAuthenticated(true);
         navigate("/devices", { replace: true });
       })
@@ -31,7 +36,7 @@ const Callback = () => {
         console.error("❌ Error exchanging code:", err);
         navigate("/auth", { replace: true });
       });
-  }, [navigate, setIsAuthenticated]);
+  }, [navigate, setIsAuthenticated, setAccessToken, setUserId]);
 
   return <p>Processing login...</p>;
 };
