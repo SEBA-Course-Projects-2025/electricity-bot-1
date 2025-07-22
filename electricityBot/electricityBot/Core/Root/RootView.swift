@@ -45,7 +45,7 @@ struct RootView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                BackNavigation { dismiss() }
+             //   BackNavigation()
             }
         }
     }

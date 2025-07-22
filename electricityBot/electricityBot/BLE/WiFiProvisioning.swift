@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct WiFiProvisioningView: View {
-    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var userSession: UserSession
     @ObservedObject var bluetooth = BluetoothManager.shared
     @State private var selectedSSID: String = ""
@@ -17,6 +16,7 @@ struct WiFiProvisioningView: View {
     @State private var sending = false
     @State private var fetching = false
     @State private var chooseDevices = false
+    @State private var navBack = false
     
     var body: some View {
         NavigationStack {
@@ -66,8 +66,7 @@ struct WiFiProvisioningView: View {
                             }
                         } label: {
                             HStack {
-                                Image(systemName: "magnifyingglass.circle.fill")
-                                Text("Get Available Networks")
+                                Text("🔎 Get Available Networks")
                                     .font(.custom("Poppins-SemiBold", size: 16))
                             }
                             .frame(maxWidth: .infinity)
@@ -127,16 +126,25 @@ struct WiFiProvisioningView: View {
                     secondaryButton: .cancel()
                 )
             }
-            .onChange(of: bluetooth.deviceID) { newID in
-                if let id = newID {
+            .onChange(of: bluetooth.deviceID) { previousID, currentID in
+                if let id = currentID {
                     userSession.currentDeviceID = id
                     print("Set currentDeviceID to \(id)")
                 }
             }
         }
+        .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $chooseDevices){
             RootView()
                 .environmentObject(userSession)
+        }
+        .navigationDestination(isPresented: $navBack){
+            BLEDevices()
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                BackNavigation(navToContent: $navBack)
+            }
         }
     }
 }

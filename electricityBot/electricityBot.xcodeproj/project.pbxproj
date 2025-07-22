@@ -40,7 +40,6 @@
 		BA8391A02DF878C300C3EA55 /* BerlinBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919B2DF878C300C3EA55 /* BerlinBold.ttf */; };
 		BA8391A12DF878C300C3EA55 /* BerlinX-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA83919C2DF878C300C3EA55 /* BerlinX-Bold.ttf */; };
 		BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391AA2DF878D800C3EA55 /* ContentView.swift */; };
-		BA8391B02DF878D800C3EA55 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */; };
 		BA8391B42DF8799500C3EA55 /* electricityBotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391B32DF8799500C3EA55 /* electricityBotApp.swift */; };
 		BA8391BB2DF94C3900C3EA55 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA8391BA2DF94C3900C3EA55 /* LoginView.swift */; };
 		BA8391D12DF94EA200C3EA55 /* Poppins-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA8391BD2DF94EA200C3EA55 /* Poppins-Black.ttf */; };
@@ -67,6 +66,8 @@
 		BAA2FB382E2BE5A5004E2CF4 /* PermissionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA2FB372E2BE5A5004E2CF4 /* PermissionRequest.swift */; };
 		BAA2FB3A2E2BE5CD004E2CF4 /* SendNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA2FB392E2BE5CD004E2CF4 /* SendNotification.swift */; };
 		BAA2FB3C2E2BEA41004E2CF4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA2FB3B2E2BEA41004E2CF4 /* AppDelegate.swift */; };
+		BAA2FB452E2F8EEE004E2CF4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA2FB442E2F8EEE004E2CF4 /* WelcomeView.swift */; };
+		BAA2FB472E2F94E5004E2CF4 /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA2FB462E2F94E5004E2CF4 /* SplashScreenView.swift */; };
 		BAC31EFE2E2BB248009DB0ED /* SendDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAC31EFD2E2BB248009DB0ED /* SendDevice.swift */; };
 		BAD4A1D82E02AE53001E7B21 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = BAD4A1D72E02AE53001E7B21 /* GoogleSignIn */; };
 		BAD4A1DA2E02AE53001E7B21 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = BAD4A1D92E02AE53001E7B21 /* GoogleSignInSwift */; };
@@ -135,7 +136,6 @@
 		BA83919B2DF878C300C3EA55 /* BerlinBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BerlinBold.ttf; sourceTree = "<group>"; };
 		BA83919C2DF878C300C3EA55 /* BerlinX-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "BerlinX-Bold.ttf"; sourceTree = "<group>"; };
 		BA8391AA2DF878D800C3EA55 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		BA8391B32DF8799500C3EA55 /* electricityBotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = electricityBotApp.swift; sourceTree = "<group>"; };
 		BA8391BA2DF94C3900C3EA55 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BA8391BC2DF94EA200C3EA55 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
@@ -163,6 +163,8 @@
 		BAA2FB372E2BE5A5004E2CF4 /* PermissionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionRequest.swift; sourceTree = "<group>"; };
 		BAA2FB392E2BE5CD004E2CF4 /* SendNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendNotification.swift; sourceTree = "<group>"; };
 		BAA2FB3B2E2BEA41004E2CF4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BAA2FB442E2F8EEE004E2CF4 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		BAA2FB462E2F94E5004E2CF4 /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		BAC31EFD2E2BB248009DB0ED /* SendDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendDevice.swift; sourceTree = "<group>"; };
 		BAD4A1E12E030051001E7B21 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BAD4A1E42E030BBD001E7B21 /* UserSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
@@ -379,8 +381,7 @@
 		BA8391B72DF8A65300C3EA55 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				BA8391AC2DF878D800C3EA55 /* SplashScreenView.swift */,
-				BA8391AA2DF878D800C3EA55 /* ContentView.swift */,
+				BAA2FB432E2F8EE4004E2CF4 /* AppLaunch */,
 				BA4EDDB42E1531C500CB8F15 /* RootView.swift */,
 			);
 			path = Root;
@@ -436,6 +437,16 @@
 				BAA2FB3B2E2BEA41004E2CF4 /* AppDelegate.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		BAA2FB432E2F8EE4004E2CF4 /* AppLaunch */ = {
+			isa = PBXGroup;
+			children = (
+				BA8391AA2DF878D800C3EA55 /* ContentView.swift */,
+				BAA2FB462E2F94E5004E2CF4 /* SplashScreenView.swift */,
+				BAA2FB442E2F8EEE004E2CF4 /* WelcomeView.swift */,
+			);
+			path = AppLaunch;
 			sourceTree = "<group>";
 		};
 		BAD4A1E82E06CF11001E7B21 /* Statistics */ = {
@@ -632,6 +643,7 @@
 				BA4EDDAE2E1169AC00CB8F15 /* HourlyPowerStat.swift in Sources */,
 				BA8391BB2DF94C3900C3EA55 /* LoginView.swift in Sources */,
 				BA4EDDB02E11761200CB8F15 /* SimpleButtonView.swift in Sources */,
+				BAA2FB472E2F94E5004E2CF4 /* SplashScreenView.swift in Sources */,
 				BA21A8A32E280C6A00572135 /* BLEDevices.swift in Sources */,
 				BA21A8A52E280CE000572135 /* WiFiProvisioning.swift in Sources */,
 				BAA2FB382E2BE5A5004E2CF4 /* PermissionRequest.swift in Sources */,
@@ -645,6 +657,7 @@
 				BAD4A1EA2E06CF2F001E7B21 /* StatsView.swift in Sources */,
 				BA4EDDB82E15591A00CB8F15 /* MainView.swift in Sources */,
 				BA8391AE2DF878D800C3EA55 /* ContentView.swift in Sources */,
+				BAA2FB452E2F8EEE004E2CF4 /* WelcomeView.swift in Sources */,
 				BAA2FB3A2E2BE5CD004E2CF4 /* SendNotification.swift in Sources */,
 				BA21A8A12E28007200572135 /* BluetoothManager.swift in Sources */,
 				BAF8B3502E0718BC00B454F7 /* BackNavigationView.swift in Sources */,
@@ -659,7 +672,6 @@
 				BA21A8912E21831E00572135 /* APIService.swift in Sources */,
 				BAC31EFE2E2BB248009DB0ED /* SendDevice.swift in Sources */,
 				BA21A8A72E29157900572135 /* CustomProgressView.swift in Sources */,
-				BA8391B02DF878D800C3EA55 /* SplashScreenView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

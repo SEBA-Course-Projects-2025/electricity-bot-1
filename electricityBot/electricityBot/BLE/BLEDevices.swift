@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct BLEDevices: View {
-    @Environment(\.dismiss) var dismiss
     @ObservedObject var bluetooth = BluetoothManager.shared
     @State private var navToProvision = false
+    @State private var navBack = false
     @EnvironmentObject var userSession: UserSession
 
     var body: some View {
@@ -75,6 +75,14 @@ struct BLEDevices: View {
         .navigationBarBackButtonHidden(true)
         .navigationDestination(isPresented: $navToProvision) {
             WiFiProvisioningView()
+        }
+        .navigationDestination(isPresented: $navBack) {
+            UserDevicesView()
+        }
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                BackNavigation(navToContent: $navBack)
+            }
         }
     }
     

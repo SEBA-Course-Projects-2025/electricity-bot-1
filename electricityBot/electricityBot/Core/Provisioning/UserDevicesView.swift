@@ -54,6 +54,7 @@ struct UserDevicesView: View {
                         .padding(.bottom)
                     LogOutView {
                         userSession.logout()
+                        navToContent = true
                     }
                 }
                 .padding(32)
