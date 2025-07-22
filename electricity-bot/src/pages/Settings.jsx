@@ -21,10 +21,25 @@ const Settings = () => {
     navigate("/auth");
   };
 
-  const handleResetDevice = () => {
+  const handleResetDevice = async () => {
+  if (!selectedDeviceId) {
+    alert("No device selected.");
+    return;
+  }
+
+  if (!window.confirm("Are you sure you want to reset this device?")) {
+    return;
+  }
+
+  try {
+    await deleteUserDevice(selectedDeviceId);
     setSelectedDeviceId(null);
-    alert("Device reseted. Please select a new device.");
-  };
+    alert("Device reset. Please select a new device.");
+    navigate("/devices");
+  } catch (err) {
+    alert(`Failed to reset device: ${err.message || err}`);
+  }
+};
 
   return (
     <div className={styles.container}>

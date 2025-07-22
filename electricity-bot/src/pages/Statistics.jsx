@@ -3,8 +3,12 @@ import { useDevice } from "../context/DeviceContext";
 import { useAuth } from "../context/AuthContext";
 import styles from "./Statistics.module.css";
 
+// ---- utils ----
 const toDate = (ts) => (ts ? new Date(ts) : null);
 const clamp01 = (n) => (n < 0 ? 0 : n > 1 ? 1 : n);
+const HOUR_MS = 60 * 60 * 1000;
+const DAY_MS = 24 * HOUR_MS;
+
 const formatDurationHM = (ms) => {
   const mins = Math.floor(ms / 60000);
   const h = Math.floor(mins / 60);
@@ -15,20 +19,23 @@ const formatDurationHM = (ms) => {
 function bucketDailyOnMs(events) {
   const arr = new Array(24).fill(0);
   if (events.length < 2) return arr;
+
   for (let i = 0; i < events.length - 1; i++) {
     const cur = events[i];
     const next = events[i + 1];
+    if (!cur.outgate_status) continue;
     const start = toDate(cur.timestamp);
     const end = toDate(next.timestamp);
     if (!start || !end) continue;
-    if (!cur.outgate_status) continue;
-    let cursor = new Date(start);
+
+    let cursor = start;
     while (cursor < end) {
       const hourIdx = cursor.getHours();
       const hourEnd = new Date(cursor);
       hourEnd.setMinutes(59, 59, 999);
       const sliceEnd = end < hourEnd ? end : hourEnd;
-      arr[hourIdx] += sliceEnd - cursor;
+      const sliceMs = sliceEnd - cursor;
+      if (sliceMs > 0) arr[hourIdx] += sliceMs;
       cursor = new Date(hourEnd.getTime() + 1);
     }
   }
@@ -41,17 +48,18 @@ function bucketWeeklyOnMs(events) {
   for (let i = 0; i < events.length - 1; i++) {
     const cur = events[i];
     const next = events[i + 1];
+    if (!cur.outgate_status) continue;
     const start = toDate(cur.timestamp);
     const end = toDate(next.timestamp);
     if (!start || !end) continue;
-    if (!cur.outgate_status) continue;
-    let cursor = new Date(start);
+    let cursor = start;
     while (cursor < end) {
       const dayIdx = cursor.getDay();
       const dayEnd = new Date(cursor);
       dayEnd.setHours(23, 59, 59, 999);
       const sliceEnd = end < dayEnd ? end : dayEnd;
-      arr[dayIdx] += sliceEnd - cursor;
+      const sliceMs = sliceEnd - cursor;
+      if (sliceMs > 0) arr[dayIdx] += sliceMs;
       cursor = new Date(dayEnd.getTime() + 1);
     }
   }
@@ -97,8 +105,45 @@ const Statistics = () => {
         return res.json();
       })
       .then((data) => {
-        const evs = Array.isArray(data?.events) ? data.events : [];
-        evs.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp));
+        let evs = Array.isArray(data?.events) ? data.events : [];
+        evs.sort(
+          (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+        );
+
+        const now = new Date();
+        const periodStart = new Date(
+          now.getTime() - (isWeekly ? 7 * DAY_MS : DAY_MS)
+        );
+        const periodEnd = now;
+
+        // keep only those inside period *or* straddling start boundary
+        evs = evs.filter((e) => {
+          const t = new Date(e.timestamp).getTime();
+          return t >= periodStart.getTime() && t <= periodEnd.getTime();
+        });
+
+        // if we lost leading history (first event starts after periodStart),
+        // prepend synthetic boundary event carrying first known state
+        if (evs.length > 0) {
+          const first = evs[0];
+          const firstT = new Date(first.timestamp).getTime();
+          if (firstT > periodStart.getTime()) {
+            evs.unshift({
+              timestamp: periodStart.toISOString(),
+              outgate_status: first.outgate_status,
+            });
+          }
+          // append synthetic trailing event at periodEnd w/ last known state
+          const last = evs[evs.length - 1];
+          const lastT = new Date(last.timestamp).getTime();
+          if (lastT < periodEnd.getTime()) {
+            evs.push({
+              timestamp: periodEnd.toISOString(),
+              outgate_status: last.outgate_status,
+            });
+          }
+        }
+
         setEvents(evs);
       })
       .catch((err) => {
@@ -116,26 +161,33 @@ const Statistics = () => {
   const normalized = useMemo(() => {
     if (!buckets.length) return [];
     if (isWeekly) {
-      const dayMs = 24 * 60 * 60 * 1000;
       const sunFirst = buckets;
       const monFirst = [
-        sunFirst[1], sunFirst[2], sunFirst[3],
-        sunFirst[4], sunFirst[5], sunFirst[6], sunFirst[0]
+        sunFirst[1],
+        sunFirst[2],
+        sunFirst[3],
+        sunFirst[4],
+        sunFirst[5],
+        sunFirst[6],
+        sunFirst[0],
       ];
-      return monFirst.map((ms) => clamp01(ms / dayMs));
+      return monFirst.map((ms) => clamp01(ms / DAY_MS));
     } else {
-      const hourMs = 60 * 60 * 1000;
-      return buckets.map((ms) => clamp01(ms / hourMs));
+      return buckets.map((ms) => clamp01(ms / HOUR_MS));
     }
   }, [buckets, isWeekly]);
 
-  const columns = useMemo(() => {
-    return normalized.map((v, i) => ({
-      v,
-      label: isWeekly ? WEEK_LABELS_MON_FIRST[i] : `${String(i).padStart(2, "0")}:00`,
-      tooltip: `${Math.round(v * 100)}% Power ON`,
-    }));
-  }, [normalized, isWeekly]);
+  const columns = useMemo(
+    () =>
+      normalized.map((v, i) => ({
+        v,
+        label: isWeekly
+          ? WEEK_LABELS_MON_FIRST[i]
+          : `${String(i).padStart(2, "0")}:00`,
+        tooltip: `${Math.round(v * 100)}% Power ON`,
+      })),
+    [normalized, isWeekly]
+  );
 
   const offDuration = useMemo(() => formatDurationHM(totalOffMs(events)), [events]);
 
@@ -144,22 +196,37 @@ const Statistics = () => {
       <h1 className={styles.heading}>
         {isWeekly ? "Statistics: Last 7 Days" : "Statistics: Last 24 Hours"}
       </h1>
-      <button className={styles.toggleBtn} onClick={() => setIsWeekly((w) => !w)}>
+
+      <button
+        className={styles.toggleBtn}
+        onClick={() => setIsWeekly((w) => !w)}
+      >
         {isWeekly ? "Show daily statistics" : "Show weekly statistics"}
       </button>
 
       {loading && <p>Loading...</p>}
       {error && <p className={styles.error}>{error}</p>}
-      {!loading && !error && events.length === 0 && <p>No statistics available to display.</p>}
+      {!loading && !error && events.length === 0 && (
+        <p>No statistics available to display.</p>
+      )}
+
       {!loading && !error && events.length > 0 && (
         <>
           <p className={styles.summary}>
             Power off duration: <strong>{offDuration}</strong>
           </p>
-          <div className={`${styles.chartScroller} ${isWeekly ? styles.weekly : styles.daily}`}>
+
+          <div
+            className={`${styles.chartScroller} ${
+              isWeekly ? styles.weekly : styles.daily
+            }`}
+          >
             {columns.map((col, i) => (
               <div key={i} className={styles.col} title={col.tooltip}>
-                <div className={styles.bar} style={{ height: `${col.v * 240}px` }} />
+                <div
+                  className={styles.bar}
+                  style={{ height: `${col.v * 240}px` }}
+                />
                 <div className={styles.labelText}>{col.label}</div>
               </div>
             ))}

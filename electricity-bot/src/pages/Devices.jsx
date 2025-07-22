@@ -41,7 +41,7 @@ const Devices = () => {
     if (!window.confirm("Delete this device?")) return;
     try {
       await deleteUserDevice(id);
-      setDevices((ds) => ds.filter((d) => d.id !== id));
+      setDevices((ds) => ds.filter((d) => d.device_id !== id));
     } catch (err) {
       alert("Delete failed");
     }

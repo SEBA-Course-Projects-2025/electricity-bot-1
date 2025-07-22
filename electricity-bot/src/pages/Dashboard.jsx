@@ -30,13 +30,14 @@ const Dashboard = () => {
       return res.json();
     })
     .then(data => {
-      setStatus(data.power);
+      setStatus(data.outgate_status);
 
-      if (data.duration) {
-        const sec = data.duration;
-        const h = Math.floor(sec / 3600);
-        const m = Math.floor((sec % 3600) / 60);
-        const s = sec % 60;
+      if (data.timestamp) {
+        const lastChange = new Date(data.timestamp);
+        const now = new Date();
+        const diffSec = Math.floor((now - lastChange) / 1000);
+        const h = Math.floor(diffSec / 3600);
+        const m = Math.floor((diffSec % 3600) / 60);
         setDurationFormatted(`${h} hours ${m} mins`);
       } else {
         setDurationFormatted("-");
