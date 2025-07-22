@@ -2,11 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useDevice } from "../context/DeviceContext";
 import styles from "./Settings.module.css";
+import { deleteUserDevice } from "../services/DeviceService";
 
 const Settings = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const { setSelectedDeviceId } = useDevice();
+  const { selectedDeviceId, setSelectedDeviceId } = useDevice(); // Додаємо selectedDeviceId
 
   const getInitials = (fullName) => {
     if (!fullName) return "NA";
@@ -22,24 +23,24 @@ const Settings = () => {
   };
 
   const handleResetDevice = async () => {
-  if (!selectedDeviceId) {
-    alert("No device selected.");
-    return;
-  }
+    if (!selectedDeviceId) {
+      alert("No device selected.");
+      return;
+    }
 
-  if (!window.confirm("Are you sure you want to reset this device?")) {
-    return;
-  }
+    if (!window.confirm("Are you sure you want to reset this device?")) {
+      return;
+    }
 
-  try {
-    await deleteUserDevice(selectedDeviceId);
-    setSelectedDeviceId(null);
-    alert("Device reset. Please select a new device.");
-    navigate("/devices");
-  } catch (err) {
-    alert(`Failed to reset device: ${err.message || err}`);
-  }
-};
+    try {
+      await deleteUserDevice(selectedDeviceId);
+      setSelectedDeviceId(null);
+      alert("Device reset. Please select a new device.");
+      navigate("/devices");
+    } catch (err) {
+      alert(`Failed to reset device: ${err.message || err}`);
+    }
+  };
 
   return (
     <div className={styles.container}>
