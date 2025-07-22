@@ -4,9 +4,11 @@ from gi.repository import GLib
 import subprocess
 import time
 from pathlib import Path
+import threading
+import textwrap
 
-INTERNET_CONFIG_PATH = "/etc/wpa_supplicant/wpa_supplicant.conf"
-DEVICE_CONFIG_PATH = "/electricity_bot/device_config.txt"
+INTERNET_CONFIG_PATH = "/etc/wpa_supplicant/wpa_supplicant-wlan0.conf"
+DEVICE_CONFIG_PATH = "/home/user/electricity_bot/device_config.txt"
 
 class WiFiProvisioningService(Service):
     def __init__(self, bus, index):
@@ -38,27 +40,31 @@ class PasswordCharacteristic(Characteristic):
     def WriteValue(self, value, options):
         self.service.password = bytes(value)
         print(f"Get password: {self.service.password.decode()}")
+        self.maybe_try_to_connect()
+
+    def maybe_try_to_connect(self):
         if self.service.ssid and self.service.password:
-            self.try_connect()
+            threading.Thread(target=self.try_to_connect, daemon=True).start()
 
     def try_to_connect(self):
         ssid = self.service.ssid.decode()
         password = self.service.password.decode()
-        config = f"""
-        country=UA
-        ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-        update_config=1
+        config = textwrap.dedent(f"""\
+            country=UA
+            ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+            update_config=1
 
-        network={{
-            ssid="{ssid}"
-            psk="{password}"
-            key_mgmt=SAE
-        }}
-        """
+            network={{
+                ssid="{ssid}"
+                psk="{password}"
+            }}
+        """)
+
         with open(INTERNET_CONFIG_PATH, "w") as f:
-            f.write(config.strip())
+            f.write(config)
         subprocess.run(["sudo", "wpa_cli", "-i", "wlan0", "reconfigure"])
         time.sleep(5)
+        subprocess.run(["sudo", "dhclient", "wlan0"])
         status_output = subprocess.check_output(["wpa_cli", "-i", "wlan0", "status"]).decode()
         if "wpa_state=COMPLETED" not in status_output:
             print("Invalid SSID or password")
@@ -116,14 +122,15 @@ class ScannedNetworksCharacteristic(Characteristic):
 
     def scan_wifi(self):
         try:
-            result = subprocess.run(["nmcli", "-t", "-f", "SSID", "dev", "wifi"], capture_output=True, text=True, check=True)
-            networks = result.stdout.strip().split('\n')
-            ssids = []
-            for ssid in networks:
-                ssid = ssid.strip()
-                if ssid:
-                    ssids.append(ssid)
-            return ssids
+            result = subprocess.run(["sudo", "iwlist", "wlan0", "scan"], capture_output=True, text=True, check=True)
+            networks = []
+            for line in result.stdout.split('\n'):
+                line = line.strip()
+                if line.startswith("ESSID:"):
+                    ssid = line.split("ESSID:")[1].strip().strip('"')
+                    if ssid:
+                        networks.append(ssid)
+            return networks
 
         except Exception as e:
             print(f"Wi-Fi scan failed: {e}")
@@ -134,6 +141,7 @@ class ScannedNetworksCharacteristic(Characteristic):
 class DeviceIDCharacteristic(Characteristic):
     def __init__(self, bus, index, service):
         super().__init__(bus, index, "a1ddeaf4-cfd8-4a7c-aa8d-ac18df3f8745", ["read"], service)
+        self.config_path = Path(DEVICE_CONFIG_PATH)
 
     def ReadValue(self, options):
         if not self.config_path.exists():
@@ -144,4 +152,3 @@ class DeviceIDCharacteristic(Characteristic):
 
         print(f"Reading Device ID: {device_id}")
         return dbus.ByteArray(device_id.encode("utf-8"))
-

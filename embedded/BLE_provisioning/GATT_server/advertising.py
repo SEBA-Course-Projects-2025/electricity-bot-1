@@ -41,3 +41,4 @@ def start_advertising(bus):
         reply_handler=lambda: print("Advertising started"),
         error_handler=lambda e: print(f"Error during advertising: {e}")
     )
+    
