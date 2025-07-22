@@ -5,7 +5,7 @@ export const getCurrentUser = async (accessToken) => {
     throw new Error("Missing token");
   }
 
-  const response = await fetch(`${API_BASE}/user`, {
+  const response = await fetch(`${API_BASE}/api/user`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${accessToken}`,
