@@ -1,0 +1,50 @@
+.tabBar {
+  display: flex;
+  justify-content: space-around;
+  padding: 18px 0;
+  background-color: white;
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.12);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 999;
+}
+
+.tabButton {
+  background: none;
+  border: none;
+  font-family: "Poppins", sans-serif;
+  color: #878787;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  padding: 10px 18px;
+  transition: color 0.3s ease, transform 0.2s ease;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.tabButton:hover {
+  color: #000000;
+  transform: scale(1.05);
+}
+
+.active {
+  color: #000000;
+}
+
+.icon {
+  font-size: 35px;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 480px) {
+  .tabButton {
+    font-size: 12px;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
+}
