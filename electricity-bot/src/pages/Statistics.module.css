@@ -2,7 +2,7 @@
   max-width: 1100px;
   margin: 50px auto;
   padding: 60px 64px;
-  font-family: "BerlinBold", sans-serif;
+  font-family: "Montserrat Regular", sans-serif;
   background: #fff;
   border-radius: 40px;
   box-shadow: 0 16px 60px rgba(0, 0, 0, 0.15);
@@ -17,21 +17,22 @@
 }
 
 .toggleBtn {
-  background-color: #f0c419;
-  border: none;
-  padding: 20px 40px;
-  margin-bottom: 40px;
+  font-family: "Montserrat Regular", sans-serif;
+  background: linear-gradient(145deg, #ffffff, #ffffff);
+  border: 1px solid #000000;
+  padding: 24px 80px;
   border-radius: 20px;
   cursor: pointer;
+  color: black;
   font-weight: 700;
   font-size: 24px;
-  color: #222;
-  box-shadow: 0 8px 24px rgba(240, 196, 25, 0.6);
-  transition: background 0.3s ease, transform 0.15s ease;
+  transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+  box-shadow: 0 6px 18px rgba(122, 121, 121, 0.5);
 }
 .toggleBtn:hover {
-  background-color: #d1aa11;
+  background: #ffffff;
   transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(121, 122, 121, 0.6);
 }
 .toggleBtn:active {
   transform: scale(0.96);
@@ -83,14 +84,14 @@
 
 .bar {
   width: 50px;
-  background: linear-gradient(180deg, #ffd93b, #f0c419);
+  background: linear-gradient(180deg, #1cdb65, #1eca55);
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 5px 14px rgba(240, 196, 25, 0.5);
+  box-shadow: 0 5px 14px rgba(29, 200, 95, 0.663);
 }
 .bar:hover {
   transform: scale(1.1);
-  box-shadow: 0 10px 26px rgba(240, 196, 25, 0.7);
+  box-shadow: 0 10px 26px rgba(29, 200, 95, 0.663);
 }
 
 .labelText {

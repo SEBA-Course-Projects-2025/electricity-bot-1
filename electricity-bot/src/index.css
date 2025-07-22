@@ -1,17 +1,3 @@
-@font-face {
-  font-family: 'BerlinBold';
-  src: url('./fonts/BerlinBold.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'BerlinRegular';
-  src: url('./fonts/BerlinRegular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
 :root {
   --brand-bg: #f0f6ff;
   --brand-accent: #ffeb6b;

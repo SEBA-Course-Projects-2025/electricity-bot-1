@@ -6,7 +6,7 @@
   width: 90%;
   margin: 120px auto;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  font-family: "BerlinBold", sans-serif;
+  font-family: "Montserrat Regular", sans-serif;
   font-size: clamp(16px, 2vw, 20px);
   text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -30,7 +30,7 @@
 }
 
 .statusTitle {
-  font-family: "BerlinBold", sans-serif;
+  font-family: "Montserrat Regular", sans-serif;
   font-weight: 700;
   font-size: clamp(28px, 3.5vw, 36px);
   margin-bottom: 12px;

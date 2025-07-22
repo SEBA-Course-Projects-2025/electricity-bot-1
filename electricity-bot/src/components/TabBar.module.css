@@ -14,7 +14,7 @@
   background: none;
   border: none;
   font-family: "Poppins", sans-serif;
-  color: #777;
+  color: #878787;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,12 +26,12 @@
 }
 
 .tabButton:hover {
-  color: #f9b700;
+  color: #000000;
   transform: scale(1.05);
 }
 
 .active {
-  color: #f9b700;
+  color: #000000;
 }
 
 .icon {

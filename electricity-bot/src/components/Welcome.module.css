@@ -16,7 +16,7 @@
 }
 
 .welcomeText {
-  font-family: 'BerlinBold', sans-serif;
+  font-family: "Montserrat Regular", sans-serif;
   font-size: clamp(20px, 4vw, 50px);
     color: #000000;
 

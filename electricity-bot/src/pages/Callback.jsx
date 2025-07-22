@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { exchangeCodeForToken, saveTokens, saveUserId } from "../services/AuthService";
+import { exchangeCodeForToken, saveTokens, saveUserId, saveUserInfo } from "../services/AuthService";
 import { getCurrentUser } from "../services/UserService";
 import { AuthContext } from "../context/AuthContext";
 
@@ -35,7 +35,7 @@ const Callback = () => {
         try {
           const user = await getCurrentUser(access_token);
           setUser(user);
-          localStorage.setItem("user", JSON.stringify(user));
+          saveUserInfo(user);
         } catch (err) {
           console.error("Failed to fetch user:", err);
         }

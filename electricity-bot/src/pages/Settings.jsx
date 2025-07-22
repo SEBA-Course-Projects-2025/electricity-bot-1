@@ -9,9 +9,9 @@ const Settings = () => {
   const { user, logout } = useAuth();
   const { selectedDeviceId, setSelectedDeviceId } = useDevice();
 
-  const getInitials = (fullName) => {
-    if (!fullName) return "NA";
-    const names = fullName.trim().split(" ");
+  const getInitials = (name) => {
+    if (!name) return "NA";
+    const names = name.trim().split(" ");
     return (
       names[0]?.[0]?.toUpperCase() + (names[1]?.[0]?.toUpperCase() || "")
     );
@@ -44,10 +44,10 @@ const Settings = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.greeting}>Hello, {user?.fullName || "User"}!</h1>
+      <h1 className={styles.greeting}>Hello, {user?.name || "User"}!</h1>
 
       <div className={styles.accountCard}>
-        <div className={styles.initials}>{getInitials(user?.fullName)}</div>
+        <div className={styles.initials}>{getInitials(user?.name)}</div>
         <div className={styles.accountInfo}>
           <div className={styles.email}>{user?.email || "noname@gmail.com"}</div>
           <button className={styles.changeUserBtn} onClick={handleChangeUser}>
@@ -59,7 +59,7 @@ const Settings = () => {
       <div className={styles.resetDevice}>
         <h2>Want to remove this device?</h2>
         <button className={styles.resetBtn} onClick={handleResetDevice}>
-          Reset
+          Hard Reset
         </button>
       </div>
 

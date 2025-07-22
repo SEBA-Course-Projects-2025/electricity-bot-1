@@ -14,7 +14,7 @@
 }
 
 .greeting {
-  font-family: "BerlinBold", sans-serif;
+  font-family: "Montserrat Regular", sans-serif;
   font-size: 48px;
   font-weight: 600;
   margin: 0 0 48px;
@@ -111,22 +111,23 @@
 }
 
 .resetBtn {
-  font-family: "BerlinBold", sans-serif;
-  background: linear-gradient(145deg, #f0c419, #ffd43b);
-  border: none;
+  font-family: "Montserrat Regular", sans-serif;
+  color: rgb(203, 22, 22);
+  background: linear-gradient(145deg, #ffffff, #ffffff);
+  border: 1px solid rgb(203, 22, 22);
+  border-radius: 12px;
   padding: 20px 48px;
   border-radius: 16px;
   cursor: pointer;
   font-weight: 600;
   font-size: 20px;
-  color: #222;
   transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
-  box-shadow: 0 6px 18px rgba(240, 196, 25, 0.5);
+  box-shadow: 0 6px 18px rgba(122, 121, 121, 0.5);
 }
 .resetBtn:hover {
-  background: linear-gradient(145deg, #d1aa11, #e2bb25);
+  background: linear-gradient(145deg, #fdfdfd, #ffffff);
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(240, 196, 25, 0.6);
+  box-shadow: 0 8px 24px rgba(255, 22, 22, 0.6);
 }
 .resetBtn:active {
   transform: scale(0.97);
@@ -140,23 +141,23 @@
 }
 
 .logoutBtn {
-  font-family: "BerlinBold", sans-serif;
-  background: linear-gradient(145deg, #e53e3e, #ff5e5e);
+  font-family: "Montserrat Regular", sans-serif;
+  background: linear-gradient(145deg, #ffffff, #ffffff);
   border: none;
   padding: 24px 80px;
   border-radius: 20px;
   cursor: pointer;
-  color: white;
+  color: black;
   font-weight: 700;
   font-size: 24px;
   transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
-  box-shadow: 0 6px 18px rgba(229, 62, 62, 0.5);
+  box-shadow: 0 6px 18px rgba(122, 121, 121, 0.5);
 }
 
 .logoutBtn:hover {
-  background: linear-gradient(145deg, #c53030, #e53e3e);
+  background: linear-gradient(145deg, #ffffff, #ffffff);
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(229, 62, 62, 0.6);
+  box-shadow: 0 8px 24px rgba(122, 121, 121, 0.6);
 }
 .logoutBtn:active {
   transform: scale(0.97);
