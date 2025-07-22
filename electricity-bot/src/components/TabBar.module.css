@@ -1,12 +1,13 @@
 .tabBar {
   display: flex;
   justify-content: space-around;
-  padding: 12px 0;
+  padding: 18px 0;
   background-color: white;
-  box-shadow: 0 -1px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 -2px 12px rgba(0, 0, 0, 0.12);
   position: fixed;
   bottom: 0;
   width: 100%;
+  z-index: 999;
 }
 
 .tabButton {
@@ -18,14 +19,15 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  padding: 6px 12px;
-  transition: color 0.3s ease;
+  padding: 10px 18px;
+  transition: color 0.3s ease, transform 0.2s ease;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 18px;
 }
 
 .tabButton:hover {
   color: #f9b700;
+  transform: scale(1.05);
 }
 
 .active {
@@ -33,6 +35,16 @@
 }
 
 .icon {
-  font-size: 24px;
-  margin-bottom: 4px;
+  font-size: 35px;
+  margin-bottom: 6px;
+}
+
+@media (max-width: 480px) {
+  .tabButton {
+    font-size: 12px;
+  }
+
+  .icon {
+    font-size: 24px;
+  }
 }

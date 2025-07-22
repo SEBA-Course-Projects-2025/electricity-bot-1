@@ -1,9 +1,30 @@
 .devicesWrapper {
-  max-width: 600px;
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
-  padding: 32px 16px;
-  font-family: "Poppins", sans-serif;
+  padding: clamp(24px, 4vw, 64px) clamp(16px, 10vw, 60px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.devicesTitle {
+  font-family: "BerlinBold", sans-serif;
+  font-size: clamp(28px, 4vw, 56px);
+  color: rgba(0, 0, 0, 0.9);
+  line-height: 1.1;
+  margin: 32px 0 16px;
   text-align: center;
+}
+
+.devicesSubtitle {
+  margin-top: 8px;
+  font-size: clamp(16px, 2vw, 22px);
+  opacity: 0.75;
+  text-align: center;
+  max-width: 600px;
 }
 
 .devicesList {
@@ -14,53 +35,94 @@
 }
 
 .actions {
+  margin-top: auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 16px;
+  width: 100%;
+  max-width: 480px;
 }
 
 .actions button {
-  padding: 10px 20px;
+  flex: 1 1 auto;
+  min-width: 180px;
+  padding: 16px 24px;
+  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 600;
   border: none;
-  border-radius: 8px;
-  background: #4f46e5;
-  color: #fff;
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--brand-text);
   cursor: pointer;
-  transition: .2s;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .actions button:hover {
-  background: #4338ca;
+  transform: scale(1.04);
+  box-shadow: 0 0 22px var(--brand-accent-strong);
 }
 
 .emptyState {
   text-align: center;
-  padding: 40px;
+  padding: clamp(40px, 5vw, 50px) clamp(24px, 20vw, 150px);
   background: linear-gradient(135deg, #fffbe6, #fff1b8);
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 24px;
+  max-width: min(600px, 100%);
+  margin: clamp(32px, 5vh, 64px) auto;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
   animation: fadeIn 0.8s ease-in-out;
 }
 
 .emptyState .icon {
-  font-size: 48px;
-  margin-bottom: 12px;
+  font-size: clamp(56px, 10vw, 96px);
+  margin-bottom: 16px;
   color: #ff9800;
+  text-shadow: 0 0 25px rgba(255, 235, 107, 0.9);
 }
 
 .emptyState h2 {
-  font-size: 1.5rem;
-  margin-bottom: 8px;
+  font-family: "SansSerifBold", sans-serif;
+  font-size: clamp(24px, 4vw, 36px);
+  margin-bottom: 10px;
   color: #333;
 }
 
 .emptyState p {
-  font-size: 1rem;
-  margin-bottom: 16px;
+  font-size: clamp(16px, 2vw, 20px);
+  margin-bottom: 24px;
   color: #555;
+  line-height: 1.35;
+}
+
+.emptyState .ctaBtn {
+  padding: 16px 32px;
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #000;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.emptyState .ctaBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 25px rgba(255, 215, 0, 0.9);
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 480px) {
+  .actions {
+    flex-direction: column;
+  }
+  .actions button {
+    width: 100%;
+  }
 }

@@ -57,17 +57,25 @@ const Devices = () => {
     await logout();
   };
 
-  if (loading) return <p>Loading devices...</p>;
-  if (errMsg) return (
-    <div className={styles.devicesWrapper}>
-      <p>{errMsg}</p>
-      <button onClick={handleLogout}>Logout</button>
-    </div>
-  );
+  if (loading) return <p className={styles.loadingText}>Loading devices...</p>;
+
+  if (errMsg)
+    return (
+      <div className={styles.devicesWrapper}>
+        <h1 className={styles.devicesTitle}>Your Devices</h1>
+        <p className={styles.devicesSubtitle}>{errMsg}</p>
+        <div className={styles.actions}>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      </div>
+    );
 
   return (
     <div className={styles.devicesWrapper}>
-      <h1>Your Devices</h1>
+      <h1 className={styles.devicesTitle}>Choose device</h1>
+      <p className={styles.devicesSubtitle}>
+        Manage your connected devices and track electricity status.
+      </p>
 
       {devices.length === 0 ? (
         <div className={styles.emptyState}>

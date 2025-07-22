@@ -11,6 +11,7 @@ import { DeviceProvider } from "./context/DeviceContext";
 import Layout from "./components/Layout";
 import Statistics from "./pages/Statistics";
 import Settings from "./pages/Settings";
+import "./index.css";
 
 function App() {
   return (

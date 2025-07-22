@@ -23,7 +23,7 @@ const Settings = () => {
 
   const handleResetDevice = () => {
     setSelectedDeviceId(null);
-    alert("Device deleted. Please select a new device.");
+    alert("Device reseted. Please select a new device.");
   };
 
   return (
