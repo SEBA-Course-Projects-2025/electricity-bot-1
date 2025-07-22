@@ -12,7 +12,7 @@ export const startKeycloakLogin = () => {
 };
 
 export const exchangeCodeForToken = async (code) => {
-  const response = await fetch(`${API_BASE}/auth/callback`, {
+  const response = await fetch(`${API_BASE}/api/auth/callback`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -75,7 +75,7 @@ export const logout = async () => {
 const redirectToLogin = () => {
   const realm = "electricity-bot";
   const clientId = "electricity-web-client";
-  const redirectUri = encodeURIComponent("https://bot-1.electricity-bot.online/auth");
+  const redirectUri = encodeURIComponent("https://bot-1.electricity-bot.online/api/auth");
   //const redirect = encodeURIComponent("http://localhost:5173/auth");
 };
 

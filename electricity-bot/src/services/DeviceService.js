@@ -7,7 +7,7 @@ export const getUserDevices = async (userId) => {
   const token = getAccessToken();
   if (!token) throw new Error("Not authenticated");
 
-  const resp = await fetch(`${API_BASE}/users/${userId}/devices`, {
+  const resp = await fetch(`${API_BASE}/api/users/${userId}/devices`, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -20,7 +20,7 @@ export const deleteUserDevice = async (deviceId) => {
   const token = getAccessToken();
   if (!token) throw new Error("Not authenticated");
 
-  const resp = await fetch(`${API_BASE}/devices/${deviceId}`, {
+  const resp = await fetch(`${API_BASE}/api/devices/${deviceId}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,

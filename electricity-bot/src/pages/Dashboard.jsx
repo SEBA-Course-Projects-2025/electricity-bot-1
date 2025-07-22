@@ -20,7 +20,7 @@ const Dashboard = () => {
     setLoading(true);
     setError(null);
 
-    fetch(`https://bot-1.electricity-bot.online/status/${selectedDeviceId}`, {
+    fetch(`https://bot-1.electricity-bot.online/api/status/${selectedDeviceId}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },

@@ -97,7 +97,7 @@ const Statistics = () => {
     setError(null);
 
     const period = isWeekly ? "week" : "day";
-    fetch(`https://bot-1.electricity-bot.online/statistics/${period}/${selectedDeviceId}`, {
+    fetch(`https://bot-1.electricity-bot.online/api/statistics/${period}/${selectedDeviceId}`, {
       headers: { Authorization: `Bearer ${accessToken}` },
     })
       .then((res) => {
