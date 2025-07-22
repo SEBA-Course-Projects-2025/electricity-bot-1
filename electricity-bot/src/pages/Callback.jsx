@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { exchangeCodeForToken, saveTokens, saveUserId } from "../services/AuthService";
-import { getCurrentUser } from "../services/UserService"; // ця функція з вище
+import { getCurrentUser } from "../services/UserService";
 import { AuthContext } from "../context/AuthContext";
 
 const Callback = () => {

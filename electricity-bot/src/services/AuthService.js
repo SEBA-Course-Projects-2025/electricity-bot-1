@@ -2,7 +2,8 @@ const API_BASE = "https://bot-1.electricity-bot.online";
 
 export const startKeycloakLogin = () => {
   const clientId = "electricity-web-client";
-  const redirectUri = encodeURIComponent("http://localhost:5173/web-callback");
+  const redirectUri = encodeURIComponent("https://bot-1.electricity-bot.online/web-callback");
+  //const redirectUri = encodeURIComponent("http://localhost:5173/web-callback");
   const realm = "electricity-bot";
 
   const authUrl = `${API_BASE}/admin/realms/${realm}/protocol/openid-connect/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=openid email profile`;
@@ -74,7 +75,8 @@ export const logout = async () => {
 const redirectToLogin = () => {
   const realm = "electricity-bot";
   const clientId = "electricity-web-client";
-  const redirect = encodeURIComponent("http://localhost:5173/auth");
+  const redirectUri = encodeURIComponent("https://bot-1.electricity-bot.online/auth");
+  //const redirect = encodeURIComponent("http://localhost:5173/auth");
 };
 
 export const saveUserInfo = (user) => {

@@ -7,7 +7,7 @@ import { deleteUserDevice } from "../services/DeviceService";
 const Settings = () => {
   const navigate = useNavigate();
   const { user, logout } = useAuth();
-  const { selectedDeviceId, setSelectedDeviceId } = useDevice(); // Додаємо selectedDeviceId
+  const { selectedDeviceId, setSelectedDeviceId } = useDevice();
 
   const getInitials = (fullName) => {
     if (!fullName) return "NA";
