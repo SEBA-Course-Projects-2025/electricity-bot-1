@@ -8,7 +8,7 @@ from application.device.device_service import DeviceService
 from pydantic import ValidationError
 
 
-@app.route("/devices", methods=["GET"])
+@app.route("/api/devices", methods=["GET"])
 @jwt_required()
 def list_devices():
     try:
@@ -35,7 +35,7 @@ def list_devices():
         return jsonify({"error": "Device fetch failed", "details": str(exception)}), 500
 
 
-@app.route("/devices/<device_id>", methods=["GET"])
+@app.route("/api/devices/<device_id>", methods=["GET"])
 @jwt_required()
 def get_device(device_id):
     if not DeviceService.is_valid_uuid(device_id):
@@ -67,7 +67,7 @@ def get_device(device_id):
         )
 
 
-@app.route("/devices/<device_id>/owners", methods=["GET"])
+@app.route("/api/devices/<device_id>/owners", methods=["GET"])
 @jwt_required()
 def get_device_owners(device_id):
     if not DeviceService.is_valid_uuid(device_id):
@@ -94,7 +94,7 @@ def get_device_owners(device_id):
         )
 
 
-@app.route("/devices/<device_id>", methods=["DELETE"])
+@app.route("/api/devices/<device_id>", methods=["DELETE"])
 @jwt_required()
 def delete_device_api(device_id):
     if not DeviceService.is_valid_uuid(device_id):
@@ -116,7 +116,7 @@ def delete_device_api(device_id):
         )
 
 
-@app.route("/devices", methods=["POST"])
+@app.route("/api/devices", methods=["POST"])
 @jwt_required()
 def create_device():
     try:
@@ -165,7 +165,7 @@ def create_device():
         )
 
 
-@app.route("/users/<user_id>/devices", methods=["GET"])
+@app.route("/api/users/<user_id>/devices", methods=["GET"])
 @jwt_required()
 def list_user_devices(user_id):
     try:

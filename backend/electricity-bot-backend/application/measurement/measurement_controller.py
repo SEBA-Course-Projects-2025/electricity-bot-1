@@ -10,7 +10,7 @@ from datetime import datetime, timezone, timedelta
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
-@app.route("/measurements", methods=["POST"])
+@app.route("/api/measurements", methods=["POST"])
 def receive_measurement():
     try:
         data = request.get_json() or {}
@@ -88,13 +88,13 @@ def receive_measurement():
         )
 
 
-@app.route("/statistics/day/<device_id>", methods=["GET"])
+@app.route("/api/statistics/day/<device_id>", methods=["GET"])
 @jwt_required()
 def get_statistics_day(device_id):
     return _get_statistics(device_id, days=1)
 
 
-@app.route("/statistics/week/<device_id>", methods=["GET"])
+@app.route("/api/statistics/week/<device_id>", methods=["GET"])
 @jwt_required()
 def get_statistics_week(device_id):
     return _get_statistics(device_id, days=7)
@@ -142,7 +142,7 @@ def _get_statistics(device_id: str, days: int):
         )
 
 
-@app.route("/status/<device_id>", methods=["GET"])
+@app.route("/api/status/<device_id>", methods=["GET"])
 @jwt_required()
 def get_current_status(device_id: str):
     try:

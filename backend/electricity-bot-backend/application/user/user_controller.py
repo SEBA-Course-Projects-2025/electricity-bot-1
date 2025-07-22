@@ -5,7 +5,7 @@ from application.user.user_service import UserService
 user_bp = Blueprint("user_bp", __name__)
 
 
-@user_bp.route("/user", methods=["GET"])
+@user_bp.route("/api/user", methods=["GET"])
 @jwt_required()
 def get_current_user():
     user_id = get_jwt_identity()
@@ -30,7 +30,7 @@ def get_current_user():
         )
 
 
-@user_bp.route("/user/devices", methods=["GET"])
+@user_bp.route("/api/user/devices", methods=["GET"])
 @jwt_required()
 def get_user_devices():
     user_id = get_jwt_identity()
@@ -40,7 +40,7 @@ def get_user_devices():
     return jsonify({"devices": devices}), 200
 
 
-@user_bp.route("/user", methods=["DELETE"])
+@user_bp.route("/api/user", methods=["DELETE"])
 @jwt_required()
 def delete_current_user():
     user_id = get_jwt_identity()

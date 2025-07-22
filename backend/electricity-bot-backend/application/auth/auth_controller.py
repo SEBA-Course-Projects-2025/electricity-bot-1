@@ -7,7 +7,7 @@ from application.email_utils.email_sender import send_welcome_email
 auth_bp = Blueprint("auth_bp", __name__)
 
 
-@auth_bp.route("/auth/callback", methods=["POST"])
+@auth_bp.route("/api/auth/callback", methods=["POST"])
 def keycloak_callback():
     data = request.get_json()
     code = data.get("code")
@@ -75,7 +75,7 @@ def keycloak_callback():
         )
 
 
-@auth_bp.route("/auth/logout", methods=["POST"])
+@auth_bp.route("/api/auth/logout", methods=["POST"])
 @jwt_required()
 def logout_user():
     user_id = get_jwt_identity()
@@ -116,7 +116,7 @@ def logout_user():
     )
 
 
-@auth_bp.route("/auth/refresh", methods=["POST"])
+@auth_bp.route("/api/auth/refresh", methods=["POST"])
 def refresh_tokens():
     data = request.get_json()
     refresh_token = data.get("refresh_token")
