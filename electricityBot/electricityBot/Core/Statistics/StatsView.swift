@@ -66,11 +66,6 @@ struct StatsView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                BackNavigation { dismiss() }
-            }
-        }
     }
     
     private var WeekStatsView: some View {
