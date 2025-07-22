@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import { DeviceProvider } from "./context/DeviceContext";
 import Layout from "./components/Layout";
 import Statistics from "./pages/Statistics";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -45,6 +46,16 @@ function App() {
                 <ProtectedRoute>
                   <Layout>
                     <Dashboard />
+                  </Layout>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <Layout>
+                    <Settings />
                   </Layout>
                 </ProtectedRoute>
               }

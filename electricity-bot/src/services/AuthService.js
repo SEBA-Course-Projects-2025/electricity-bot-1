@@ -66,6 +66,7 @@ export const logout = async () => {
 
   localStorage.removeItem("access_token");
   localStorage.removeItem("refresh_token");
+  localStorage.removeItem("user");
 
   redirectToLogin();
 };
@@ -76,4 +77,20 @@ const redirectToLogin = () => {
   const redirect = encodeURIComponent("http://localhost:5173/auth");
 
   window.location.href = `${API_BASE}/admin/realms/${realm}/protocol/openid-connect/logout?client_id=${clientId}&post_logout_redirect_uri=${redirect}`;
+};
+
+// Збереження інформації користувача
+export const saveUserInfo = (user) => {
+  if (user) localStorage.setItem("user", JSON.stringify(user));
+};
+
+// Отримання інформації користувача
+export const getUserInfo = () => {
+  const userStr = localStorage.getItem("user");
+  if (!userStr) return null;
+  try {
+    return JSON.parse(userStr);
+  } catch {
+    return null;
+  }
 };
