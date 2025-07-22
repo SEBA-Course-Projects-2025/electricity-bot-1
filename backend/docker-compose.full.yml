@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: electricity-bot-bd
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    #  - ./backend/initdb.d:/docker-entrypoint-initdb.d
+    networks:
+      - electricity
+
+  flask:
+    build:
+      context: ./electricity-bot-backend
+    container_name: electricity-bot-flask
+    restart: always
+    depends_on:
+      - mysql
+      - keycloak
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+    networks:
+      - electricity
+    
+    extra_hosts:
+      - "localhost:host-gateway"
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0.3
+    container_name: electricity-bot-keycloak
+    command: start-dev --import-realm
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    env_file:
+      - .env
+    environment:
+      KC_DB: mysql
+      KC_DB_URL: jdbc:mysql://mysql:3306/keycloak
+      KC_DB_USERNAME: ${MYSQL_USER}
+      KC_DB_PASSWORD: ${MYSQL_PASSWORD}
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+    volumes:
+      - ./electricity-bot-backend/keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
+    networks:
+      - electricity
+
+volumes:
+  mysql_data:
+
+networks:
+  electricity:
+    driver: bridge

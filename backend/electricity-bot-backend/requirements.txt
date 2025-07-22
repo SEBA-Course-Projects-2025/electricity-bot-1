@@ -1,0 +1,15 @@
+flask==3.0.0
+pydantic[email]>=2.0.0
+alembic==1.13.1
+sqlalchemy>=2.0.0
+apscheduler>=3.9.1
+pymysql>=1.0.0
+cryptography>=3.4.7
+python-dotenv>=1.0.0
+google-auth>=2.0.0
+requests==2.32.2
+flask-jwt-extended
+flask_cors
+premailer      
+python-dotenv
+gunicorn

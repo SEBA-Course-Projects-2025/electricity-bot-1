@@ -1,0 +1,3 @@
+
+*.pyc
+backend/electricity-bot-backend/alembic/versions/add_previous_owner_id.py
