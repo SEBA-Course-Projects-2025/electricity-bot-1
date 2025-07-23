@@ -41,16 +41,18 @@ class MeasurementService:
 
     def check_for_disconnected_devices(self):
         now = datetime.now(timezone.utc)
-        threshold = now - timedelta(minutes=2)
+        threshold = now - timedelta(minutes=1, seconds=11)
         devices = self.db.query(DeviceModel).all()
 
         for device in devices:
-            last_seen = device.last_seen
+            last_true = (
+                self.db.query(MeasurementModel)
+                .filter_by(device_id=device.device_id, outgate_status=True)
+                .order_by(MeasurementModel.timestamp.desc())
+                .first()
+            )
 
-            if last_seen is not None and last_seen.tzinfo is None:
-                last_seen = last_seen.replace(tzinfo=timezone.utc)
-
-            if last_seen is None or last_seen < threshold:
+            if last_true is None or last_true.timestamp < threshold:
                 last = (
                     self.db.query(MeasurementModel)
                     .filter_by(device_id=device.device_id)
