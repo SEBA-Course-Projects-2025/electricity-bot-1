@@ -1,0 +1,61 @@
+.statusCard {
+  background-color: #ffffff;
+  border-radius: 28px;
+  padding: clamp(32px, 5vw, 64px);
+  max-width: 600px;
+  width: 90%;
+  margin: 120px auto;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  font-family: "Montserrat Regular", sans-serif;
+  font-size: clamp(16px, 2vw, 20px);
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.statusCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.statusImage {
+  width: clamp(140px, 25vw, 200px);
+  height: auto;
+  margin-bottom: 32px;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+}
+
+.statusText {
+  margin-top: 12px;
+  padding: 0 8px;
+}
+
+.statusTitle {
+  font-family: "Montserrat Regular", sans-serif;
+  font-weight: 700;
+  font-size: clamp(28px, 3.5vw, 36px);
+  margin-bottom: 12px;
+  color: rgba(26, 26, 26, 0.9);
+  line-height: 1.2;
+}
+
+.statusSubtitle {
+  font-weight: 400;
+  font-size: clamp(16px, 2vw, 22px);
+  color: #7a7a7a;
+  line-height: 1.4;
+}
+
+@media (max-width: 480px) {
+  .statusCard {
+    margin: 20px 16px;
+    padding: 20px;
+  }
+
+  .statusTitle {
+    font-size: 20px;
+  }
+
+  .statusSubtitle {
+    font-size: 14px;
+  }
+}

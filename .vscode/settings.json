@@ -1,0 +1,30 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "127.0.0.1",
+            "port": 3307,
+            "driver": "MySQL",
+            "name": "electricity-bot",
+            "database": "electricity_bot_bd",
+            "username": "user"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "95.217.128.16",
+            "port": 3307,
+            "driver": "MySQL",
+            "name": "electricity-bot-prod",
+            "database": "electricity_bot_bd",
+            "username": "user"
+        }
+    ]
+}

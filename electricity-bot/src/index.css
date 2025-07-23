@@ -1,0 +1,16 @@
+:root {
+  --brand-bg: #f0f6ff;
+  --brand-accent: #ffeb6b;
+  --brand-accent-strong: rgba(255, 215, 0, 0.9);
+  --brand-text: #000;
+  --brand-primary: #4f46e5;
+  --brand-primary-hover: #4338ca;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--brand-bg);
+  color: var(--brand-text);
+  font-family: "Poppins", sans-serif;
+}
