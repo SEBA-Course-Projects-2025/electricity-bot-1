@@ -55,6 +55,8 @@ services:
       KC_HTTP_RELATIVE_PATH: /admin 
     volumes:
       - ./electricity-bot-backend/keycloak/realm-export.json:/opt/keycloak/data/import/realm-export.json
+      - ./electricity-bot-backend/keycloak-theme/my-custom:/opt/keycloak/themes/my-custom:ro
+
     networks:
       - electricity
     restart: always
@@ -69,7 +71,7 @@ services:
     - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     - ./nginx/proxy_params:/etc/nginx/proxy_params:ro
     - /etc/letsencrypt:/etc/letsencrypt:ro 
-    - ./electricity-bot/dist:/usr/share/nginx/html:ro
+    - /root/electricity-bot-1/electricity-bot/dist:/usr/share/nginx/html:ro
     depends_on:
       - flask
       - keycloak
