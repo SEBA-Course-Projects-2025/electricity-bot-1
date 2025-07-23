@@ -10,7 +10,7 @@ import Foundation
 struct GetStatistics {
     static func sendRequestToBackend(deviceID: String, days: Int) async throws -> PowerStatsRequest {
         let path = days == 1 ? "day" : "week"
-        guard let url = URL(string: "https://bot-1.electricity-bot.online/statistics/\(path)/\(deviceID)") else {
+        guard let url = URL(string: "https://bot-1.electricity-bot.online/api/statistics/\(path)/\(deviceID)") else {
             throw URLError(.badURL)
         }
         

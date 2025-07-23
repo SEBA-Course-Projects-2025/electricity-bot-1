@@ -121,6 +121,7 @@ extension BluetoothManager: CBPeripheralDelegate {
                 ssidChar = char
             case "a1ddeaf4-cfd8-4a7c-aa8d-ac18df3f8743":
                 statusChar = char
+                peripheral.setNotifyValue(true, for: char)
             case "a1ddeaf4-cfd8-4a7c-aa8d-ac18df3f8742":
                 passChar = char
             case "a1ddeaf4-cfd8-4a7c-aa8d-ac18df3f8744":
@@ -131,6 +132,17 @@ extension BluetoothManager: CBPeripheralDelegate {
             }
         }
     }
+    
+    func handleStatusUpdate(_ data: Data) {
+        if let statusString = String(data: data, encoding: .utf8) {
+            DispatchQueue.main.async {
+                self.statusMessage = statusString.trimmingCharacters(in: .whitespacesAndNewlines)
+            }
+        } else {
+            print("Failed to decode status message from data: \(data)")
+        }
+    }
+
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: (any Error)?) {
         guard let value = characteristic.value else { return }
@@ -155,7 +167,8 @@ extension BluetoothManager: CBPeripheralDelegate {
             Task {
                 do {
                     let result = try await SendDevice.sendDeviceToBackend(userID: userID ?? "", deviceID: deviceID)
-                    print("Success sending device info: \(result)")
+                    // use it in push
+                    UserDefaults.standard.set(deviceID, forKey: "currentDeviceID")
                 } catch {
                     print("Error sending device info: \(error)")
                 }

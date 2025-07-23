@@ -9,7 +9,7 @@ import Foundation
 
 struct GetStatus {
     static func sendRequestToBackend(deviceID: String) async throws -> PowerStatus {
-        guard let url = URL(string: "https://bot-1.electricity-bot.online/status/\(deviceID)") else {
+        guard let url = URL(string: "https://bot-1.electricity-bot.online/api/status/\(deviceID)") else {
             throw URLError(.badURL)
         }
         

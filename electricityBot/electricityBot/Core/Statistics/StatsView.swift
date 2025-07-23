@@ -39,6 +39,15 @@ struct StatsView: View {
                     Spacer()
                 }
                 .padding()
+            } else if (weeklyStats && viewModel.statsByDay.isEmpty) || (!weeklyStats && viewModel.statsByHour.isEmpty) {
+                VStack {
+                    Spacer()
+                    Text("No power data available yet ⚡️")
+                        .font(.title3)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    Spacer()
+                }
             } else {
                 VStack {
                     TabView(selection: $weeklyStats) {
@@ -102,14 +111,14 @@ struct StatsView: View {
                                 
                                 Text(weekdayToString(for: stat.day))
                                     .font(.caption2)
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.foregroundLow)
                             }
                         }
                     }
                     .padding(.horizontal)
                 }
                 .frame(height: 130)
-                .background()
+                .background(.white)
                 .cornerRadius(8.0)
             }
             Spacer()
@@ -169,14 +178,14 @@ struct StatsView: View {
                                 
                                 Text("\(stat.hour % 12 == 0 ? 12 : stat.hour % 12)\(stat.hour >= 12 ? "pm" : "am")")
                                     .font(.caption2)
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.foregroundLow)
                             }
                         }
                     }
                     .padding(.horizontal)
                 }
                 .frame(height: 130)
-                .background()
+                .background(Color.white)
                 .cornerRadius(8.0)
             }
             

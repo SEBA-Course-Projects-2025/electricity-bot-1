@@ -26,7 +26,7 @@ struct TokenHandler {
             return false
         }
         
-        let url = URL(string: "https://bot-1.electricity-bot.online/auth/refresh")!
+        let url = URL(string: "https://bot-1.electricity-bot.online/api/auth/refresh")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

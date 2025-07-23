@@ -17,7 +17,7 @@ struct DeleteDevice {
     }
     
     static func deleteUserDevice(deviceID: String) async throws -> String {
-        guard let url = URL(string: "https://bot-1.electricity-bot.online/devices/\(deviceID)") else {
+        guard let url = URL(string: "https://bot-1.electricity-bot.online/api/devices/\(deviceID)") else {
             throw URLError(.badURL)
         }
 

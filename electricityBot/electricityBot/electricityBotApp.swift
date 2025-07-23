@@ -16,7 +16,7 @@ struct electricityBot: App {
     var body: some Scene {
         WindowGroup {
             SplashScreenView()
-                .preferredColorScheme(.light)
+               // .preferredColorScheme(.light)
                 .environmentObject(userSession)
                 .onAppear {
                     if let deviceID = userSession.currentDeviceID {

@@ -87,6 +87,7 @@ fileprivate struct CustomTabBar<Value: CaseIterable & Hashable & CustomTabProtoc
                         .font(.custom("Poppins-SemiBold", size: 11))
                         .offset(y: isActive ? 5 : 0)
                         .animation(.interpolatingSpring(stiffness: 120, damping: 5), value: isActive)
+                        .foregroundColor(.foregroundLow)
 
                 }
             }
@@ -100,7 +101,7 @@ fileprivate struct CustomTabBar<Value: CaseIterable & Hashable & CustomTabProtoc
                         .fill(.ultraThinMaterial)
                 } else {
                     Rectangle()
-                        .fill(.background)
+                        .fill(Color.background)
                 }
                 
                 Rectangle()

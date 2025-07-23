@@ -18,7 +18,7 @@ struct SimpleButtonView: View {
         } label: {
             Text(title)
                 .font(.custom("Poppins-SemiBold", size: 16))
-                .foregroundColor(Color.textColor.opacity(0.72))
+                .foregroundColor(Color.foregroundLow.opacity(0.72))
                 .frame(width: UIScreen.main.bounds.width - CGFloat(size), height: 52)
         }
         .background(Color.white)

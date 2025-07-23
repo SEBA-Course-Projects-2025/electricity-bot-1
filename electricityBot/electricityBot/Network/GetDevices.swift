@@ -9,7 +9,7 @@ import Foundation
 
 struct GetDevices {
     static func getUserDevices(userID: String) async throws -> [Device] {
-        guard let url = URL(string: "https://bot-1.electricity-bot.online/users/\(userID)/devices") else {
+        guard let url = URL(string: "https://bot-1.electricity-bot.online/api/users/\(userID)/devices") else {
             throw URLError(.badURL)
         }
 

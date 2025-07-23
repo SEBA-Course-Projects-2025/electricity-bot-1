@@ -20,7 +20,7 @@ struct SendDevice {
                 "device_id": deviceID
             ]
             
-            guard let url = URL(string: "https://bot-1.electricity-bot.online/devices") else {
+            guard let url = URL(string: "https://bot-1.electricity-bot.online/api/devices") else {
                 throw NetworkError.invalidURL
             }
 

@@ -61,7 +61,7 @@ struct WiFiProvisioningView: View {
                         Button {
                             fetching = true
                             bluetooth.fetchNetworks()
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                                 fetching = false
                             }
                         } label: {
@@ -95,15 +95,30 @@ struct WiFiProvisioningView: View {
                         if !bluetooth.statusMessage.isEmpty {
                             Text("Status: \(bluetooth.statusMessage)")
                                 .font(.custom("Poppins", size: 12))
-                                .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                                .foregroundColor(
+                                    bluetooth.statusMessage == "CONNECTED" ? .green :
+                                        bluetooth.statusMessage == "INVALID_CREDENTIALS" ? .red :
+                                            .orange)
+                        }
+                        
+                        if bluetooth.statusMessage == "INVALID_CREDENTIALS" {
+                            Button("Retry") {
+                                password = ""
+                                confirmChoice = true
+                                
+                            }
+                            .font(.custom("Poppins-SemiBold", size: 14))
+                            .padding(.top, 8)
+                            .padding(.horizontal)
+                            .frame(maxWidth: .infinity)
+                            .background(Color.red.opacity(0.1))
+                            .cornerRadius(8)
                         }
                         
                         if bluetooth.connectedPeripheral != nil {
                             Text("Connected to: \(bluetooth.connectedPeripheral?.name ?? "Unknown")")
                                 .font(.custom("Poppins", size: 12))
                                 .foregroundColor(.foregroundLow)
-                            
-                           // get device id
                         }
                     }
                     

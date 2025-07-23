@@ -92,9 +92,11 @@ struct MainView: View {
             VStack(alignment: .leading) {
                 Text(viewModel.status ? "Power is on!" : "Power is off!")
                     .font(.custom("Poppins-Medium", size: 24))
+                    .foregroundColor(.foregroundLow)
                 
                 Text("Power is \(viewModel.status ? "on" : "off") for \(viewModel.currentStatusDurationFormatted).")
                     .font(.custom("Poppins-Regular", size: 12))
+                    .foregroundColor(.foregroundLow)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()

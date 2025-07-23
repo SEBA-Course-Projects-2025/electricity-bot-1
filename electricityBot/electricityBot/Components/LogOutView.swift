@@ -18,7 +18,7 @@ struct LogOutView: View {
                 .frame(maxWidth: .infinity)
                 .multilineTextAlignment(.center)
                 .font(.custom("Poppins-Regular", size: 16))
-                .foregroundColor(Color.foregroundLow)
+                .foregroundColor(Color.textColor)
         }
     }
 }

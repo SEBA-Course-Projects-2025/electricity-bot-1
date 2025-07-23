@@ -15,7 +15,7 @@ struct SplashScreenView: View {
     
     var body: some View {
         if isActive {
-            ContentView(animation: animation)
+            TransitionView(animation: animation)
         } else {
             ZStack {
                 Color.backgroundColor

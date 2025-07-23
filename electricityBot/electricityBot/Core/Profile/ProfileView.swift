@@ -31,14 +31,14 @@ struct ProfileView: View {
                         Text(userSession.user?.initials ?? "NA")
                             .font(.custom("Poppins-Medium", size: 21))
                             .frame(width: 40, height: 40)
-                            .background(Color.foregroundLow.opacity(0.35))
+                            .background(Color.textColor.opacity(0.35))
                             .foregroundColor(.white)
                             .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                         
                         VStack(alignment: .leading) {
                             Text(userSession.user?.email ?? "noname@gmail.com")
                                 .font(.custom("Poppins-SemiBold", size: 15))
-                                .foregroundColor(.foregroundLow.opacity(0.75))
+                                .foregroundColor(.textColor.opacity(0.75))
                             
                             Button {
                                 userSession.logout()
@@ -46,7 +46,7 @@ struct ProfileView: View {
                             } label: {
                                 Text("Change user")
                                     .font(.custom("Poppins-Regular", size: 15))
-                                    .foregroundColor(.foregroundLow.opacity(0.75))
+                                    .foregroundColor(.textColor.opacity(0.75))
                             }
                         }
                     }

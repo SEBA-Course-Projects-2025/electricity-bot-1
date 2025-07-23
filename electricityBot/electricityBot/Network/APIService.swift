@@ -16,7 +16,7 @@ struct APIService {
             return
         }
         
-        var request = URLRequest(url: URL(string: "\(baseURL)/user")!)
+        var request = URLRequest(url: URL(string: "\(baseURL)/api/user")!)
         request.httpMethod = "GET"
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         
@@ -46,7 +46,7 @@ struct APIService {
     
     
     static func refreshAccessToken(refreshToken: String, completion: @escaping (Result<(accessToken: String, refreshToken: String), Error>) -> Void) {
-        var request = URLRequest(url: URL(string: "\(baseURL)/auth/refresh")!)
+        var request = URLRequest(url: URL(string: "\(baseURL)/api/auth/refresh")!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         let body: [String: Any] = ["refresh_token": refreshToken, "is_web": false]
@@ -81,7 +81,7 @@ struct APIService {
             return
         }
         
-        var request = URLRequest(url: URL(string: "\(baseURL)/auth/logout")!)
+        var request = URLRequest(url: URL(string: "\(baseURL)/api/auth/logout")!)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
