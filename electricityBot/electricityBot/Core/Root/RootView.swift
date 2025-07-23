@@ -34,8 +34,9 @@ struct RootView: View {
     var body: some View {
         CustomTabView(selection: $activeTab) { tab, tabBarHeight in
             switch tab {
-            case .statistics: StatsView(deviceID: "286cd1fb-083c-4b4a-b7bf-b30f279ed8ea")
-            case .main: MainView(deviceID: "286cd1fb-083c-4b4a-b7bf-b30f279ed8ea")
+            case .statistics: StatsView()
+                    .environmentObject(userSession)
+            case .main: MainView()
                     .environmentObject(userSession)
             case .settings: ProfileView()
                     .environmentObject(userSession)
@@ -44,7 +45,7 @@ struct RootView: View {
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                BackNavigation { dismiss() }
+             //   BackNavigation()
             }
         }
     }

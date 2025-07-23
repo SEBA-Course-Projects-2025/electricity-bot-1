@@ -11,8 +11,6 @@ struct MainView: View {
     @EnvironmentObject var userSession: UserSession
     @StateObject private var viewModel = PowerStatusViewModel()
     
-    let deviceID: String
-    
     var body: some View {
         ZStack(alignment: .leading) {
             Color.backgroundColor
@@ -33,7 +31,12 @@ struct MainView: View {
                 
                 // graph
                 if viewModel.isLoading {
-                    ProgressView("Loading data...")
+                    VStack() {
+                        Spacer()
+                        CustomProgressView(text: "Loading info...")
+                            .frame(maxWidth: .infinity)
+                        Spacer()
+                    }
                 } else if let error = viewModel.errorMessage {
                     VStack {
                         Text("⚠️ Error")
@@ -54,7 +57,19 @@ struct MainView: View {
                 Spacer().frame(height: 80)
             }
             .padding(32)
-            .onAppear(perform: loadStatus)
+            .onAppear {
+                Task {
+                    await loadStatus()
+                }
+            }
+            .task {
+                if let deviceID = userSession.currentDeviceID {
+                    await viewModel.requestStatus(deviceID: deviceID)
+                } else {
+                    print("Device ID not available yet!")
+                }
+            }
+
         }
     }
     
@@ -77,9 +92,11 @@ struct MainView: View {
             VStack(alignment: .leading) {
                 Text(viewModel.status ? "Power is on!" : "Power is off!")
                     .font(.custom("Poppins-Medium", size: 24))
+                    .foregroundColor(.foregroundLow)
                 
                 Text("Power is \(viewModel.status ? "on" : "off") for \(viewModel.currentStatusDurationFormatted).")
                     .font(.custom("Poppins-Regular", size: 12))
+                    .foregroundColor(.foregroundLow)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
@@ -90,12 +107,19 @@ struct MainView: View {
         .shadow(color: .black.opacity(0.1), radius: 20)
     }
     
-    private func loadStatus() {
-        viewModel.requestStatus(deviceID: deviceID)
+    @MainActor
+    private func loadStatus() async {
+        Task {
+            guard let deviceID = userSession.currentDeviceID else {
+                print("No device id current.")
+                return
+            }
+            await viewModel.requestStatus(deviceID: deviceID)
+        }
     }
 }
 
 #Preview {
-    MainView(deviceID: "286cd1fb-083c-4b4a-b7bf-b30f279ed8ea")
+    MainView()
         .environmentObject(UserSession())
 }

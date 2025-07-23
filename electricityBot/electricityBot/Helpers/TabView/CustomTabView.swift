@@ -41,8 +41,8 @@ struct CustomTabView<Content: View, Value: CaseIterable & Hashable & CustomTabPr
 
 // tab bar config
 struct TabBarConfiguration {
-    var activeColor: Color = .yellow
-    var activeBackgroundColor: Color = Color(red: 0.97647, green: 0.9294, blue: 0.749)
+    var activeColor: Color = .blueAccentButton
+    var activeBackgroundColor: Color = .blueAccentButton
     var inactiveColor: Color = .gray
     var backgroundColor: Color = .white
     var tabAnimation: Animation = .smooth(duration: 0.35, extraBounce: 0)
@@ -75,7 +75,7 @@ fileprivate struct CustomTabBar<Value: CaseIterable & Hashable & CustomTabProtoc
                         .background {
                             if isActive {
                                 Capsule(style: .continuous)
-                                    .fill(config.activeBackgroundColor.opacity(0.5))
+                                    .fill(config.activeBackgroundColor.opacity(0.2))
                                     .matchedGeometryEffect(id: "ACTIVETAB", in: animation )
                             }
                         }
@@ -87,6 +87,7 @@ fileprivate struct CustomTabBar<Value: CaseIterable & Hashable & CustomTabProtoc
                         .font(.custom("Poppins-SemiBold", size: 11))
                         .offset(y: isActive ? 5 : 0)
                         .animation(.interpolatingSpring(stiffness: 120, damping: 5), value: isActive)
+                        .foregroundColor(.foregroundLow)
 
                 }
             }
@@ -100,7 +101,7 @@ fileprivate struct CustomTabBar<Value: CaseIterable & Hashable & CustomTabProtoc
                         .fill(.ultraThinMaterial)
                 } else {
                     Rectangle()
-                        .fill(.background)
+                        .fill(Color.background)
                 }
                 
                 Rectangle()

@@ -21,20 +21,34 @@ struct TokenHandler {
         KeychainHelper.delete("refresh_token")
     }
 
-    static func refreshAccessToken(completion: @escaping (Bool) -> Void) {
+    static func refreshAccessToken() async -> Bool {
         guard let refreshToken = getToken(forKey: "refresh_token") else {
-            completion(false)
-            return
+            return false
         }
-        APIService.refreshAccessToken(refreshToken: refreshToken) { result in
-            switch result {
-            case .success(let tokens):
-                saveToken(tokens.accessToken, forKey: "access_token")
-                saveToken(tokens.refreshToken, forKey: "refresh_token")
-                completion(true)
-            case .failure:
-                completion(false)
+        
+        let url = URL(string: "https://bot-1.electricity-bot.online/api/auth/refresh")!
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let body = ["refresh_token": refreshToken]
+        request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(for: request)
+            if let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let access = json["access_token"] as? String,
+               let refresh = json["refresh_token"] as? String {
+                print("New access:", access)
+                print("New refresh:", refresh)
+
+                saveToken(access, forKey: "access_token")
+                saveToken(refresh, forKey: "refresh_token")
+                return true
             }
+        } catch {
+            print("Token refresh failed.")
         }
+        return false
     }
 }

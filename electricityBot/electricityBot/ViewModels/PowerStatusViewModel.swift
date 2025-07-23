@@ -9,29 +9,48 @@ import Foundation
 import Combine
 import Algorithms
 
+@MainActor
 class PowerStatusViewModel: ObservableObject {
-    @Published var status: Bool = false
-    @Published var time: Date = Date()
+    @Published var status: Bool = false {
+        didSet {
+            UserDefaults.standard.set(status, forKey: "lastPowerStatus")
+        }
+    }
+    @Published var time: Date = Date() {
+        didSet {
+            print("Saving status \(status) to UserDefaults")
+            UserDefaults.standard.set(time, forKey: "lastPowerTimestamp")
+        }
+    }
     @Published var isLoading = false
     @Published var errorMessage: String?
 
-    func requestStatus(deviceID: String) {
+    init() {
+        // Load from UserDefaults if exists
+        let savedStatus = UserDefaults.standard.bool(forKey: "lastPowerStatus")
+        let timestampInterval = UserDefaults.standard.double(forKey: "lastPowerTimestamp")
+        if timestampInterval > 0 {
+            self.status = savedStatus
+            self.time = Date(timeIntervalSince1970: timestampInterval)
+        }
+    }
+    
+    func requestStatus(deviceID: String) async {
         isLoading = true
         errorMessage = nil
         
-        GetStatus.sendRequestToBackend(deviceID: deviceID) { [weak self] result in
-            DispatchQueue.main.async {
-                self?.isLoading = false
-                    
-                switch result {
-                    case .success(let response):
-                        self?.status = response.status
-                        self?.time = response.timestamp
-                    case .failure(let error):
-                        self?.errorMessage = "Failed to load stats: \(error.localizedDescription)"
-                }
-            }
+        do {
+            let response = try await GetStatus.sendRequestToBackend(deviceID: deviceID)
+            self.status = response.status
+            self.time = response.timestamp
+            self.errorMessage = nil
+        
+            print(response)
+        } catch {
+            self.errorMessage = "Failed to load status: \(error.localizedDescription)"
         }
+        
+        isLoading = false
     }
     
     var currentStatusDuration: TimeInterval {

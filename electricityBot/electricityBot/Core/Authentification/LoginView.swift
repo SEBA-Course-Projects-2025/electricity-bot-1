@@ -6,14 +6,17 @@
 //
 
 import SwiftUI
-import GoogleSignIn
-import GoogleSignInSwift
+
+enum Route: Hashable {
+    case userDevices
+}
 
 struct LoginView: View {
     @EnvironmentObject var userSession: UserSession
     @State private var email = ""
     @State private var password = ""
-    @State private var loginResult: Result<String, Error>? = nil
+    @State private var isUserReady = false
+    @State private var path: [Route] = []
     
     var body: some View {
         NavigationStack {
@@ -42,16 +45,15 @@ struct LoginView: View {
                             startKeycloak()
                         }, size: 240)
                         
-                        NavigationLink(destination: RootView(), isActive: $userSession.isLoggedIn) {
-                            EmptyView()
-                        }
-                        
                     }
                     .padding(.bottom, 20)
                     
                     Spacer()
                 }
                 .navigationBarBackButtonHidden(true)
+                .navigationDestination(isPresented: $isUserReady) {
+                    UserDevicesView()
+                }
             }
         }
     }
@@ -63,8 +65,14 @@ struct LoginView: View {
                 let accessToken = tokens.accessToken
                 let refreshToken = tokens.refreshToken
                 print("Access Token: \(accessToken)")
-                self.userSession.login(with: accessToken, refreshToken: refreshToken)
-                
+                self.userSession.login(with: accessToken, refreshToken: refreshToken) {
+                    if self.userSession.user != nil {
+                        self.isUserReady = true
+                    } else {
+                        print("User was not added properly")
+                    }
+                }
+
             case .failure(let error):
                 print("Login failed: \(error.localizedDescription)")
             }

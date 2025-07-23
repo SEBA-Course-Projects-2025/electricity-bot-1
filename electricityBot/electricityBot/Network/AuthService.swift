@@ -62,7 +62,7 @@ func startKeycloakLogin(completion: @escaping (Result<(accessToken: String, refr
 }
 
 func sendTokenToBackend(token: String, completion: @escaping (Result<(accessToken: String, refreshToken: String), Error>) -> Void) {
-    let backendURL = URL(string: "https://bot-1.electricity-bot.online/auth/callback")!
+    let backendURL = URL(string: "https://bot-1.electricity-bot.online/api/auth/callback")!
     var request = URLRequest(url: backendURL)
     request.httpMethod = "POST"
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")

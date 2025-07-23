@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct BackNavigation: View {
-    let action: () -> Void  // this will call `dismiss()`
+    @Binding var navToContent: Bool
 
     var body: some View {
-        Button(action: action) {
+        Button(action: { navToContent = true }) {
             HStack(spacing: 6) {
                 Image(systemName: "chevron.left")
                     .font(.system(size: 16, weight: .medium))

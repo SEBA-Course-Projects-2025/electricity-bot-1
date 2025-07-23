@@ -11,18 +11,23 @@ struct StatsView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject private var viewModel = PowerStatsViewModel()
     @State private var weeklyStats = false
-    
-    let deviceID: String
-    
+    @EnvironmentObject var userSession: UserSession
+
     var body: some View {
         ZStack {
             Color.backgroundColor
                 .ignoresSafeArea()
             
             if viewModel.isLoading {
-                ProgressView("Loading data...")
+                VStack() {
+                    Spacer()
+                    CustomProgressView(text: "Loading info...")
+                        .frame(maxWidth: .infinity)
+                    Spacer()
+                }
             } else if let error = viewModel.errorMessage {
                 VStack {
+                    Spacer()
                     Text("⚠️ Error")
                         .font(.title)
                         .padding(.bottom, 4)
@@ -31,8 +36,18 @@ struct StatsView: View {
                         .foregroundColor(.secondary)
                         .multilineTextAlignment(.center)
                         .padding(.horizontal)
+                    Spacer()
                 }
                 .padding()
+            } else if (weeklyStats && viewModel.statsByDay.isEmpty) || (!weeklyStats && viewModel.statsByHour.isEmpty) {
+                VStack {
+                    Spacer()
+                    Text("No power data available yet ⚡️")
+                        .font(.title3)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                    Spacer()
+                }
             } else {
                 VStack {
                     TabView(selection: $weeklyStats) {
@@ -44,7 +59,9 @@ struct StatsView: View {
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                     .onChange(of: weeklyStats) {
-                        loadStats()
+                        Task {
+                            await loadStats()
+                        }
                     }
                     Spacer().frame(height: 80)
                 }
@@ -52,13 +69,12 @@ struct StatsView: View {
             }
 
         }
-        .onAppear(perform: loadStats)
-        .navigationBarBackButtonHidden(true)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                BackNavigation { dismiss() }
+        .onAppear {
+            Task {
+                await loadStats()
             }
         }
+        .navigationBarBackButtonHidden(true)
     }
     
     private var WeekStatsView: some View {
@@ -95,14 +111,14 @@ struct StatsView: View {
                                 
                                 Text(weekdayToString(for: stat.day))
                                     .font(.caption2)
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.foregroundLow)
                             }
                         }
                     }
                     .padding(.horizontal)
                 }
                 .frame(height: 130)
-                .background()
+                .background(.white)
                 .cornerRadius(8.0)
             }
             Spacer()
@@ -112,7 +128,9 @@ struct StatsView: View {
                 withAnimation {
                     weeklyStats.toggle()
                 }
-                loadStats()
+                Task {
+                    await loadStats()
+                }
             }, size: 150)
             .frame(maxWidth: .infinity)
             .padding()
@@ -160,14 +178,14 @@ struct StatsView: View {
                                 
                                 Text("\(stat.hour % 12 == 0 ? 12 : stat.hour % 12)\(stat.hour >= 12 ? "pm" : "am")")
                                     .font(.caption2)
-                                    .foregroundColor(.secondary)
+                                    .foregroundColor(.foregroundLow)
                             }
                         }
                     }
                     .padding(.horizontal)
                 }
                 .frame(height: 130)
-                .background()
+                .background(Color.white)
                 .cornerRadius(8.0)
             }
             
@@ -178,7 +196,9 @@ struct StatsView: View {
                 withAnimation {
                     weeklyStats.toggle()
                 }
-                loadStats()
+                Task {
+                    await loadStats()
+                }
             }, size: 150)
             .frame(maxWidth: .infinity)
             .padding()
@@ -186,12 +206,17 @@ struct StatsView: View {
         .padding(32)
     }
 
-    private func loadStats() {
-        let days = weeklyStats ? 7 : 1
-        viewModel.requestStats(deviceID: deviceID, days: days)
+    @MainActor
+    private func loadStats() async {
+        guard let deviceID = userSession.currentDeviceID else {
+            print("Missing device ID")
+            return
+        }
+        await viewModel.requestStats(deviceID: deviceID, days: weeklyStats ? 7 : 1)
     }
 }
 
 #Preview {
-    StatsView(deviceID: "286cd1fb-083c-4b4a-b7bf-b30f279ed8ea")
+    StatsView()
+        .environmentObject(UserSession())
 }
