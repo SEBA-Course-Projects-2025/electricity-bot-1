@@ -8,7 +8,8 @@ on:
 
 jobs:
 
-  # Backend (Python) – lint with black
+ # Backend (Python) – lint with black
+
   lint-python:
     runs-on: ubuntu-latest
     steps:
@@ -17,4 +18,5 @@ jobs:
         with:
           python-version: 3.11
       - run: pip install black
+
       - run: black --check backend/electricity-bot-backend
