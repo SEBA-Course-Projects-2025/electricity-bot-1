@@ -1,0 +1,8 @@
+[Unit]
+Description=Send Measurement to Server
+After=network.target device_id_generation.service
+Requires=device_id_generation.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /home/user/electricity_bot/sending_measurements.py

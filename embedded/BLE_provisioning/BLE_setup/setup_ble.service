@@ -1,0 +1,13 @@
+[Unit]
+Description=Setup BLE Service
+After=network.target device_id_generation.service
+Requires=device_id_generation.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/user/electricity_bot/ble_provisioning/setup_ble.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

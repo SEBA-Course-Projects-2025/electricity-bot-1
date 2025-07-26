@@ -1,0 +1,13 @@
+[Unit]
+Description=GATT Server Service
+After=bluetooth.service setup_ble.service
+Requires=bluetooth.service setup_ble.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /home/user/electricity_bot/ble_provisioning/main.py
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

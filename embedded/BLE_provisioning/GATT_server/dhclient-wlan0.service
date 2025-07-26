@@ -1,0 +1,11 @@
+[Unit]
+Description=DHCP Client for wlan0
+After=wpa_supplicant.service
+Requires=wpa_supplicant.service
+
+[Service]
+ExecStart=/sbin/dhclient wlan0
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target

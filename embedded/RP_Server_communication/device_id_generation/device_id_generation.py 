@@ -1,0 +1,13 @@
+import uuid
+from pathlib import Path
+
+config_path = Path("/home/user/electricity_bot/device_config.txt")
+
+if not config_path.exists():
+    device_id = str(uuid.uuid4())
+    config_path.write_text(device_id)
+    print(f"Generated device id: {device_id}")
+else:
+    device_id = config_path.read_text().strip()
+    print(f"Device id already exists: {device_id}")
+    

@@ -1,0 +1,11 @@
+[Unit]
+Description=Device ID Generator
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /home/user/electricity_bot/device_id_generation.py
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
